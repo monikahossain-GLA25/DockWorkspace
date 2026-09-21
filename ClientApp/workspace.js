@@ -972,9 +972,61 @@ const dockview =
     );
 
 
-/* =========================================================
+/* 
    TOP PANEL — CORRELATION
+ */
+
+// const correlation =
+//     dockview.addPanel({
+
+//         id:
+//             "correlation",
+
+//         component:
+//             "correlation",
+
+//         title:
+//             "Correlation",
+
+//         initialHeight:
+//             430
+
+//     });
+
+/* =========================================================
+   CALCULATE INITIAL COLUMN SIZE
    ========================================================= */
+
+const totalWidth =
+    container.clientWidth;
+
+
+const totalHeight =
+    container.clientHeight;
+
+
+/*
+   Demo is roughly:
+   left   ≈ 1/3
+   middle ≈ 1/3
+   right  ≈ 1/3
+*/
+
+const columnWidth =
+    Math.floor(totalWidth / 3);
+
+
+const correlationHeight =
+    Math.floor(totalHeight * 0.54);
+
+
+const orderBookHeight =
+    totalHeight - correlationHeight;
+
+
+/*
+   1. LEFT TOP — CORRELATION
+   */
 
 const correlation =
     dockview.addPanel({
@@ -988,16 +1040,131 @@ const correlation =
         title:
             "Correlation",
 
+        initialWidth:
+            columnWidth,
+
         initialHeight:
-            430
+            correlationHeight,
+
+        minimumWidth:
+            320,
+
+        minimumHeight:
+            220
 
     });
 
 
-/* =========================================================
+/* 
+   2. MIDDLE BLANK COLUMN
+    */
+
+const middleBlank =
+    dockview.addPanel({
+
+        id:
+            "middle-placeholder",
+
+        component:
+            "blank",
+
+        title:
+            "Middle",
+
+        initialWidth:
+            columnWidth,
+
+        position: {
+
+            referencePanel:
+                correlation,
+
+            direction:
+                "right"
+        }
+
+    });
+
+
+/*
+   For now middle section must appear blank.
+*/
+
+middleBlank.group.header.hidden =
+    true;
+
+
+/* 
+   3. RIGHT BLANK COLUMN
+   */
+
+const rightBlank =
+    dockview.addPanel({
+
+        id:
+            "right-placeholder",
+
+        component:
+            "blank",
+
+        title:
+            "Right",
+
+        initialWidth:
+            columnWidth,
+
+        position: {
+
+            referencePanel:
+                middleBlank,
+
+            direction:
+                "right"
+        }
+
+    });
+
+
+rightBlank.group.header.hidden =
+    true;
+
+
+/*
+   4. LEFT BOTTOM — ORDER BOOK
+ */
+
+const orderBook =
+    dockview.addPanel({
+
+        id:
+            "order-book",
+
+        component:
+            "order-book",
+
+        title:
+            "Order Book",
+
+        initialHeight:
+            orderBookHeight,
+
+        minimumHeight:
+            220,
+
+        position: {
+
+            referencePanel:
+                correlation,
+
+            direction:
+                "below"
+        }
+
+    });
+/* 
    TAB 2
    SAME GROUP
-   ========================================================= */
+   */
 
 dockview.addPanel({
 
