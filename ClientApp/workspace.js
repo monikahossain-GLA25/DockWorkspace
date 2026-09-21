@@ -2,19 +2,35 @@
     DockviewComponent,
     themeLight
 } from "dockview";
+class BlankPanel {
+
+    constructor() {
+
+        this.element =
+            document.createElement("div");
+
+        this.element.className =
+            "blank-panel";
+    }
 
 
-/* =========================================================
+    init() {
+
+        this.element.innerHTML = "";
+    }
+}
+
+/* 
    GLOBAL COUNTER FOR + ADD TAB
-   ========================================================= */
+    */
 
 let newTabNumber = 3;
 
 
-/* =========================================================
+/* 
    CORRELATION DATA
    Static dummy UI data only
-   ========================================================= */
+  */
 
 const assets = [
     "BTC",
@@ -49,9 +65,9 @@ const correlationData = [
 ];
 
 
-/* =========================================================
+/* 
    BUILD ONE CORRELATION CELL
-   ========================================================= */
+    */
 
 function getCorrelationColor(value, diagonal) {
 
