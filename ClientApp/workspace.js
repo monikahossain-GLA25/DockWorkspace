@@ -23,63 +23,52 @@ class ExplorerPanel {
 
             <div class="explorer-menu">
 
-                <button class="explorer-item"
-                        type="button">
-
+                <button class="explorer-item" type="button">
                     <span class="explorer-icon">□</span>
-
                     <span>Dashboard</span>
-
                 </button>
 
-
-                <button class="explorer-item"
-                        type="button">
-
+                <button class="explorer-item" type="button">
                     <span class="explorer-icon">□</span>
-
                     <span>News</span>
-
                 </button>
 
-
-                <button class="explorer-item"
-                        type="button">
-
+                <button class="explorer-item" type="button">
                     <span class="explorer-icon">□</span>
-
                     <span>Reports</span>
-
                 </button>
 
-
-                <button class="explorer-item"
-                        type="button">
-
+                <button class="explorer-item" type="button">
                     <span class="explorer-icon">□</span>
-
                     <span>Markets</span>
-
                 </button>
 
-
-                <button class="explorer-item"
-                        type="button">
-
+                <button class="explorer-item" type="button">
                     <span class="explorer-icon">□</span>
-
                     <span>Settings</span>
-
                 </button>
 
             </div>
         `;
     }
+
+
+    /*
+       IMPORTANT:
+       Dockview calls init() when the panel is created.
+    */
+    init(params) {
+
+        // No real data required yet.
+        // We only need this method so Dockview
+        // can initialize the component correctly.
+
+    }
 }
 
 
 /* =========================================================
-   EMPTY CENTRAL PANEL
+   EMPTY CENTRAL WORKSPACE
    ========================================================= */
 
 class EmptyWorkspacePanel {
@@ -96,11 +85,22 @@ class EmptyWorkspacePanel {
             </span>
         `;
     }
+
+
+    /*
+       Dockview also requires init()
+       for this component.
+    */
+    init(params) {
+
+        // Nothing needed yet.
+
+    }
 }
 
 
 /* =========================================================
-   FIND THE HTML HOST
+   GET DOCKVIEW CONTAINER
    ========================================================= */
 
 const container =
@@ -131,17 +131,12 @@ const dockview =
                 switch (options.name) {
 
                     case "explorer":
-
                         return new ExplorerPanel();
 
-
                     case "empty-workspace":
-
                         return new EmptyWorkspacePanel();
 
-
                     default:
-
                         return new EmptyWorkspacePanel();
                 }
             }
@@ -151,7 +146,7 @@ const dockview =
 
 
 /* =========================================================
-   CREATE CENTRAL WORKSPACE FIRST
+   CREATE MAIN WORKSPACE PANEL
    ========================================================= */
 
 const mainPanel =
@@ -167,8 +162,7 @@ const mainPanel =
 
 
 /*
-    For Milestone 1 we do not want a tab header
-    above our blank central workspace.
+   Hide the normal header for the empty workspace.
 */
 
 mainPanel.group.header.hidden = true;
@@ -198,7 +192,7 @@ const leftGroup =
 
 
 /* =========================================================
-   PUT EXPLORER PANEL INSIDE LEFT EDGE GROUP
+   ADD EXPLORER INTO LEFT GROUP
    ========================================================= */
 
 const explorerPanel =
@@ -220,7 +214,7 @@ const explorerPanel =
 
 
 /* =========================================================
-   PUT EXPLORER TAB VERTICALLY ON LEFT
+   VERTICAL EXPLORER TAB
    ========================================================= */
 
 explorerPanel.group.api.setHeaderPosition(
@@ -229,8 +223,7 @@ explorerPanel.group.api.setHeaderPosition(
 
 
 /* =========================================================
-   START WITH THE EXPLORER COLLAPSED
-   Like the screenshot.
+   START COLLAPSED
    ========================================================= */
 
 leftGroup.collapse();
