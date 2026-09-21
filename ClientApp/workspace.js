@@ -911,34 +911,35 @@ const dockview =
                PANEL CONTENT
             */
 
-            createComponent:
-                (options) => {
+            createComponent: (options) => {
 
-                    switch (
-                    options.name
-                    ) {
+                switch (options.name) {
 
-                        case "correlation":
+                    case "correlation":
 
-                            return new CorrelationPanel();
+                        return new CorrelationPanel();
 
 
-                        case "order-book":
+                    case "order-book":
 
-                            return new OrderBookPanel();
-
-
-                        case "empty":
-
-                            return new EmptyPanel();
+                        return new OrderBookPanel();
 
 
-                        default:
+                    case "blank":
 
-                            return new EmptyPanel();
-                    }
+                        return new BlankPanel();
 
-                },
+
+                    case "empty":
+
+                        return new EmptyPanel();
+
+
+                    default:
+
+                        return new BlankPanel();
+                }
+            },
 
 
             /*
