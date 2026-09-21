@@ -737,96 +737,34 @@ class RightHeaderActions {
 
     init(parameters) {
 
-        /*
-           STAR
-           Visual UI for now
-        */
-
-        const star =
+        const expandButton =
             document.createElement("button");
 
 
-        star.type =
+        expandButton.type =
             "button";
 
 
-        star.className =
-            "dock-header-button";
+        expandButton.className =
+            "dock-header-button expand-button";
 
 
-        star.title =
-            "Favourite";
+        expandButton.title =
+            "Expand / Restore";
 
 
-        star.textContent =
-            "☆";
-
-
-        star.addEventListener(
-            "click",
-            () => {
-
-                star.textContent =
-                    star.textContent === "☆"
-                        ? "★"
-                        : "☆";
-            }
-        );
-
-
-        /*
-           POP-OUT ICON
-           Interface first.
-           Behaviour can be added later.
-        */
-
-        const popout =
-            document.createElement("button");
-
-
-        popout.type =
-            "button";
-
-
-        popout.className =
-            "dock-header-button";
-
-
-        popout.title =
-            "Pop out";
-
-
-        popout.textContent =
-            "↗";
-
-
-        /*
-           MAXIMIZE
-        */
-
-        const maximize =
-            document.createElement("button");
-
-
-        maximize.type =
-            "button";
-
-
-        maximize.className =
-            "dock-header-button";
-
-
-        maximize.title =
-            "Maximize / Restore";
-
-
-        maximize.textContent =
+        expandButton.innerHTML =
             "⛶";
 
 
-        maximize.addEventListener(
+        expandButton.addEventListener(
             "click",
             () => {
+
+                /*
+                   If something is already maximized,
+                   restore normal layout.
+                */
 
                 if (
                     parameters
@@ -838,9 +776,16 @@ class RightHeaderActions {
                         .containerApi
                         .exitMaximizedGroup();
 
+                    expandButton.innerHTML =
+                        "⛶";
+
                     return;
                 }
 
+
+                /*
+                   Otherwise maximize this group.
+                */
 
                 const activePanel =
                     parameters
@@ -848,23 +793,27 @@ class RightHeaderActions {
                         .activePanel;
 
 
-                if (activePanel) {
+                if (!activePanel) {
 
-                    parameters
-                        .containerApi
-                        .maximizeGroup(
-                            activePanel
-                        );
+                    return;
                 }
 
+
+                parameters
+                    .containerApi
+                    .maximizeGroup(
+                        activePanel
+                    );
+
+
+                expandButton.innerHTML =
+                    "❐";
             }
         );
 
 
-        this.element.append(
-            star,
-            popout,
-            maximize
+        this.element.appendChild(
+            expandButton
         );
     }
 
