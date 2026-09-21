@@ -16379,70 +16379,518 @@
   var require_workspace = __commonJS({
     "ClientApp/workspace.js"() {
       init_main_esm2();
-      var ExplorerPanel = class {
+      var newTabNumber = 3;
+      var assets = [
+        "BTC",
+        "ETH",
+        "AAPL",
+        "MSFT",
+        "NVDA",
+        "TSLA",
+        "SPX",
+        "GOLD"
+      ];
+      var correlationData = [
+        [1, -0.27, 0, -0.77, 0.74, 0.56, -0.74, 0.79],
+        [-0.27, 1, -0.38, 0.55, 0.44, -0.76, -0.62, -0.13],
+        [0, -0.38, 1, -0.15, -0.63, 0.45, 0.9, 0.59],
+        [-0.77, 0.55, -0.15, 1, 0.04, -0.04, 0.55, -0.34],
+        [0.74, 0.44, -0.63, 0.04, 1, -0.23, 0.62, 0.82],
+        [0.56, -0.76, 0.45, -0.04, -0.23, 1, 0.16, -0.44],
+        [-0.74, -0.62, 0.9, 0.55, 0.62, 0.16, 1, -0.1],
+        [0.79, -0.13, 0.59, -0.34, 0.82, -0.44, -0.1, 1]
+      ];
+      function getCorrelationColor(value, diagonal) {
+        if (diagonal) {
+          return {
+            background: "#f1f2f4",
+            color: "#334155"
+          };
+        }
+        const strength = Math.min(Math.abs(value), 1);
+        const opacity = 0.15 + strength * 0.72;
+        if (value >= 0) {
+          return {
+            background: `rgba(10, 157, 78, ${opacity})`,
+            color: strength > 0.48 ? "#ffffff" : "#334155"
+          };
+        }
+        return {
+          background: `rgba(225, 29, 46, ${opacity})`,
+          color: strength > 0.48 ? "#ffffff" : "#334155"
+        };
+      }
+      var CorrelationPanel = class {
         constructor() {
           this.element = document.createElement("div");
-          this.element.className = "explorer-content";
+          this.element.className = "trade-panel correlation-panel";
+        }
+        init() {
           this.element.innerHTML = `
-            <h3 class="explorer-heading">
-                Explorer
-            </h3>
 
-            <div class="explorer-menu">
+            <div class="panel-inner-toolbar">
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">\u25A1</span>
-                    <span>Dashboard</span>
-                </button>
+                <div class="panel-inner-title">
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">\u25A1</span>
-                    <span>News</span>
-                </button>
+                    <strong>
+                        Correlation
+                    </strong>
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">\u25A1</span>
-                    <span>Reports</span>
-                </button>
+                    <span>
+                        30d rolling
+                    </span>
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">\u25A1</span>
-                    <span>Markets</span>
-                </button>
+                </div>
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">\u25A1</span>
-                    <span>Settings</span>
-                </button>
+
+                <div class="correlation-scale">
+
+                    <span>-1</span>
+
+                    <span class="scale-gradient"></span>
+
+                    <span>+1</span>
+
+                </div>
 
             </div>
+
+
+            <div class="correlation-scroll">
+
+                <div
+                    class="correlation-grid"
+                    id="correlation-grid">
+                </div>
+
+            </div>
+
         `;
-        }
-        /*
-           IMPORTANT:
-           Dockview calls init() when the panel is created.
-        */
-        init(params) {
+          const grid = this.element.querySelector(
+            "#correlation-grid"
+          );
+          grid.appendChild(
+            document.createElement("span")
+          );
+          assets.forEach((asset) => {
+            const heading = document.createElement("span");
+            heading.className = "correlation-column-heading";
+            heading.textContent = asset;
+            grid.appendChild(
+              heading
+            );
+          });
+          correlationData.forEach(
+            (row, rowIndex) => {
+              const rowName = document.createElement("span");
+              rowName.className = "correlation-row-heading";
+              rowName.textContent = assets[rowIndex];
+              grid.appendChild(
+                rowName
+              );
+              row.forEach(
+                (value, columnIndex) => {
+                  const cell = document.createElement(
+                    "div"
+                  );
+                  cell.className = "correlation-cell";
+                  const diagonal = rowIndex === columnIndex;
+                  const colors = getCorrelationColor(
+                    value,
+                    diagonal
+                  );
+                  cell.style.background = colors.background;
+                  cell.style.color = colors.color;
+                  cell.textContent = value.toFixed(2);
+                  if (diagonal) {
+                    cell.classList.add(
+                      "correlation-diagonal"
+                    );
+                  }
+                  grid.appendChild(
+                    cell
+                  );
+                }
+              );
+            }
+          );
         }
       };
-      var EmptyWorkspacePanel = class {
+      var OrderBookPanel = class {
         constructor() {
           this.element = document.createElement("div");
-          this.element.className = "empty-workspace";
+          this.element.className = "trade-panel order-book-panel";
+        }
+        init() {
           this.element.innerHTML = `
-            <span class="empty-workspace-text">
-                Empty Workspace
-            </span>
+
+            <div class="order-top">
+
+                <div>
+
+                    <div class="instrument-name">
+
+                        BTC/USD
+
+                        <span class="instrument-tag">
+                            PERP
+                        </span>
+
+                    </div>
+
+
+                    <div class="main-price negative">
+
+                        67,324.8
+
+                    </div>
+
+
+                    <div class="index-line">
+
+                        Index&nbsp;
+                        67,338.3
+
+                        <span class="negative">
+                            -0.14%
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mini-chart">
+
+                    <svg
+                        viewBox="0 0 140 45"
+                        preserveAspectRatio="none">
+
+                        <polyline
+                            points="
+                            0,31
+                            10,26
+                            16,30
+                            23,21
+                            32,24
+                            39,13
+                            46,18
+                            54,10
+                            62,17
+                            69,15
+                            76,7
+                            83,11
+                            91,9
+                            99,5
+                            108,12
+                            116,8
+                            124,17
+                            132,23
+                            140,28"
+                            fill="none"
+                            stroke="#ef3340"
+                            stroke-width="1.6">
+                        </polyline>
+
+                    </svg>
+
+                </div>
+
+            </div>
+
+
+            <div class="market-stat-row">
+
+                <div>
+                    <span>24H HIGH</span>
+                    <strong>67,502.7</strong>
+                </div>
+
+                <div>
+                    <span>24H LOW</span>
+                    <strong>67,324.8</strong>
+                </div>
+
+                <div>
+                    <span>24H VOL</span>
+                    <strong>124.55M</strong>
+                </div>
+
+                <div>
+                    <span>OPEN INT</span>
+                    <strong>43.09M</strong>
+                </div>
+
+                <div>
+                    <span>FUNDING</span>
+                    <strong class="negative">
+                        -0.0041%
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="order-table-header">
+
+                <span>PRICE</span>
+
+                <span>SIZE</span>
+
+                <span>TOTAL</span>
+
+            </div>
+
+
+            <div class="order-row ask">
+
+                <span>67,326.6</span>
+                <span>4.656</span>
+                <span>6.19</span>
+
+            </div>
+
+
+            <div class="order-row ask">
+
+                <span>67,326.1</span>
+                <span>0.150</span>
+                <span>1.54</span>
+
+            </div>
+
+
+            <div class="order-row ask">
+
+                <span>67,325.6</span>
+                <span>0.952</span>
+                <span>1.39</span>
+
+            </div>
+
+
+            <div class="order-row ask">
+
+                <span>67,325.1</span>
+                <span>0.595</span>
+                <span>0.89</span>
+
+            </div>
+
+
+            <div class="spread-row">
+
+                <strong class="negative">
+
+                    \u25BC 67,324.8
+
+                </strong>
+
+                <span>
+
+                    Spread 0.5
+                    (0.001%)
+
+                </span>
+
+            </div>
+
+
+            <div class="order-row bid">
+
+                <span>67,324.6</span>
+                <span>0.054</span>
+                <span>0.95</span>
+
+            </div>
+
+
+            <div class="order-row bid">
+
+                <span>67,324.1</span>
+                <span>3.081</span>
+                <span>3.14</span>
+
+            </div>
+
+
+            <div class="order-row bid">
+
+                <span>67,323.6</span>
+                <span>0.992</span>
+                <span>4.06</span>
+
+            </div>
+
+
+            <div class="order-row bid">
+
+                <span>67,323.1</span>
+                <span>0.050</span>
+                <span>6.73</span>
+
+            </div>
+
+
+            <div class="time-sales-title">
+
+                <span>TIME & SALES</span>
+
+                <span>TIME \xB7 PRICE \xB7 SIZE</span>
+
+            </div>
+
+
+            <div class="time-sales-row">
+
+                <span>07:13:39</span>
+
+                <span class="negative">
+                    67,323.7
+                </span>
+
+                <span>
+                    1.998
+                </span>
+
+            </div>
+
         `;
         }
-        /*
-           Dockview also requires init()
-           for this component.
-        */
+      };
+      var EmptyPanel = class {
+        constructor() {
+          this.element = document.createElement("div");
+          this.element.className = "demo-empty-panel";
+        }
         init(params) {
+          this.element.innerHTML = `
+
+            <div>
+
+                ${params.api.title}
+
+            </div>
+
+        `;
         }
       };
-      var container = document.getElementById("dockview-container");
+      var MenuHeaderAction = class {
+        constructor() {
+          this.element = document.createElement("div");
+          this.element.className = "header-action-container";
+        }
+        init() {
+          this.element.innerHTML = `
+
+            <button
+                type="button"
+                class="dock-header-button menu-button"
+                title="Panel menu">
+
+                \u2630
+
+            </button>
+
+        `;
+        }
+        dispose() {
+          this.element.remove();
+        }
+      };
+      var AddTabHeaderAction = class {
+        constructor() {
+          this.element = document.createElement("div");
+          this.element.className = "header-action-container";
+        }
+        init(parameters) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "dock-header-button add-tab-button";
+          button.title = "Add tab";
+          button.textContent = "+";
+          button.addEventListener(
+            "click",
+            () => {
+              newTabNumber++;
+              const referencePanel = parameters.group.activePanel;
+              if (!referencePanel) {
+                return;
+              }
+              parameters.containerApi.addPanel({
+                id: `new-tab-${Date.now()}-${newTabNumber}`,
+                component: "empty",
+                title: `Tab ${newTabNumber}`,
+                position: {
+                  referencePanel: referencePanel.id,
+                  direction: "within"
+                }
+              });
+            }
+          );
+          this.element.appendChild(
+            button
+          );
+        }
+        dispose() {
+          this.element.remove();
+        }
+      };
+      var RightHeaderActions = class {
+        constructor() {
+          this.element = document.createElement("div");
+          this.element.className = "right-header-actions";
+        }
+        init(parameters) {
+          const star = document.createElement("button");
+          star.type = "button";
+          star.className = "dock-header-button";
+          star.title = "Favourite";
+          star.textContent = "\u2606";
+          star.addEventListener(
+            "click",
+            () => {
+              star.textContent = star.textContent === "\u2606" ? "\u2605" : "\u2606";
+            }
+          );
+          const popout = document.createElement("button");
+          popout.type = "button";
+          popout.className = "dock-header-button";
+          popout.title = "Pop out";
+          popout.textContent = "\u2197";
+          const maximize = document.createElement("button");
+          maximize.type = "button";
+          maximize.className = "dock-header-button";
+          maximize.title = "Maximize / Restore";
+          maximize.textContent = "\u26F6";
+          maximize.addEventListener(
+            "click",
+            () => {
+              if (parameters.containerApi.hasMaximizedGroup()) {
+                parameters.containerApi.exitMaximizedGroup();
+                return;
+              }
+              const activePanel = parameters.group.activePanel;
+              if (activePanel) {
+                parameters.containerApi.maximizeGroup(
+                  activePanel
+                );
+              }
+            }
+          );
+          this.element.append(
+            star,
+            popout,
+            maximize
+          );
+        }
+        dispose() {
+          this.element.remove();
+        }
+      };
+      var container = document.getElementById(
+        "dockview-container"
+      );
       if (!container) {
         throw new Error(
           "Dockview container was not found."
@@ -16452,46 +16900,71 @@
         container,
         {
           theme: themeLight,
+          /*
+             PANEL CONTENT
+          */
           createComponent: (options) => {
             switch (options.name) {
-              case "explorer":
-                return new ExplorerPanel();
-              case "empty-workspace":
-                return new EmptyWorkspacePanel();
+              case "correlation":
+                return new CorrelationPanel();
+              case "order-book":
+                return new OrderBookPanel();
+              case "empty":
+                return new EmptyPanel();
               default:
-                return new EmptyWorkspacePanel();
+                return new EmptyPanel();
             }
-          }
+          },
+          /*
+             ☰ before tabs
+          */
+          createPrefixHeaderActionComponent: () => new MenuHeaderAction(),
+          /*
+             + directly after tabs
+          */
+          createLeftHeaderActionComponent: () => new AddTabHeaderAction(),
+          /*
+             Icons at far right
+          */
+          createRightHeaderActionComponent: () => new RightHeaderActions()
         }
       );
-      var mainPanel = dockview.addPanel({
-        id: "main-workspace",
-        component: "empty-workspace",
-        title: "Workspace"
+      var correlation = dockview.addPanel({
+        id: "correlation",
+        component: "correlation",
+        title: "Correlation",
+        initialHeight: 430
       });
-      mainPanel.group.header.hidden = true;
-      var leftGroup = dockview.addEdgeGroup(
-        "left",
-        {
-          id: "left-explorer-group",
-          initialSize: 240,
-          minimumSize: 180,
-          maximumSize: 360,
-          collapsedSize: 30
-        }
-      );
-      var explorerPanel = dockview.addPanel({
-        id: "explorer",
-        component: "explorer",
-        title: "Explorer",
+      dockview.addPanel({
+        id: "tab-2",
+        component: "empty",
+        title: "Tab 2",
+        inactive: true,
         position: {
-          referenceGroup: leftGroup.id
+          referencePanel: "correlation",
+          direction: "within"
         }
       });
-      explorerPanel.group.api.setHeaderPosition(
-        "left"
-      );
-      leftGroup.collapse();
+      dockview.addPanel({
+        id: "tab-3",
+        component: "empty",
+        title: "Tab 3",
+        inactive: true,
+        position: {
+          referencePanel: "correlation",
+          direction: "within"
+        }
+      });
+      dockview.addPanel({
+        id: "order-book",
+        component: "order-book",
+        title: "Order Book",
+        initialHeight: 400,
+        position: {
+          referencePanel: "correlation",
+          direction: "below"
+        }
+      });
     }
   });
   require_workspace();

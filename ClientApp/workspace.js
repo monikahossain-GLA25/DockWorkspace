@@ -5,106 +5,869 @@
 
 
 /* =========================================================
-   EXPLORER PANEL
+   GLOBAL COUNTER FOR + ADD TAB
    ========================================================= */
 
-class ExplorerPanel {
+let newTabNumber = 3;
+
+
+/* =========================================================
+   CORRELATION DATA
+   Static dummy UI data only
+   ========================================================= */
+
+const assets = [
+    "BTC",
+    "ETH",
+    "AAPL",
+    "MSFT",
+    "NVDA",
+    "TSLA",
+    "SPX",
+    "GOLD"
+];
+
+
+const correlationData = [
+
+    [1.00, -0.27, 0.00, -0.77, 0.74, 0.56, -0.74, 0.79],
+
+    [-0.27, 1.00, -0.38, 0.55, 0.44, -0.76, -0.62, -0.13],
+
+    [0.00, -0.38, 1.00, -0.15, -0.63, 0.45, 0.90, 0.59],
+
+    [-0.77, 0.55, -0.15, 1.00, 0.04, -0.04, 0.55, -0.34],
+
+    [0.74, 0.44, -0.63, 0.04, 1.00, -0.23, 0.62, 0.82],
+
+    [0.56, -0.76, 0.45, -0.04, -0.23, 1.00, 0.16, -0.44],
+
+    [-0.74, -0.62, 0.90, 0.55, 0.62, 0.16, 1.00, -0.10],
+
+    [0.79, -0.13, 0.59, -0.34, 0.82, -0.44, -0.10, 1.00]
+
+];
+
+
+/* =========================================================
+   BUILD ONE CORRELATION CELL
+   ========================================================= */
+
+function getCorrelationColor(value, diagonal) {
+
+    if (diagonal) {
+
+        return {
+            background: "#f1f2f4",
+            color: "#334155"
+        };
+    }
+
+
+    const strength =
+        Math.min(Math.abs(value), 1);
+
+
+    const opacity =
+        0.15 + (strength * 0.72);
+
+
+    if (value >= 0) {
+
+        return {
+            background:
+                `rgba(10, 157, 78, ${opacity})`,
+
+            color:
+                strength > 0.48
+                    ? "#ffffff"
+                    : "#334155"
+        };
+    }
+
+
+    return {
+
+        background:
+            `rgba(225, 29, 46, ${opacity})`,
+
+        color:
+            strength > 0.48
+                ? "#ffffff"
+                : "#334155"
+    };
+}
+
+
+/* =========================================================
+   CORRELATION PANEL
+   ========================================================= */
+
+class CorrelationPanel {
 
     constructor() {
 
-        this.element = document.createElement("div");
+        this.element =
+            document.createElement("div");
 
-        this.element.className = "explorer-content";
+        this.element.className =
+            "trade-panel correlation-panel";
+    }
+
+
+    init() {
 
         this.element.innerHTML = `
-            <h3 class="explorer-heading">
-                Explorer
-            </h3>
 
-            <div class="explorer-menu">
+            <div class="panel-inner-toolbar">
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">□</span>
-                    <span>Dashboard</span>
-                </button>
+                <div class="panel-inner-title">
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">□</span>
-                    <span>News</span>
-                </button>
+                    <strong>
+                        Correlation
+                    </strong>
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">□</span>
-                    <span>Reports</span>
-                </button>
+                    <span>
+                        30d rolling
+                    </span>
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">□</span>
-                    <span>Markets</span>
-                </button>
+                </div>
 
-                <button class="explorer-item" type="button">
-                    <span class="explorer-icon">□</span>
-                    <span>Settings</span>
-                </button>
+
+                <div class="correlation-scale">
+
+                    <span>-1</span>
+
+                    <span class="scale-gradient"></span>
+
+                    <span>+1</span>
+
+                </div>
 
             </div>
+
+
+            <div class="correlation-scroll">
+
+                <div
+                    class="correlation-grid"
+                    id="correlation-grid">
+                </div>
+
+            </div>
+
         `;
-    }
 
 
-    /*
-       IMPORTANT:
-       Dockview calls init() when the panel is created.
-    */
-    init(params) {
+        const grid =
+            this.element.querySelector(
+                "#correlation-grid"
+            );
 
-        // No real data required yet.
-        // We only need this method so Dockview
-        // can initialize the component correctly.
 
+        /*
+           Empty top-left corner
+        */
+
+        grid.appendChild(
+            document.createElement("span")
+        );
+
+
+        /*
+           Column headings
+        */
+
+        assets.forEach(asset => {
+
+            const heading =
+                document.createElement("span");
+
+            heading.className =
+                "correlation-column-heading";
+
+            heading.textContent =
+                asset;
+
+            grid.appendChild(
+                heading
+            );
+        });
+
+
+        /*
+           Matrix rows
+        */
+
+        correlationData.forEach(
+            (row, rowIndex) => {
+
+                const rowName =
+                    document.createElement("span");
+
+                rowName.className =
+                    "correlation-row-heading";
+
+                rowName.textContent =
+                    assets[rowIndex];
+
+                grid.appendChild(
+                    rowName
+                );
+
+
+                row.forEach(
+                    (value, columnIndex) => {
+
+                        const cell =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        cell.className =
+                            "correlation-cell";
+
+
+                        const diagonal =
+                            rowIndex ===
+                            columnIndex;
+
+
+                        const colors =
+                            getCorrelationColor(
+                                value,
+                                diagonal
+                            );
+
+
+                        cell.style.background =
+                            colors.background;
+
+
+                        cell.style.color =
+                            colors.color;
+
+
+                        cell.textContent =
+                            value.toFixed(2);
+
+
+                        if (diagonal) {
+
+                            cell.classList.add(
+                                "correlation-diagonal"
+                            );
+                        }
+
+
+                        grid.appendChild(
+                            cell
+                        );
+                    }
+                );
+            }
+        );
     }
 }
 
 
 /* =========================================================
-   EMPTY CENTRAL WORKSPACE
+   ORDER BOOK PANEL
+   Dummy interface based on Dockview demo
    ========================================================= */
 
-class EmptyWorkspacePanel {
+class OrderBookPanel {
 
     constructor() {
 
-        this.element = document.createElement("div");
+        this.element =
+            document.createElement("div");
 
-        this.element.className = "empty-workspace";
-
-        this.element.innerHTML = `
-            <span class="empty-workspace-text">
-                Empty Workspace
-            </span>
-        `;
+        this.element.className =
+            "trade-panel order-book-panel";
     }
 
 
-    /*
-       Dockview also requires init()
-       for this component.
-    */
-    init(params) {
+    init() {
 
-        // Nothing needed yet.
+        this.element.innerHTML = `
 
+            <div class="order-top">
+
+                <div>
+
+                    <div class="instrument-name">
+
+                        BTC/USD
+
+                        <span class="instrument-tag">
+                            PERP
+                        </span>
+
+                    </div>
+
+
+                    <div class="main-price negative">
+
+                        67,324.8
+
+                    </div>
+
+
+                    <div class="index-line">
+
+                        Index&nbsp;
+                        67,338.3
+
+                        <span class="negative">
+                            -0.14%
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mini-chart">
+
+                    <svg
+                        viewBox="0 0 140 45"
+                        preserveAspectRatio="none">
+
+                        <polyline
+                            points="
+                            0,31
+                            10,26
+                            16,30
+                            23,21
+                            32,24
+                            39,13
+                            46,18
+                            54,10
+                            62,17
+                            69,15
+                            76,7
+                            83,11
+                            91,9
+                            99,5
+                            108,12
+                            116,8
+                            124,17
+                            132,23
+                            140,28"
+                            fill="none"
+                            stroke="#ef3340"
+                            stroke-width="1.6">
+                        </polyline>
+
+                    </svg>
+
+                </div>
+
+            </div>
+
+
+            <div class="market-stat-row">
+
+                <div>
+                    <span>24H HIGH</span>
+                    <strong>67,502.7</strong>
+                </div>
+
+                <div>
+                    <span>24H LOW</span>
+                    <strong>67,324.8</strong>
+                </div>
+
+                <div>
+                    <span>24H VOL</span>
+                    <strong>124.55M</strong>
+                </div>
+
+                <div>
+                    <span>OPEN INT</span>
+                    <strong>43.09M</strong>
+                </div>
+
+                <div>
+                    <span>FUNDING</span>
+                    <strong class="negative">
+                        -0.0041%
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="order-table-header">
+
+                <span>PRICE</span>
+
+                <span>SIZE</span>
+
+                <span>TOTAL</span>
+
+            </div>
+
+
+            <div class="order-row ask">
+
+                <span>67,326.6</span>
+                <span>4.656</span>
+                <span>6.19</span>
+
+            </div>
+
+
+            <div class="order-row ask">
+
+                <span>67,326.1</span>
+                <span>0.150</span>
+                <span>1.54</span>
+
+            </div>
+
+
+            <div class="order-row ask">
+
+                <span>67,325.6</span>
+                <span>0.952</span>
+                <span>1.39</span>
+
+            </div>
+
+
+            <div class="order-row ask">
+
+                <span>67,325.1</span>
+                <span>0.595</span>
+                <span>0.89</span>
+
+            </div>
+
+
+            <div class="spread-row">
+
+                <strong class="negative">
+
+                    ▼ 67,324.8
+
+                </strong>
+
+                <span>
+
+                    Spread 0.5
+                    (0.001%)
+
+                </span>
+
+            </div>
+
+
+            <div class="order-row bid">
+
+                <span>67,324.6</span>
+                <span>0.054</span>
+                <span>0.95</span>
+
+            </div>
+
+
+            <div class="order-row bid">
+
+                <span>67,324.1</span>
+                <span>3.081</span>
+                <span>3.14</span>
+
+            </div>
+
+
+            <div class="order-row bid">
+
+                <span>67,323.6</span>
+                <span>0.992</span>
+                <span>4.06</span>
+
+            </div>
+
+
+            <div class="order-row bid">
+
+                <span>67,323.1</span>
+                <span>0.050</span>
+                <span>6.73</span>
+
+            </div>
+
+
+            <div class="time-sales-title">
+
+                <span>TIME & SALES</span>
+
+                <span>TIME · PRICE · SIZE</span>
+
+            </div>
+
+
+            <div class="time-sales-row">
+
+                <span>07:13:39</span>
+
+                <span class="negative">
+                    67,323.7
+                </span>
+
+                <span>
+                    1.998
+                </span>
+
+            </div>
+
+        `;
     }
 }
 
 
 /* =========================================================
-   GET DOCKVIEW CONTAINER
+   EMPTY TAB
+   Used by Tab 2, Tab 3 and + button
+   ========================================================= */
+
+class EmptyPanel {
+
+    constructor() {
+
+        this.element =
+            document.createElement("div");
+
+        this.element.className =
+            "demo-empty-panel";
+    }
+
+
+    init(params) {
+
+        this.element.innerHTML = `
+
+            <div>
+
+                ${params.api.title}
+
+            </div>
+
+        `;
+    }
+}
+
+
+/* =========================================================
+   HAMBURGER ACTION
+   Appears BEFORE tabs
+   ========================================================= */
+
+class MenuHeaderAction {
+
+    constructor() {
+
+        this.element =
+            document.createElement("div");
+
+        this.element.className =
+            "header-action-container";
+    }
+
+
+    init() {
+
+        this.element.innerHTML = `
+
+            <button
+                type="button"
+                class="dock-header-button menu-button"
+                title="Panel menu">
+
+                ☰
+
+            </button>
+
+        `;
+    }
+
+
+    dispose() {
+
+        this.element.remove();
+    }
+}
+
+
+/* =========================================================
+   + BUTTON
+   Dockview puts LEFT ACTIONS directly after tabs.
+   Therefore this appears like:
+   Correlation | Tab2 | Tab3 | +
+   ========================================================= */
+
+class AddTabHeaderAction {
+
+    constructor() {
+
+        this.element =
+            document.createElement("div");
+
+        this.element.className =
+            "header-action-container";
+    }
+
+
+    init(parameters) {
+
+        const button =
+            document.createElement("button");
+
+
+        button.type =
+            "button";
+
+
+        button.className =
+            "dock-header-button add-tab-button";
+
+
+        button.title =
+            "Add tab";
+
+
+        button.textContent =
+            "+";
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                newTabNumber++;
+
+
+                const referencePanel =
+                    parameters.group
+                        .activePanel;
+
+
+                if (!referencePanel) {
+
+                    return;
+                }
+
+
+                parameters
+                    .containerApi
+                    .addPanel({
+
+                        id:
+                            `new-tab-${Date.now()}-${newTabNumber}`,
+
+                        component:
+                            "empty",
+
+                        title:
+                            `Tab ${newTabNumber}`,
+
+                        position: {
+
+                            referencePanel:
+                                referencePanel.id,
+
+                            direction:
+                                "within"
+                        }
+
+                    });
+
+            }
+        );
+
+
+        this.element.appendChild(
+            button
+        );
+    }
+
+
+    dispose() {
+
+        this.element.remove();
+    }
+}
+
+
+/* =========================================================
+   RIGHT-SIDE ACTIONS
+   Star / Pop-out appearance / Maximize
+   ========================================================= */
+
+class RightHeaderActions {
+
+    constructor() {
+
+        this.element =
+            document.createElement("div");
+
+        this.element.className =
+            "right-header-actions";
+    }
+
+
+    init(parameters) {
+
+        /*
+           STAR
+           Visual UI for now
+        */
+
+        const star =
+            document.createElement("button");
+
+
+        star.type =
+            "button";
+
+
+        star.className =
+            "dock-header-button";
+
+
+        star.title =
+            "Favourite";
+
+
+        star.textContent =
+            "☆";
+
+
+        star.addEventListener(
+            "click",
+            () => {
+
+                star.textContent =
+                    star.textContent === "☆"
+                        ? "★"
+                        : "☆";
+            }
+        );
+
+
+        /*
+           POP-OUT ICON
+           Interface first.
+           Behaviour can be added later.
+        */
+
+        const popout =
+            document.createElement("button");
+
+
+        popout.type =
+            "button";
+
+
+        popout.className =
+            "dock-header-button";
+
+
+        popout.title =
+            "Pop out";
+
+
+        popout.textContent =
+            "↗";
+
+
+        /*
+           MAXIMIZE
+        */
+
+        const maximize =
+            document.createElement("button");
+
+
+        maximize.type =
+            "button";
+
+
+        maximize.className =
+            "dock-header-button";
+
+
+        maximize.title =
+            "Maximize / Restore";
+
+
+        maximize.textContent =
+            "⛶";
+
+
+        maximize.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    parameters
+                        .containerApi
+                        .hasMaximizedGroup()
+                ) {
+
+                    parameters
+                        .containerApi
+                        .exitMaximizedGroup();
+
+                    return;
+                }
+
+
+                const activePanel =
+                    parameters
+                        .group
+                        .activePanel;
+
+
+                if (activePanel) {
+
+                    parameters
+                        .containerApi
+                        .maximizeGroup(
+                            activePanel
+                        );
+                }
+
+            }
+        );
+
+
+        this.element.append(
+            star,
+            popout,
+            maximize
+        );
+    }
+
+
+    dispose() {
+
+        this.element.remove();
+    }
+}
+
+
+/* =========================================================
+   GET HTML CONTAINER
    ========================================================= */
 
 const container =
-    document.getElementById("dockview-container");
+    document.getElementById(
+        "dockview-container"
+    );
 
 
 if (!container) {
@@ -124,106 +887,183 @@ const dockview =
         container,
         {
 
-            theme: themeLight,
+            theme:
+                themeLight,
 
-            createComponent: (options) => {
 
-                switch (options.name) {
+            /*
+               PANEL CONTENT
+            */
 
-                    case "explorer":
-                        return new ExplorerPanel();
+            createComponent:
+                (options) => {
 
-                    case "empty-workspace":
-                        return new EmptyWorkspacePanel();
+                    switch (
+                    options.name
+                    ) {
 
-                    default:
-                        return new EmptyWorkspacePanel();
-                }
-            }
+                        case "correlation":
+
+                            return new CorrelationPanel();
+
+
+                        case "order-book":
+
+                            return new OrderBookPanel();
+
+
+                        case "empty":
+
+                            return new EmptyPanel();
+
+
+                        default:
+
+                            return new EmptyPanel();
+                    }
+
+                },
+
+
+            /*
+               ☰ before tabs
+            */
+
+            createPrefixHeaderActionComponent:
+                () =>
+                    new MenuHeaderAction(),
+
+
+            /*
+               + directly after tabs
+            */
+
+            createLeftHeaderActionComponent:
+                () =>
+                    new AddTabHeaderAction(),
+
+
+            /*
+               Icons at far right
+            */
+
+            createRightHeaderActionComponent:
+                () =>
+                    new RightHeaderActions()
 
         }
     );
 
 
 /* =========================================================
-   CREATE MAIN WORKSPACE PANEL
+   TOP PANEL — CORRELATION
    ========================================================= */
 
-const mainPanel =
+const correlation =
     dockview.addPanel({
 
-        id: "main-workspace",
+        id:
+            "correlation",
 
-        component: "empty-workspace",
+        component:
+            "correlation",
 
-        title: "Workspace"
+        title:
+            "Correlation",
 
-    });
-
-
-/*
-   Hide the normal header for the empty workspace.
-*/
-
-mainPanel.group.header.hidden = true;
-
-
-/* =========================================================
-   CREATE LEFT EDGE GROUP
-   ========================================================= */
-
-const leftGroup =
-    dockview.addEdgeGroup(
-        "left",
-        {
-
-            id: "left-explorer-group",
-
-            initialSize: 240,
-
-            minimumSize: 180,
-
-            maximumSize: 360,
-
-            collapsedSize: 30
-
-        }
-    );
-
-
-/* =========================================================
-   ADD EXPLORER INTO LEFT GROUP
-   ========================================================= */
-
-const explorerPanel =
-    dockview.addPanel({
-
-        id: "explorer",
-
-        component: "explorer",
-
-        title: "Explorer",
-
-        position: {
-
-            referenceGroup: leftGroup.id
-
-        }
+        initialHeight:
+            430
 
     });
 
 
 /* =========================================================
-   VERTICAL EXPLORER TAB
+   TAB 2
+   SAME GROUP
    ========================================================= */
 
-explorerPanel.group.api.setHeaderPosition(
-    "left"
-);
+dockview.addPanel({
+
+    id:
+        "tab-2",
+
+    component:
+        "empty",
+
+    title:
+        "Tab 2",
+
+    inactive:
+        true,
+
+    position: {
+
+        referencePanel:
+            "correlation",
+
+        direction:
+            "within"
+    }
+
+});
 
 
 /* =========================================================
-   START COLLAPSED
+   TAB 3
+   SAME GROUP
    ========================================================= */
 
-leftGroup.collapse();
+dockview.addPanel({
+
+    id:
+        "tab-3",
+
+    component:
+        "empty",
+
+    title:
+        "Tab 3",
+
+    inactive:
+        true,
+
+    position: {
+
+        referencePanel:
+            "correlation",
+
+        direction:
+            "within"
+    }
+
+});
+
+
+/* =========================================================
+   BOTTOM PANEL — ORDER BOOK
+   ========================================================= */
+
+dockview.addPanel({
+
+    id:
+        "order-book",
+
+    component:
+        "order-book",
+
+    title:
+        "Order Book",
+
+    initialHeight:
+        400,
+
+    position: {
+
+        referencePanel:
+            "correlation",
+
+        direction:
+            "below"
+    }
+
+});
