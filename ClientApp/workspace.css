@@ -1,2 +1,246 @@
-﻿body {
+﻿/* =========================================================
+   1. DOCKVIEW'S OWN CSS
+   ========================================================= */
+
+@import "dockview/dist/styles/dockview.css";
+
+
+/* =========================================================
+   2. GLOBAL PAGE RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
 }
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    overflow: hidden;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #ffffff;
+    color: #2f3747;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+
+/* =========================================================
+   3. TOP HEADER
+   Similar to the screenshot
+   ========================================================= */
+
+.app-header {
+    flex: 0 0 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    background: #ffffff;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+
+/* =========================================================
+   4. BRAND / LOGO
+   ========================================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    height: 100%;
+}
+
+
+.brand-logo {
+    width: 19px;
+    height: 20px;
+    display: grid;
+    grid-template-columns: 7px 7px;
+    grid-template-rows: 9px 9px;
+    gap: 2px;
+}
+
+
+.logo-block {
+    display: block;
+    border-radius: 2px;
+}
+
+
+.logo-cyan {
+    grid-row: 1 / 3;
+    background: #0bc4cc;
+}
+
+
+.logo-blue {
+    background: #3478f6;
+}
+
+
+.logo-pink {
+    background: #e842c8;
+}
+
+
+.brand-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #485064;
+    letter-spacing: -0.2px;
+}
+
+
+/* =========================================================
+   5. MAIN WORKSPACE
+   VERY IMPORTANT:
+   Dockview must receive an actual height.
+   ========================================================= */
+
+.workspace-shell {
+    position: relative;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   6. DOCKVIEW HOST
+   ========================================================= */
+
+#dockview-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   7. EXPLORER CONTENT
+   Visible when the left rail is expanded.
+   ========================================================= */
+
+.explorer-content {
+    width: 100%;
+    height: 100%;
+    padding: 14px 12px;
+    overflow: auto;
+    background: #fafbfc;
+    color: #394150;
+}
+
+
+.explorer-heading {
+    margin: 0 0 14px 0;
+    font-size: 11px;
+    font-weight: 700;
+    color: #727b8d;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   8. EXPLORER MENU ITEMS
+   Dummy UI only.
+   ========================================================= */
+
+.explorer-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+
+.explorer-item {
+    width: 100%;
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border: 0;
+    border-radius: 3px;
+    background: transparent;
+    color: #394150;
+    font: inherit;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+}
+
+
+    .explorer-item:hover {
+        background: #eceff3;
+    }
+
+
+.explorer-icon {
+    width: 16px;
+    text-align: center;
+    color: #677084;
+}
+
+
+/* =========================================================
+   9. EMPTY MAIN WORKSPACE
+   ========================================================= */
+
+.empty-workspace {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+}
+
+
+.empty-workspace-text {
+    color: #a0a6b1;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   10. SMALL VISUAL POLISH FOR DOCKVIEW
+   ========================================================= */
+
+#dockview-container {
+    --dv-tabs-and-actions-container-font-size: 12px;
+}
+
+
+/*
+   We intentionally keep the styling light for Milestone 1.
+
+   Later we will customize:
+   - tab height
+   - hamburger icon
+   - plus button
+   - close button
+   - maximize icon
+   - border colors
+   - hover states
+   - active tab
+*/
