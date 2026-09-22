@@ -478,3 +478,350 @@ class FxRatesPanel {
         });
     }
 }
+/* 
+   ORDERS PANEL
+   */
+
+class OrdersPanel {
+
+    constructor() {
+
+        this.element =
+            document.createElement("div");
+
+
+        this.element.className =
+            "workspace-panel orders-panel";
+    }
+
+
+    init() {
+
+        this.element.innerHTML = `
+
+            <div class="order-toolbar">
+
+                <span class="order-toolbar-title">
+                    Order Blotter
+                </span>
+
+
+                <span
+                    class="
+                        status-badge
+                        status-working">
+
+                    39 WORKING
+
+                </span>
+
+
+                <span
+                    class="
+                        status-badge
+                        status-filled">
+
+                    18 FILLED
+
+                </span>
+
+
+                <span class="order-gross">
+
+                    Gross $23.26M
+
+                </span>
+
+            </div>
+
+
+            <div class="order-table">
+
+                <div class="order-header">
+
+                    <span>SIDE</span>
+
+                    <span>SYMBOL</span>
+
+                    <span>TYP</span>
+
+                    <span>PRICE</span>
+
+                    <span>NOTIONAL</span>
+
+                    <span>STATUS</span>
+
+                    <span>TIME</span>
+
+                </div>
+
+
+                <div class="order-table-body">
+                </div>
+
+            </div>
+
+        `;
+
+
+        const tableBody =
+            this.element.querySelector(
+                ".order-table-body"
+            );
+
+
+        orderRows.forEach(order => {
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "trade-order-row";
+
+
+            const sideClass =
+                order.side === "BUY"
+                    ? "buy-side"
+                    : "sell-side";
+
+
+            let statusClass =
+                "status-done";
+
+
+            if (order.status === "CANCEL") {
+
+                statusClass =
+                    "status-cancel";
+            }
+
+
+            if (order.status === "PARTIAL") {
+
+                statusClass =
+                    "status-partial";
+            }
+
+
+            row.innerHTML = `
+
+                <span>
+
+                    <span
+                        class="
+                            side-badge
+                            ${sideClass}">
+
+                        ${order.side}
+
+                    </span>
+
+                </span>
+
+
+                <strong>
+                    ${order.symbol}
+                </strong>
+
+
+                <span>
+                    ${order.type}
+                </span>
+
+
+                <span>
+                    ${order.price}
+                </span>
+
+
+                <span>
+                    ${order.notional}
+                </span>
+
+
+                <span>
+
+                    <span
+                        class="
+                            order-status
+                            ${statusClass}">
+
+                        ${order.status}
+
+                    </span>
+
+                </span>
+
+
+                <span>
+                    ${order.time}
+                </span>
+
+            `;
+
+
+            tableBody.appendChild(
+                row
+            );
+        });
+    }
+}
+/* 
+   VOL SURFACE PANEL
+ */
+
+class VolSurfacePanel {
+
+    constructor() {
+
+        this.element =
+            document.createElement("div");
+
+
+        this.element.className =
+            "workspace-panel vol-panel";
+    }
+
+
+    init() {
+
+        this.element.innerHTML = `
+
+            <div class="vol-toolbar">
+
+                <strong class="vol-title">
+
+                    Vol Surface
+
+                </strong>
+
+
+                <span class="vol-subtitle">
+
+                    implied vol · by delta / tenor
+
+                </span>
+
+
+                <div class="vol-legend">
+
+                    <span>
+                        10
+                    </span>
+
+                    <span class="vol-gradient">
+                    </span>
+
+                    <span>
+                        22%
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="vol-scroll">
+
+                <div class="vol-grid">
+                </div>
+
+            </div>
+
+        `;
+
+
+        const grid =
+            this.element.querySelector(
+                ".vol-grid"
+            );
+
+
+        /*
+           Top-left blank corner.
+        */
+
+        grid.appendChild(
+            document.createElement("span")
+        );
+
+
+        /*
+           Column headings.
+        */
+
+        volColumns.forEach(column => {
+
+            const heading =
+                document.createElement(
+                    "span"
+                );
+
+
+            heading.className =
+                "vol-heading";
+
+
+            heading.textContent =
+                column;
+
+
+            grid.appendChild(
+                heading
+            );
+        });
+
+
+        /*
+           Matrix rows.
+        */
+
+        volRows.forEach(row => {
+
+            const tenor =
+                document.createElement(
+                    "span"
+                );
+
+
+            tenor.className =
+                "vol-tenor";
+
+
+            tenor.textContent =
+                row.tenor;
+
+
+            grid.appendChild(
+                tenor
+            );
+
+
+            row.values.forEach(value => {
+
+                const cell =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                cell.className =
+                    `vol-cell ${getVolClass(value)}`;
+
+
+                cell.textContent =
+                    value.toFixed(1);
+
+
+                grid.appendChild(
+                    cell
+                );
+
+            });
+
+        });
+    }
+}
