@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Second Dock Workspace";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>Second Dock Workspace</title>
+
+    <link rel="stylesheet"
+          href="~/dist/second-workspace.css"
+          asp-append-version="true" />
+
+</head>
+
+
+<body>
+
+    <!-- 
+         TOP DOCKVIEW BRAND BAR
+          -->
+
+    <header class="app-header">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+
+                <span class="logo-block logo-cyan"></span>
+
+                <span class="logo-block logo-blue"></span>
+
+                <span class="logo-block logo-pink"></span>
+
+            </div>
+
+            <span class="brand-name">
+                dockview
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- 
+         SECOND DOCKVIEW WORKSPACE
+         -->
+
+    <main class="workspace-shell">
+
+        <div id="second-dockview-container">
+        </div>
+
+    </main>
+
+
+    <!-- 
+         SECOND WORKSPACE JAVASCRIPT
+         -->
+
+    <script src="~/dist/second-workspace.js"
+            asp-append-version="true">
+    </script>
+
+</body>
+
+</html>
