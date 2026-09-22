@@ -4289,3 +4289,8 @@ body {
   color: #94a3b8;
   font-size: 12px;
 }
+.blank-panel {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}

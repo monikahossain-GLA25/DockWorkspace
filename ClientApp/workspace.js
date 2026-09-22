@@ -115,9 +115,9 @@ function getCorrelationColor(value, diagonal) {
 }
 
 
-/* =========================================================
+/* 
    CORRELATION PANEL
-   ========================================================= */
+  */
 
 class CorrelationPanel {
 
@@ -288,10 +288,10 @@ class CorrelationPanel {
 }
 
 
-/* =========================================================
+/* 
    ORDER BOOK PANEL
    Dummy interface based on Dockview demo
-   ========================================================= */
+    */
 
 class OrderBookPanel {
 
@@ -545,10 +545,10 @@ class OrderBookPanel {
 }
 
 
-/* =========================================================
+/* 
    EMPTY TAB
    Used by Tab 2, Tab 3 and + button
-   ========================================================= */
+  */
 
 class EmptyPanel {
 
@@ -577,10 +577,10 @@ class EmptyPanel {
 }
 
 
-/* =========================================================
+/* 
    HAMBURGER ACTION
    Appears BEFORE tabs
-   ========================================================= */
+ */
 
 class MenuHeaderAction {
 
@@ -618,12 +618,12 @@ class MenuHeaderAction {
 }
 
 
-/* =========================================================
+/* 
    + BUTTON
    Dockview puts LEFT ACTIONS directly after tabs.
    Therefore this appears like:
    Correlation | Tab2 | Tab3 | +
-   ========================================================= */
+   */
 
 class AddTabHeaderAction {
 
@@ -718,10 +718,10 @@ class AddTabHeaderAction {
 }
 
 
-/* =========================================================
+/* 
    RIGHT-SIDE ACTIONS
    Star / Pop-out appearance / Maximize
-   ========================================================= */
+    */
 
 class RightHeaderActions {
 
@@ -825,9 +825,9 @@ class RightHeaderActions {
 }
 
 
-/* =========================================================
+/* 
    GET HTML CONTAINER
-   ========================================================= */
+   */
 
 const container =
     document.getElementById(
@@ -843,9 +843,9 @@ if (!container) {
 }
 
 
-/* =========================================================
+/* 
    CREATE DOCKVIEW
-   ========================================================= */
+   */
 
 const dockview =
     new DockviewComponent(

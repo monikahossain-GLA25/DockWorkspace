@@ -16379,6 +16379,15 @@
   var require_workspace = __commonJS({
     "ClientApp/workspace.js"() {
       init_main_esm2();
+      var BlankPanel = class {
+        constructor() {
+          this.element = document.createElement("div");
+          this.element.className = "blank-panel";
+        }
+        init() {
+          this.element.innerHTML = "";
+        }
+      };
       var newTabNumber = 3;
       var assets = [
         "BTC",
@@ -16842,46 +16851,31 @@
           this.element.className = "right-header-actions";
         }
         init(parameters) {
-          const star = document.createElement("button");
-          star.type = "button";
-          star.className = "dock-header-button";
-          star.title = "Favourite";
-          star.textContent = "\u2606";
-          star.addEventListener(
-            "click",
-            () => {
-              star.textContent = star.textContent === "\u2606" ? "\u2605" : "\u2606";
-            }
-          );
-          const popout = document.createElement("button");
-          popout.type = "button";
-          popout.className = "dock-header-button";
-          popout.title = "Pop out";
-          popout.textContent = "\u2197";
-          const maximize = document.createElement("button");
-          maximize.type = "button";
-          maximize.className = "dock-header-button";
-          maximize.title = "Maximize / Restore";
-          maximize.textContent = "\u26F6";
-          maximize.addEventListener(
+          const expandButton = document.createElement("button");
+          expandButton.type = "button";
+          expandButton.className = "dock-header-button expand-button";
+          expandButton.title = "Expand / Restore";
+          expandButton.innerHTML = "\u26F6";
+          expandButton.addEventListener(
             "click",
             () => {
               if (parameters.containerApi.hasMaximizedGroup()) {
                 parameters.containerApi.exitMaximizedGroup();
+                expandButton.innerHTML = "\u26F6";
                 return;
               }
               const activePanel = parameters.group.activePanel;
-              if (activePanel) {
-                parameters.containerApi.maximizeGroup(
-                  activePanel
-                );
+              if (!activePanel) {
+                return;
               }
+              parameters.containerApi.maximizeGroup(
+                activePanel
+              );
+              expandButton.innerHTML = "\u2750";
             }
           );
-          this.element.append(
-            star,
-            popout,
-            maximize
+          this.element.appendChild(
+            expandButton
           );
         }
         dispose() {
@@ -16909,10 +16903,12 @@
                 return new CorrelationPanel();
               case "order-book":
                 return new OrderBookPanel();
+              case "blank":
+                return new BlankPanel();
               case "empty":
                 return new EmptyPanel();
               default:
-                return new EmptyPanel();
+                return new BlankPanel();
             }
           },
           /*
@@ -16929,11 +16925,52 @@
           createRightHeaderActionComponent: () => new RightHeaderActions()
         }
       );
+      var totalWidth = container.clientWidth;
+      var totalHeight = container.clientHeight;
+      var columnWidth = Math.floor(totalWidth / 3);
+      var correlationHeight = Math.floor(totalHeight * 0.54);
+      var orderBookHeight = totalHeight - correlationHeight;
       var correlation = dockview.addPanel({
         id: "correlation",
         component: "correlation",
         title: "Correlation",
-        initialHeight: 430
+        initialWidth: columnWidth,
+        initialHeight: correlationHeight,
+        minimumWidth: 320,
+        minimumHeight: 220
+      });
+      var middleBlank = dockview.addPanel({
+        id: "middle-placeholder",
+        component: "blank",
+        title: "Middle",
+        initialWidth: columnWidth,
+        position: {
+          referencePanel: correlation,
+          direction: "right"
+        }
+      });
+      middleBlank.group.header.hidden = true;
+      var rightBlank = dockview.addPanel({
+        id: "right-placeholder",
+        component: "blank",
+        title: "Right",
+        initialWidth: columnWidth,
+        position: {
+          referencePanel: middleBlank,
+          direction: "right"
+        }
+      });
+      rightBlank.group.header.hidden = true;
+      var orderBook = dockview.addPanel({
+        id: "order-book",
+        component: "order-book",
+        title: "Order Book",
+        initialHeight: orderBookHeight,
+        minimumHeight: 220,
+        position: {
+          referencePanel: correlation,
+          direction: "below"
+        }
       });
       dockview.addPanel({
         id: "tab-2",
