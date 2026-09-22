@@ -222,3 +222,259 @@ const volRows = [
     }
 
 ];
+/* 
+   VOLATILITY COLOUR HELPER
+    */
+
+function getVolClass(value) {
+
+    if (value < 10.5) {
+
+        return "vol-blue";
+    }
+
+
+    if (value < 12.5) {
+
+        return "vol-cyan";
+    }
+
+
+    if (value < 15.0) {
+
+        return "vol-green";
+    }
+
+
+    if (value < 18.0) {
+
+        return "vol-lime";
+    }
+
+
+    if (value < 19.5) {
+
+        return "vol-yellow";
+    }
+
+
+    if (value < 21.0) {
+
+        return "vol-orange";
+    }
+
+
+    return "vol-red";
+}
+/* 
+   FX RATES PANEL
+   */
+
+class FxRatesPanel {
+
+    constructor() {
+
+        this.element =
+            document.createElement("div");
+
+
+        this.element.className =
+            "workspace-panel fx-panel";
+    }
+
+
+    init() {
+
+        /*
+           Create the basic panel structure.
+        */
+
+        this.element.innerHTML = `
+
+            <div class="fx-subtabs">
+
+                <button
+                    type="button"
+                    class="fx-subtab active">
+
+                    G10 ×
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="fx-subtab">
+
+                    EM
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="fx-subtab">
+
+                    Crosses
+
+                </button>
+
+            </div>
+
+
+            <div class="fx-grid">
+            </div>
+
+        `;
+
+
+        /*
+           Find our grid.
+        */
+
+        const grid =
+            this.element.querySelector(
+                ".fx-grid"
+            );
+
+
+        /*
+           Generate one card for every FX item.
+        */
+
+        fxRates.forEach(rate => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "fx-card";
+
+
+            const directionSymbol =
+                rate.direction === "up"
+                    ? "▸"
+                    : "▸";
+
+
+            card.innerHTML = `
+
+                <div class="fx-card-header">
+
+                    <span
+                        class="
+                            fx-direction
+                            ${rate.direction === "up"
+                    ? "fx-up"
+                    : "fx-down"}">
+
+                        ${directionSymbol}
+
+                    </span>
+
+
+                    <span>
+                        ${rate.pair}
+                    </span>
+
+
+                    <span class="fx-demo">
+                        Demo Account
+                    </span>
+
+                </div>
+
+
+                <div class="fx-card-body">
+
+                    <div class="fx-label-row">
+
+                        <span>
+                            ${rate.action}
+                        </span>
+
+                        <span>
+                            Buy
+                        </span>
+
+                    </div>
+
+
+                    <div class="fx-price-row">
+
+                        <div
+                            class="
+                                fx-price
+                                ${rate.direction}">
+
+                            <span>
+                                ${rate.valueBefore}
+                            </span>
+
+                            <span class="fx-big">
+                                ${rate.bigValue}
+                            </span>
+
+                            <span>
+                                ${rate.valueAfter}
+                            </span>
+
+                        </div>
+
+
+                        <span class="fx-size">
+                            ${rate.size}
+                        </span>
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(
+                card
+            );
+        });
+
+
+        /*
+           Secondary tab behaviour.
+
+           G10 / EM / Crosses
+        */
+
+        const subTabs =
+            this.element.querySelectorAll(
+                ".fx-subtab"
+            );
+
+
+        subTabs.forEach(tab => {
+
+            tab.addEventListener(
+                "click",
+                () => {
+
+                    subTabs.forEach(
+                        item =>
+                            item.classList.remove(
+                                "active"
+                            )
+                    );
+
+
+                    tab.classList.add(
+                        "active"
+                    );
+
+                }
+            );
+
+        });
+    }
+}
