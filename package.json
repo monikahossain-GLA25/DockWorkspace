@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild ClientApp/workspace.js ClientApp/workspace.css --bundle --outdir=wwwroot/dist",
-    "watch": "esbuild ClientApp/workspace.js ClientApp/workspace.css --bundle --outdir=wwwroot/dist --watch"
+    "build": "esbuild ClientApp/workspace.js ClientApp/workspace.css ClientApp/second-workspace.js ClientApp/second-workspace.css --bundle --outdir=wwwroot/dist",
+    "watch": "esbuild ClientApp/workspace.js ClientApp/workspace.css ClientApp/second-workspace.js ClientApp/second-workspace.css --bundle --outdir=wwwroot/dist --watch",
+
+    "build:first": "esbuild ClientApp/workspace.js ClientApp/workspace.css --bundle --outdir=wwwroot/dist",
+    "build:second": "esbuild ClientApp/second-workspace.js ClientApp/second-workspace.css --bundle --outdir=wwwroot/dist"
   },
   "keywords": [],
   "author": "",
