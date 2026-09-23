@@ -874,14 +874,37 @@ const dockview =
                         return new OrderBookPanel();
 
 
+                    case "fx-rates":
+
+                        return new TemplatePanel(
+                            "fxrates-template"
+                        );
+
+
+                    case "orders":
+
+                        return new TemplatePanel(
+                            "orders-template"
+                        );
+
+
+                    case "positions":
+
+                        return new TemplatePanel(
+                            "positions-template"
+                        );
+
+
+                    case "vol-surface":
+
+                        return new TemplatePanel(
+                            "volsurface-template"
+                        );
+
+
                     case "blank":
 
                         return new BlankPanel();
-
-
-                    case "empty":
-
-                        return new EmptyPanel();
 
 
                     default:
