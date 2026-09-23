@@ -1200,3 +1200,47 @@ dockview.addPanel({
     }
 
 });
+
+
+
+//23.09.2026
+class TemplatePanel {
+
+    constructor(templateId) {
+
+        this.templateId = templateId;
+
+        this.element =
+            document.createElement("div");
+
+        this.element.className =
+            "dock-panel-host";
+    }
+
+
+    init() {
+
+        const template =
+            document.getElementById(
+                this.templateId
+            );
+
+
+        if (!template) {
+
+            throw new Error(
+                `Template '${this.templateId}' was not found.`
+            );
+        }
+
+
+        const content =
+            template.content.cloneNode(true);
+
+
+        this.element.appendChild(
+            content
+        );
+    }
+
+}
