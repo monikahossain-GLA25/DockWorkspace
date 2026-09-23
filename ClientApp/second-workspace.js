@@ -825,3 +825,621 @@ class VolSurfacePanel {
         });
     }
 }
+/* 
+   EMPTY / PLACEHOLDER PANEL
+   */
+
+class EmptyPanel {
+
+    constructor() {
+
+        this.element =
+            document.createElement(
+                "div"
+            );
+
+
+        this.element.className =
+            "empty-tab-panel";
+    }
+
+
+    init(params) {
+
+        const title =
+            params?.api?.title
+            ?? "Panel";
+
+
+        this.element.textContent =
+            title;
+    }
+}
+/* =========================================================
+   LEFT HAMBURGER BUTTON
+   ========================================================= */
+
+class MenuHeaderAction {
+
+    constructor() {
+
+        this.element =
+            document.createElement(
+                "div"
+            );
+
+
+        this.element.className =
+            "header-action-container";
+    }
+
+
+    init() {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.type =
+            "button";
+
+
+        button.className =
+            "dock-header-button menu-button";
+
+
+        button.title =
+            "Panel Menu";
+
+
+        button.textContent =
+            "☰";
+
+
+        this.element.appendChild(
+            button
+        );
+    }
+
+
+    dispose() {
+
+        this.element.remove();
+    }
+}
+
+
+/* =========================================================
+   + ADD TAB
+   ========================================================= */
+
+class AddTabHeaderAction {
+
+    constructor() {
+
+        this.element =
+            document.createElement(
+                "div"
+            );
+
+
+        this.element.className =
+            "header-action-container";
+    }
+
+
+    init(parameters) {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.type =
+            "button";
+
+
+        button.className =
+            "dock-header-button add-tab-button";
+
+
+        button.title =
+            "Add Tab";
+
+
+        button.textContent =
+            "+";
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const referencePanel =
+                    parameters
+                        .group
+                        .activePanel;
+
+
+                if (!referencePanel) {
+
+                    return;
+                }
+
+
+                tabCounter++;
+
+
+                parameters
+                    .containerApi
+                    .addPanel({
+
+                        id:
+                            `second-tab-${Date.now()}-${tabCounter}`,
+
+                        component:
+                            "empty",
+
+                        title:
+                            `Tab ${tabCounter}`,
+
+                        position: {
+
+                            referencePanel:
+                                referencePanel.id,
+
+                            direction:
+                                "within"
+                        }
+
+                    });
+
+            }
+        );
+
+
+        this.element.appendChild(
+            button
+        );
+    }
+
+
+    dispose() {
+
+        this.element.remove();
+    }
+}
+
+
+/* =========================================================
+   RIGHT-SIDE ACTIONS
+   ========================================================= */
+
+class RightHeaderActions {
+
+    constructor() {
+
+        this.element =
+            document.createElement(
+                "div"
+            );
+
+
+        this.element.className =
+            "right-header-actions";
+    }
+
+
+    init(parameters) {
+
+        /* -----------------------------------------
+           STAR
+           ----------------------------------------- */
+
+        const starButton =
+            document.createElement(
+                "button"
+            );
+
+
+        starButton.type =
+            "button";
+
+
+        starButton.className =
+            "dock-header-button";
+
+
+        starButton.title =
+            "Favourite";
+
+
+        starButton.textContent =
+            "☆";
+
+
+        starButton.addEventListener(
+            "click",
+            () => {
+
+                starButton.textContent =
+                    starButton.textContent === "☆"
+                        ? "★"
+                        : "☆";
+            }
+        );
+
+
+        /* -----------------------------------------
+           POP-OUT ICON
+           Visual only for this milestone.
+           ----------------------------------------- */
+
+        const popoutButton =
+            document.createElement(
+                "button"
+            );
+
+
+        popoutButton.type =
+            "button";
+
+
+        popoutButton.className =
+            "dock-header-button";
+
+
+        popoutButton.title =
+            "Pop Out";
+
+
+        popoutButton.textContent =
+            "↗";
+
+
+        /* -----------------------------------------
+           EXPAND / RESTORE
+           ----------------------------------------- */
+
+        const expandButton =
+            document.createElement(
+                "button"
+            );
+
+
+        expandButton.type =
+            "button";
+
+
+        expandButton.className =
+            "dock-header-button";
+
+
+        expandButton.title =
+            "Expand / Restore";
+
+
+        expandButton.textContent =
+            "⛶";
+
+
+        expandButton.addEventListener(
+            "click",
+            () => {
+
+                const activePanel =
+                    parameters
+                        .group
+                        .activePanel;
+
+
+                if (!activePanel) {
+
+                    return;
+                }
+
+
+                /*
+                   Is THIS group already maximized?
+                */
+
+                if (
+                    activePanel
+                        .api
+                        .isMaximized()
+                ) {
+
+                    activePanel
+                        .api
+                        .exitMaximized();
+
+
+                    expandButton.textContent =
+                        "⛶";
+
+
+                    return;
+                }
+
+
+                /*
+                   Otherwise maximize it.
+                */
+
+                activePanel
+                    .api
+                    .maximize();
+
+
+                expandButton.textContent =
+                    "❐";
+            }
+        );
+
+
+        this.element.append(
+            starButton,
+            popoutButton,
+            expandButton
+        );
+    }
+
+
+    dispose() {
+
+        this.element.remove();
+    }
+}
+/* =========================================================
+   FIND HTML CONTAINER
+   ========================================================= */
+
+const container =
+    document.getElementById(
+        "second-dockview-container"
+    );
+
+
+if (!container) {
+
+    throw new Error(
+        "Second Dockview container was not found."
+    );
+}
+
+
+/* =========================================================
+   CREATE DOCKVIEW
+   ========================================================= */
+
+const dockview =
+    new DockviewComponent(
+        container,
+        {
+
+            theme:
+                themeLight,
+
+
+            /* -------------------------------------
+               PANEL COMPONENT FACTORY
+               ------------------------------------- */
+
+            createComponent:
+                (options) => {
+
+                    switch (
+                    options.name
+                    ) {
+
+                        case "fx-rates":
+
+                            return new FxRatesPanel();
+
+
+                        case "orders":
+
+                            return new OrdersPanel();
+
+
+                        case "vol-surface":
+
+                            return new VolSurfacePanel();
+
+
+                        case "empty":
+
+                            return new EmptyPanel();
+
+
+                        default:
+
+                            return new EmptyPanel();
+                    }
+
+                },
+
+
+            /* -------------------------------------
+               ☰
+               ------------------------------------- */
+
+            createPrefixHeaderActionComponent:
+                () =>
+                    new MenuHeaderAction(),
+
+
+            /* -------------------------------------
+               +
+               ------------------------------------- */
+
+            createLeftHeaderActionComponent:
+                () =>
+                    new AddTabHeaderAction(),
+
+
+            /* -------------------------------------
+               ☆ ↗ ⛶
+               ------------------------------------- */
+
+            createRightHeaderActionComponent:
+                () =>
+                    new RightHeaderActions()
+
+        }
+    );
+/* =========================================================
+CALCULATE WORKSPACE HEIGHT
+========================================================= */
+
+const totalHeight =
+    container.clientHeight;
+
+
+const fxHeight =
+    Math.floor(
+        totalHeight * 0.35
+    );
+
+
+const ordersHeight =
+    Math.floor(
+        totalHeight * 0.30
+    );
+
+
+const volHeight =
+    Math.floor(
+        totalHeight * 0.35
+    );
+
+
+/* =========================================================
+   PANEL 1
+   FX RATES
+   ========================================================= */
+
+const fxPanel =
+    dockview.addPanel({
+
+        id:
+            "fx-rates",
+
+        component:
+            "fx-rates",
+
+        title:
+            "FX Rates",
+
+        initialHeight:
+            fxHeight,
+
+        minimumHeight:
+            200
+
+    });
+
+
+/* =========================================================
+   PANEL 2
+   ORDERS
+   BELOW FX RATES
+   ========================================================= */
+
+const ordersPanel =
+    dockview.addPanel({
+
+        id:
+            "orders",
+
+        component:
+            "orders",
+
+        title:
+            "Orders",
+
+        initialHeight:
+            ordersHeight,
+
+        minimumHeight:
+            180,
+
+        position: {
+
+            referencePanel:
+                fxPanel,
+
+            direction:
+                "below"
+        }
+
+    });
+
+
+/* =========================================================
+   POSITIONS TAB
+   SAME GROUP AS ORDERS
+   ========================================================= */
+
+dockview.addPanel({
+
+    id:
+        "positions",
+
+    component:
+        "empty",
+
+    title:
+        "Positions",
+
+    inactive:
+        true,
+
+    position: {
+
+        referencePanel:
+            ordersPanel,
+
+        direction:
+            "within"
+    }
+
+});
+
+
+/* =========================================================
+   PANEL 3
+   VOL SURFACE
+   BELOW ORDERS
+   ========================================================= */
+
+dockview.addPanel({
+
+    id:
+        "vol-surface",
+
+    component:
+        "vol-surface",
+
+    title:
+        "Vol Surface",
+
+    initialHeight:
+        volHeight,
+
+    minimumHeight:
+        210,
+
+    position: {
+
+        referencePanel:
+            ordersPanel,
+
+        direction:
+            "below"
+    }
+
+});
