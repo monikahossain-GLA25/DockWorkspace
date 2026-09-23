@@ -292,7 +292,33 @@ class CorrelationPanel {
    ORDER BOOK PANEL
    Dummy interface based on Dockview demo
     */
+const orderBook =
+    dockview.addPanel({
 
+        id:
+            "order-book",
+
+        component:
+            "order-book",
+
+        title:
+            "Order Book",
+
+        initialHeight:
+            Math.floor(
+                workspaceHeight / 2
+            ),
+
+        position: {
+
+            referencePanel:
+                correlation,
+
+            direction:
+                "below"
+        }
+
+    });
 class OrderBookPanel {
 
     constructor() {
@@ -761,53 +787,31 @@ class RightHeaderActions {
             "click",
             () => {
 
-                /*
-                   If something is already maximized,
-                   restore normal layout.
-                */
-
-                if (
-                    parameters
-                        .containerApi
-                        .hasMaximizedGroup()
-                ) {
-
-                    parameters
-                        .containerApi
-                        .exitMaximizedGroup();
-
-                    expandButton.innerHTML =
-                        "⛶";
-
-                    return;
-                }
-
-
-                /*
-                   Otherwise maximize this group.
-                */
-
-                const activePanel =
+                const panel =
                     parameters
                         .group
                         .activePanel;
 
 
-                if (!activePanel) {
+                if (!panel) {
 
                     return;
                 }
 
 
-                parameters
-                    .containerApi
-                    .maximizeGroup(
-                        activePanel
-                    );
+                if (
+                    panel.api.isMaximized()
+                ) {
 
+                    panel.api.exitMaximized();
 
-                expandButton.innerHTML =
-                    "❐";
+                }
+                else {
+
+                    panel.api.maximize();
+
+                }
+
             }
         );
 
@@ -965,9 +969,9 @@ const dockview =
 
 //     });
 
-/* =========================================================
+/* 
    CALCULATE INITIAL COLUMN SIZE
-   ========================================================= */
+    */
 
 const totalWidth =
     container.clientWidth;
@@ -1224,8 +1228,198 @@ dockview.addPanel({
 
 });
 
+//23.09.2026
+const workspaceWidth =
+    container.clientWidth;
 
 
+const workspaceHeight =
+    container.clientHeight;
+
+
+/*
+    Similar proportions to Dockview demo:
+
+    Left   ~30%
+    Middle ~47%
+    Right  ~23%
+*/
+
+const leftWidth =
+    Math.floor(
+        workspaceWidth * 0.30
+    );
+
+
+const middleWidth =
+    Math.floor(
+        workspaceWidth * 0.47
+    );
+
+
+const rightWidth =
+    workspaceWidth -
+    leftWidth -
+    middleWidth;
+
+
+const middleRowHeight =
+    Math.floor(
+        workspaceHeight / 3
+    );
+const correlation =
+    dockview.addPanel({
+
+        id: "correlation",
+
+        component: "correlation",
+
+        title: "Correlation",
+
+        initialWidth:
+            leftWidth,
+
+        initialHeight:
+            Math.floor(
+                workspaceHeight / 2
+            )
+
+    });
+const fxRates =
+    dockview.addPanel({
+
+        id: "fx-rates",
+
+        component: "fx-rates",
+
+        title: "FX Rates",
+
+        initialWidth:
+            middleWidth,
+
+        initialHeight:
+            middleRowHeight,
+
+        position: {
+
+            referencePanel:
+                correlation,
+
+            direction:
+                "right"
+        }
+
+    });
+const rightPlaceholder =
+    dockview.addPanel({
+
+        id:
+            "right-placeholder",
+
+        component:
+            "blank",
+
+        title:
+            "Right",
+
+        initialWidth:
+            rightWidth,
+
+        position: {
+
+            referencePanel:
+                fxRates,
+
+            direction:
+                "right"
+        }
+
+    });
+
+
+rightPlaceholder
+    .group
+    .header
+    .hidden = true;
+
+
+
+//23.09.2026
+const orders =
+    dockview.addPanel({
+
+        id:
+            "orders",
+
+        component:
+            "orders",
+
+        title:
+            "Orders",
+
+        initialHeight:
+            middleRowHeight,
+
+        position: {
+
+            referencePanel:
+                fxRates,
+
+            direction:
+                "below"
+        }
+
+    });
+
+dockview.addPanel({
+
+    id:
+        "positions",
+
+    component:
+        "positions",
+
+    title:
+        "Positions",
+
+    inactive:
+        true,
+
+    position: {
+
+        referencePanel:
+            orders,
+
+        direction:
+            "within"
+    }
+
+});
+const volSurface =
+    dockview.addPanel({
+
+        id:
+            "vol-surface",
+
+        component:
+            "vol-surface",
+
+        title:
+            "Vol Surface",
+
+        initialHeight:
+            middleRowHeight,
+
+        position: {
+
+            referencePanel:
+                orders,
+
+            direction:
+                "below"
+        }
+
+    });
 //23.09.2026
 class TemplatePanel {
 
