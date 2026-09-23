@@ -16379,6 +16379,7 @@
   var require_workspace = __commonJS({
     "ClientApp/workspace.js"() {
       init_main_esm2();
+      var newTabNumber = 0;
       var BlankPanel = class {
         constructor() {
           this.element = document.createElement("div");
@@ -16388,7 +16389,44 @@
           this.element.innerHTML = "";
         }
       };
-      var newTabNumber = 3;
+      var EmptyPanel = class {
+        constructor() {
+          this.element = document.createElement("div");
+          this.element.className = "demo-empty-panel";
+        }
+        init() {
+          this.element.innerHTML = `
+
+            <div class="empty-tab-content">
+
+                Empty Panel
+
+            </div>
+
+        `;
+        }
+      };
+      var TemplatePanel = class {
+        constructor(templateId) {
+          this.templateId = templateId;
+          this.element = document.createElement("div");
+          this.element.className = "dock-panel-host";
+        }
+        init() {
+          const template = document.getElementById(
+            this.templateId
+          );
+          if (!template) {
+            throw new Error(
+              `Template '${this.templateId}' was not found.`
+            );
+          }
+          const content = template.content.cloneNode(true);
+          this.element.appendChild(
+            content
+          );
+        }
+      };
       var assets = [
         "BTC",
         "ETH",
@@ -16400,14 +16438,86 @@
         "GOLD"
       ];
       var correlationData = [
-        [1, -0.27, 0, -0.77, 0.74, 0.56, -0.74, 0.79],
-        [-0.27, 1, -0.38, 0.55, 0.44, -0.76, -0.62, -0.13],
-        [0, -0.38, 1, -0.15, -0.63, 0.45, 0.9, 0.59],
-        [-0.77, 0.55, -0.15, 1, 0.04, -0.04, 0.55, -0.34],
-        [0.74, 0.44, -0.63, 0.04, 1, -0.23, 0.62, 0.82],
-        [0.56, -0.76, 0.45, -0.04, -0.23, 1, 0.16, -0.44],
-        [-0.74, -0.62, 0.9, 0.55, 0.62, 0.16, 1, -0.1],
-        [0.79, -0.13, 0.59, -0.34, 0.82, -0.44, -0.1, 1]
+        [
+          1,
+          -0.27,
+          0,
+          -0.77,
+          0.74,
+          0.56,
+          -0.74,
+          0.79
+        ],
+        [
+          -0.27,
+          1,
+          -0.38,
+          0.55,
+          0.44,
+          -0.76,
+          -0.62,
+          -0.13
+        ],
+        [
+          0,
+          -0.38,
+          1,
+          -0.15,
+          -0.63,
+          0.45,
+          0.9,
+          0.59
+        ],
+        [
+          -0.77,
+          0.55,
+          -0.15,
+          1,
+          0.04,
+          -0.04,
+          0.55,
+          -0.34
+        ],
+        [
+          0.74,
+          0.44,
+          -0.63,
+          0.04,
+          1,
+          -0.23,
+          0.62,
+          0.82
+        ],
+        [
+          0.56,
+          -0.76,
+          0.45,
+          -0.04,
+          -0.23,
+          1,
+          0.16,
+          -0.44
+        ],
+        [
+          -0.74,
+          -0.62,
+          0.9,
+          0.55,
+          0.62,
+          0.16,
+          1,
+          -0.1
+        ],
+        [
+          0.79,
+          -0.13,
+          0.59,
+          -0.34,
+          0.82,
+          -0.44,
+          -0.1,
+          1
+        ]
       ];
       function getCorrelationColor(value, diagonal) {
         if (diagonal) {
@@ -16416,7 +16526,10 @@
             color: "#334155"
           };
         }
-        const strength = Math.min(Math.abs(value), 1);
+        const strength = Math.min(
+          Math.abs(value),
+          1
+        );
         const opacity = 0.15 + strength * 0.72;
         if (value >= 0) {
           return {
@@ -16454,11 +16567,17 @@
 
                 <div class="correlation-scale">
 
-                    <span>-1</span>
+                    <span>
+                        -1
+                    </span>
 
-                    <span class="scale-gradient"></span>
+                    <span
+                        class="scale-gradient">
+                    </span>
 
-                    <span>+1</span>
+                    <span>
+                        +1
+                    </span>
 
                 </div>
 
@@ -16481,17 +16600,23 @@
           grid.appendChild(
             document.createElement("span")
           );
-          assets.forEach((asset) => {
-            const heading = document.createElement("span");
-            heading.className = "correlation-column-heading";
-            heading.textContent = asset;
-            grid.appendChild(
-              heading
-            );
-          });
+          assets.forEach(
+            (asset) => {
+              const heading = document.createElement(
+                "span"
+              );
+              heading.className = "correlation-column-heading";
+              heading.textContent = asset;
+              grid.appendChild(
+                heading
+              );
+            }
+          );
           correlationData.forEach(
             (row, rowIndex) => {
-              const rowName = document.createElement("span");
+              const rowName = document.createElement(
+                "span"
+              );
               rowName.className = "correlation-row-heading";
               rowName.textContent = assets[rowIndex];
               grid.appendChild(
@@ -16576,6 +16701,7 @@
                         preserveAspectRatio="none">
 
                         <polyline
+
                             points="
                             0,31
                             10,26
@@ -16596,9 +16722,13 @@
                             124,17
                             132,23
                             140,28"
+
                             fill="none"
+
                             stroke="#ef3340"
+
                             stroke-width="1.6">
+
                         </polyline>
 
                     </svg>
@@ -16611,30 +16741,67 @@
             <div class="market-stat-row">
 
                 <div>
-                    <span>24H HIGH</span>
-                    <strong>67,502.7</strong>
+
+                    <span>
+                        24H HIGH
+                    </span>
+
+                    <strong>
+                        67,502.7
+                    </strong>
+
                 </div>
 
-                <div>
-                    <span>24H LOW</span>
-                    <strong>67,324.8</strong>
-                </div>
 
                 <div>
-                    <span>24H VOL</span>
-                    <strong>124.55M</strong>
+
+                    <span>
+                        24H LOW
+                    </span>
+
+                    <strong>
+                        67,324.8
+                    </strong>
+
                 </div>
 
-                <div>
-                    <span>OPEN INT</span>
-                    <strong>43.09M</strong>
-                </div>
 
                 <div>
-                    <span>FUNDING</span>
+
+                    <span>
+                        24H VOL
+                    </span>
+
+                    <strong>
+                        124.55M
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        OPEN INT
+                    </span>
+
+                    <strong>
+                        43.09M
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        FUNDING
+                    </span>
+
                     <strong class="negative">
                         -0.0041%
                     </strong>
+
                 </div>
 
             </div>
@@ -16642,50 +16809,92 @@
 
             <div class="order-table-header">
 
-                <span>PRICE</span>
+                <span>
+                    PRICE
+                </span>
 
-                <span>SIZE</span>
+                <span>
+                    SIZE
+                </span>
 
-                <span>TOTAL</span>
+                <span>
+                    TOTAL
+                </span>
+
+            </div>
+
+
+            <!-- SELL ORDERS -->
+
+            <div class="order-row ask">
+
+                <span>
+                    67,326.6
+                </span>
+
+                <span>
+                    4.656
+                </span>
+
+                <span>
+                    6.19
+                </span>
 
             </div>
 
 
             <div class="order-row ask">
 
-                <span>67,326.6</span>
-                <span>4.656</span>
-                <span>6.19</span>
+                <span>
+                    67,326.1
+                </span>
+
+                <span>
+                    0.150
+                </span>
+
+                <span>
+                    1.54
+                </span>
 
             </div>
 
 
             <div class="order-row ask">
 
-                <span>67,326.1</span>
-                <span>0.150</span>
-                <span>1.54</span>
+                <span>
+                    67,325.6
+                </span>
+
+                <span>
+                    0.952
+                </span>
+
+                <span>
+                    1.39
+                </span>
 
             </div>
 
 
             <div class="order-row ask">
 
-                <span>67,325.6</span>
-                <span>0.952</span>
-                <span>1.39</span>
+                <span>
+                    67,325.1
+                </span>
+
+                <span>
+                    0.595
+                </span>
+
+                <span>
+                    0.89
+                </span>
 
             </div>
 
 
-            <div class="order-row ask">
-
-                <span>67,325.1</span>
-                <span>0.595</span>
-                <span>0.89</span>
-
-            </div>
-
+            <!-- SPREAD -->
 
             <div class="spread-row">
 
@@ -16694,6 +16903,7 @@
                     \u25BC 67,324.8
 
                 </strong>
+
 
                 <span>
 
@@ -16705,54 +16915,96 @@
             </div>
 
 
+            <!-- BUY ORDERS -->
+
             <div class="order-row bid">
 
-                <span>67,324.6</span>
-                <span>0.054</span>
-                <span>0.95</span>
+                <span>
+                    67,324.6
+                </span>
+
+                <span>
+                    0.054
+                </span>
+
+                <span>
+                    0.95
+                </span>
 
             </div>
 
 
             <div class="order-row bid">
 
-                <span>67,324.1</span>
-                <span>3.081</span>
-                <span>3.14</span>
+                <span>
+                    67,324.1
+                </span>
+
+                <span>
+                    3.081
+                </span>
+
+                <span>
+                    3.14
+                </span>
 
             </div>
 
 
             <div class="order-row bid">
 
-                <span>67,323.6</span>
-                <span>0.992</span>
-                <span>4.06</span>
+                <span>
+                    67,323.6
+                </span>
+
+                <span>
+                    0.992
+                </span>
+
+                <span>
+                    4.06
+                </span>
 
             </div>
 
 
             <div class="order-row bid">
 
-                <span>67,323.1</span>
-                <span>0.050</span>
-                <span>6.73</span>
+                <span>
+                    67,323.1
+                </span>
+
+                <span>
+                    0.050
+                </span>
+
+                <span>
+                    6.73
+                </span>
 
             </div>
 
+
+            <!-- TIME & SALES -->
 
             <div class="time-sales-title">
 
-                <span>TIME & SALES</span>
+                <span>
+                    TIME & SALES
+                </span>
 
-                <span>TIME \xB7 PRICE \xB7 SIZE</span>
+                <span>
+                    TIME \xB7 PRICE \xB7 SIZE
+                </span>
 
             </div>
 
 
             <div class="time-sales-row">
 
-                <span>07:13:39</span>
+                <span>
+                    07:13:39
+                </span>
 
                 <span class="negative">
                     67,323.7
@@ -16761,23 +17013,6 @@
                 <span>
                     1.998
                 </span>
-
-            </div>
-
-        `;
-        }
-      };
-      var EmptyPanel = class {
-        constructor() {
-          this.element = document.createElement("div");
-          this.element.className = "demo-empty-panel";
-        }
-        init(params) {
-          this.element.innerHTML = `
-
-            <div>
-
-                ${params.api.title}
 
             </div>
 
@@ -16793,8 +17028,14 @@
           this.element.innerHTML = `
 
             <button
+
                 type="button"
-                class="dock-header-button menu-button"
+
+                class="
+                    dock-header-button
+                    menu-button
+                "
+
                 title="Panel menu">
 
                 \u2630
@@ -16813,7 +17054,9 @@
           this.element.className = "header-action-container";
         }
         init(parameters) {
-          const button = document.createElement("button");
+          const button = document.createElement(
+            "button"
+          );
           button.type = "button";
           button.className = "dock-header-button add-tab-button";
           button.title = "Add tab";
@@ -16821,17 +17064,17 @@
           button.addEventListener(
             "click",
             () => {
-              newTabNumber++;
               const referencePanel = parameters.group.activePanel;
               if (!referencePanel) {
                 return;
               }
+              newTabNumber++;
               parameters.containerApi.addPanel({
                 id: `new-tab-${Date.now()}-${newTabNumber}`,
                 component: "empty",
                 title: `Tab ${newTabNumber}`,
                 position: {
-                  referencePanel: referencePanel.id,
+                  referencePanel,
                   direction: "within"
                 }
               });
@@ -16851,7 +17094,9 @@
           this.element.className = "right-header-actions";
         }
         init(parameters) {
-          const expandButton = document.createElement("button");
+          const expandButton = document.createElement(
+            "button"
+          );
           expandButton.type = "button";
           expandButton.className = "dock-header-button expand-button";
           expandButton.title = "Expand / Restore";
@@ -16859,19 +17104,15 @@
           expandButton.addEventListener(
             "click",
             () => {
-              if (parameters.containerApi.hasMaximizedGroup()) {
-                parameters.containerApi.exitMaximizedGroup();
-                expandButton.innerHTML = "\u26F6";
+              const panel = parameters.group.activePanel;
+              if (!panel) {
                 return;
               }
-              const activePanel = parameters.group.activePanel;
-              if (!activePanel) {
+              if (panel.api.isMaximized()) {
+                panel.api.exitMaximized();
                 return;
               }
-              parameters.containerApi.maximizeGroup(
-                activePanel
-              );
-              expandButton.innerHTML = "\u2750";
+              panel.api.maximize();
             }
           );
           this.element.appendChild(
@@ -16894,111 +17135,148 @@
         container,
         {
           theme: themeLight,
-          /*
-             PANEL CONTENT
-          */
+          /* 
+             PANEL COMPONENT FACTORY
+             */
           createComponent: (options) => {
             switch (options.name) {
+              /*
+                  LEFT WORKSPACE
+              */
               case "correlation":
                 return new CorrelationPanel();
               case "order-book":
                 return new OrderBookPanel();
-              case "blank":
-                return new BlankPanel();
+              /*
+                  MIDDLE WORKSPACE
+                  Razor <template> components
+              */
+              case "fx-rates":
+                return new TemplatePanel(
+                  "fxrates-template"
+                );
+              case "orders":
+                return new TemplatePanel(
+                  "orders-template"
+                );
+              case "positions":
+                return new TemplatePanel(
+                  "positions-template"
+                );
+              case "vol-surface":
+                return new TemplatePanel(
+                  "volsurface-template"
+                );
+              /*
+                  DYNAMIC + TAB
+              */
               case "empty":
                 return new EmptyPanel();
+              /*
+                  TEMPORARY RIGHT SIDE
+              */
+              case "blank":
+                return new BlankPanel();
               default:
                 return new BlankPanel();
             }
           },
-          /*
-             ☰ before tabs
-          */
+          /* 
+             ☰ BEFORE TABS
+             */
           createPrefixHeaderActionComponent: () => new MenuHeaderAction(),
-          /*
-             + directly after tabs
-          */
+          /* 
+             + AFTER TABS
+             */
           createLeftHeaderActionComponent: () => new AddTabHeaderAction(),
-          /*
-             Icons at far right
-          */
+          /* 
+             ⛶ AT RIGHT SIDE
+            */
           createRightHeaderActionComponent: () => new RightHeaderActions()
         }
       );
-      var totalWidth = container.clientWidth;
-      var totalHeight = container.clientHeight;
-      var columnWidth = Math.floor(totalWidth / 3);
-      var correlationHeight = Math.floor(totalHeight * 0.54);
-      var orderBookHeight = totalHeight - correlationHeight;
+      var workspaceWidth = container.clientWidth;
+      var workspaceHeight = container.clientHeight;
+      var leftWidth = Math.floor(
+        workspaceWidth * 0.3
+      );
+      var middleWidth = Math.floor(
+        workspaceWidth * 0.47
+      );
+      var rightWidth = workspaceWidth - leftWidth - middleWidth;
+      var middleRowHeight = Math.floor(
+        workspaceHeight / 3
+      );
       var correlation = dockview.addPanel({
         id: "correlation",
         component: "correlation",
         title: "Correlation",
-        initialWidth: columnWidth,
-        initialHeight: correlationHeight,
-        minimumWidth: 320,
-        minimumHeight: 220
+        initialWidth: leftWidth,
+        initialHeight: Math.floor(
+          workspaceHeight / 2
+        )
       });
-      var middleBlank = dockview.addPanel({
-        id: "middle-placeholder",
-        component: "blank",
-        title: "Middle",
-        initialWidth: columnWidth,
+      var fxRates = dockview.addPanel({
+        id: "fx-rates",
+        component: "fx-rates",
+        title: "FX Rates",
+        initialWidth: middleWidth,
+        initialHeight: middleRowHeight,
         position: {
           referencePanel: correlation,
           direction: "right"
         }
       });
-      middleBlank.group.header.hidden = true;
-      var rightBlank = dockview.addPanel({
+      var rightPlaceholder = dockview.addPanel({
         id: "right-placeholder",
         component: "blank",
         title: "Right",
-        initialWidth: columnWidth,
+        initialWidth: rightWidth,
         position: {
-          referencePanel: middleBlank,
+          referencePanel: fxRates,
           direction: "right"
         }
       });
-      rightBlank.group.header.hidden = true;
+      rightPlaceholder.group.header.hidden = true;
       var orderBook = dockview.addPanel({
         id: "order-book",
         component: "order-book",
         title: "Order Book",
-        initialHeight: orderBookHeight,
-        minimumHeight: 220,
+        initialHeight: Math.floor(
+          workspaceHeight / 2
+        ),
         position: {
           referencePanel: correlation,
           direction: "below"
         }
       });
-      dockview.addPanel({
-        id: "tab-2",
-        component: "empty",
-        title: "Tab 2",
-        inactive: true,
+      var orders = dockview.addPanel({
+        id: "orders",
+        component: "orders",
+        title: "Orders",
+        initialHeight: middleRowHeight,
         position: {
-          referencePanel: "correlation",
-          direction: "within"
+          referencePanel: fxRates,
+          direction: "below"
         }
       });
       dockview.addPanel({
-        id: "tab-3",
-        component: "empty",
-        title: "Tab 3",
+        id: "positions",
+        component: "positions",
+        title: "Positions",
         inactive: true,
         position: {
-          referencePanel: "correlation",
+          referencePanel: orders,
           direction: "within"
         }
       });
-      dockview.addPanel({
-        id: "order-book",
-        component: "order-book",
-        title: "Order Book",
-        initialHeight: 400,
+      var volSurface = dockview.addPanel({
+        id: "vol-surface",
+        component: "vol-surface",
+        title: "Vol Surface",
+        initialHeight: middleRowHeight,
         position: {
-          referencePanel: "correlation",
+          referencePanel: orders,
           direction: "below"
         }
       });
