@@ -1,50 +1,869 @@
-﻿<div class="fx-panel"
-     data-fx-panel>
+﻿<div class="fx-panel">
+
+    <!-- ==========================================
+         FX SUB TABS
+         ========================================== -->
 
     <div class="fx-subtabs">
 
         <button type="button"
-                class="fx-subtab active"
-                data-fx-tab="g10">
+                class="fx-subtab active">
             G10
         </button>
 
         <button type="button"
-                class="fx-subtab"
-                data-fx-tab="em">
+                class="fx-subtab">
             EM
         </button>
 
         <button type="button"
-                class="fx-subtab"
-                data-fx-tab="crosses">
+                class="fx-subtab">
             Crosses
         </button>
 
     </div>
 
 
-    <section class="fx-tab-pane active"
-             data-fx-pane="g10">
+    <!-- ==========================================
+         FX CARDS
+         ========================================== -->
 
-        <partial name="Partials/_FxRatesG10" />
-
-    </section>
-
-
-    <section class="fx-tab-pane"
-             data-fx-pane="em">
-
-        <partial name="Partials/_FxRatesEM" />
-
-    </section>
+    <div class="fx-card-grid">
 
 
-    <section class="fx-tab-pane"
-             data-fx-pane="crosses">
+        <!-- EUR / USD -->
 
-        <partial name="Partials/_FxRatesCrosses" />
+        <div class="fx-card">
 
-    </section>
+            <div class="fx-card-header">
+
+                <span class="fx-direction fx-down">
+                    ▸
+                </span>
+
+                <span class="fx-pair">
+                    EUR/USD
+                </span>
+
+                <span class="fx-account">
+                    Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="fx-card-body">
+
+                <!-- SELL -->
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Sell EUR
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            1.09
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            41
+                        </span>
+
+                        <span class="fx-price-last">
+                            0
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CENTER -->
+
+                <div class="fx-center">
+
+                    <div class="fx-size-row">
+
+                        <span class="fx-size">
+                            200M
+                        </span>
+
+                        <span class="fx-size">
+                            200M
+                        </span>
+
+                    </div>
+
+                    <span class="fx-spread">
+                        3.4
+                    </span>
+
+                </div>
+
+
+                <!-- BUY -->
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Buy EUR
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            1.09
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            44
+                        </span>
+
+                        <span class="fx-price-last">
+                            5
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="fx-card-footer">
+
+                <span>SW · SPOT</span>
+
+                <span>1,000,000</span>
+
+                <span>08 Feb</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- GBP / USD -->
+
+        <div class="fx-card">
+
+            <div class="fx-card-header">
+
+                <span class="fx-direction fx-down">
+                    ▸
+                </span>
+
+                <span class="fx-pair">
+                    GBP/USD
+                </span>
+
+                <span class="fx-account">
+                    Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="fx-card-body">
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Sell GBP
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            1.27
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            35
+                        </span>
+
+                        <span class="fx-price-last">
+                            2
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fx-center">
+
+                    <div class="fx-size-row">
+
+                        <span class="fx-size">
+                            200M
+                        </span>
+
+                        <span class="fx-size">
+                            200M
+                        </span>
+
+                    </div>
+
+                    <span class="fx-spread">
+                        2.1
+                    </span>
+
+                </div>
+
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Buy GBP
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            1.27
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            37
+                        </span>
+
+                        <span class="fx-price-last">
+                            6
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="fx-card-footer">
+
+                <span>SW · SPOT</span>
+                <span>1,000,000</span>
+                <span>08 Feb</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- USD / JPY -->
+
+        <div class="fx-card">
+
+            <div class="fx-card-header">
+
+                <span class="fx-direction fx-down">
+                    ▸
+                </span>
+
+                <span class="fx-pair">
+                    USD/JPY
+                </span>
+
+                <span class="fx-account">
+                    Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="fx-card-body">
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Sell USD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            149.
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            95
+                        </span>
+
+                        <span class="fx-price-last">
+                            8
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fx-center">
+
+                    <div class="fx-size-row">
+
+                        <span class="fx-size">200M</span>
+                        <span class="fx-size">200M</span>
+
+                    </div>
+
+                    <span class="fx-spread">
+                        1.9
+                    </span>
+
+                </div>
+
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Buy USD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            149.
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            97
+                        </span>
+
+                        <span class="fx-price-last">
+                            7
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="fx-card-footer">
+
+                <span>SW · SPOT</span>
+                <span>1,000,000</span>
+                <span>08 Feb</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- USD / CHF -->
+
+        <div class="fx-card">
+
+            <div class="fx-card-header">
+
+                <span class="fx-direction fx-up">
+                    ▸
+                </span>
+
+                <span class="fx-pair">
+                    USD/CHF
+                </span>
+
+                <span class="fx-account">
+                    Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="fx-card-body">
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Sell USD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            0.88
+                        </span>
+
+                        <span class="fx-price-main fx-green">
+                            54
+                        </span>
+
+                        <span class="fx-price-last">
+                            6
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fx-center">
+
+                    <div class="fx-size-row">
+
+                        <span class="fx-size">200M</span>
+                        <span class="fx-size">200M</span>
+
+                    </div>
+
+                    <span class="fx-spread">
+                        2.1
+                    </span>
+
+                </div>
+
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Buy USD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            0.88
+                        </span>
+
+                        <span class="fx-price-main fx-green">
+                            56
+                        </span>
+
+                        <span class="fx-price-last">
+                            9
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="fx-card-footer">
+
+                <span>SW · SPOT</span>
+                <span>1,000,000</span>
+                <span>08 Feb</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- USD / CAD -->
+
+        <div class="fx-card">
+
+            <div class="fx-card-header">
+
+                <span class="fx-direction fx-up">
+                    ▸
+                </span>
+
+                <span class="fx-pair">
+                    USD/CAD
+                </span>
+
+                <span class="fx-account">
+                    Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="fx-card-body">
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Sell USD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            1.36
+                        </span>
+
+                        <span class="fx-price-main fx-green">
+                            66
+                        </span>
+
+                        <span class="fx-price-last">
+                            9
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fx-center">
+
+                    <div class="fx-size-row">
+
+                        <span class="fx-size">200M</span>
+                        <span class="fx-size">200M</span>
+
+                    </div>
+
+                    <span class="fx-spread">
+                        2.6
+                    </span>
+
+                </div>
+
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Buy USD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            1.36
+                        </span>
+
+                        <span class="fx-price-main fx-green">
+                            69
+                        </span>
+
+                        <span class="fx-price-last">
+                            8
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="fx-card-footer">
+
+                <span>SW · SPOT</span>
+                <span>1,000,000</span>
+                <span>08 Feb</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- AUD / USD -->
+
+        <div class="fx-card">
+
+            <div class="fx-card-header">
+
+                <span class="fx-direction fx-down">
+                    ▸
+                </span>
+
+                <span class="fx-pair">
+                    AUD/USD
+                </span>
+
+                <span class="fx-account">
+                    Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="fx-card-body">
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Sell AUD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            0.65
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            48
+                        </span>
+
+                        <span class="fx-price-last">
+                            5
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fx-center">
+
+                    <div class="fx-size-row">
+
+                        <span class="fx-size">200M</span>
+                        <span class="fx-size">200M</span>
+
+                    </div>
+
+                    <span class="fx-spread">
+                        2.8
+                    </span>
+
+                </div>
+
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Buy AUD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            0.65
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            50
+                        </span>
+
+                        <span class="fx-price-last">
+                            1
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="fx-card-footer">
+
+                <span>SW · SPOT</span>
+                <span>1,000,000</span>
+                <span>08 Feb</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NZD / USD -->
+
+        <div class="fx-card">
+
+            <div class="fx-card-header">
+
+                <span class="fx-direction fx-down">
+                    ▸
+                </span>
+
+                <span class="fx-pair">
+                    NZD/USD
+                </span>
+
+                <span class="fx-account">
+                    Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="fx-card-body">
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Sell NZD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            0.65
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            62
+                        </span>
+
+                        <span class="fx-price-last">
+                            6
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fx-center">
+
+                    <div class="fx-size-row">
+
+                        <span class="fx-size">200M</span>
+                        <span class="fx-size">200M</span>
+
+                    </div>
+
+                    <span class="fx-spread">
+                        3.5
+                    </span>
+
+                </div>
+
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Buy NZD
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            0.65
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            65
+                        </span>
+
+                        <span class="fx-price-last">
+                            4
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="fx-card-footer">
+
+                <span>SW · SPOT</span>
+                <span>1,000,000</span>
+                <span>08 Feb</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- EUR / JPY -->
+
+        <div class="fx-card">
+
+            <div class="fx-card-header">
+
+                <span class="fx-direction fx-down">
+                    ▸
+                </span>
+
+                <span class="fx-pair">
+                    EUR/JPY
+                </span>
+
+                <span class="fx-account">
+                    Demo Account
+                </span>
+
+            </div>
+
+
+            <div class="fx-card-body">
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Sell EUR
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            160.
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            84
+                        </span>
+
+                        <span class="fx-price-last">
+                            1
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="fx-center">
+
+                    <div class="fx-size-row">
+
+                        <span class="fx-size">200M</span>
+                        <span class="fx-size">200M</span>
+
+                    </div>
+
+                    <span class="fx-spread">
+                        3.5
+                    </span>
+
+                </div>
+
+
+                <div class="fx-side">
+
+                    <div class="fx-side-title">
+                        Buy EUR
+                    </div>
+
+                    <div class="fx-price">
+
+                        <span class="fx-price-prefix">
+                            160.
+                        </span>
+
+                        <span class="fx-price-main fx-red">
+                            88
+                        </span>
+
+                        <span class="fx-price-last">
+                            2
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="fx-card-footer">
+
+                <span>SW · SPOT</span>
+                <span>1,000,000</span>
+                <span>08 Feb</span>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>

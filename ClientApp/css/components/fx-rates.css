@@ -57,14 +57,14 @@
     }
 
 
-/* 
+/* =========================================================
    FX CARD GRID
 
    Original parsed demo uses:
    repeat(auto-fill, minmax(186px, 1fr))
    108px rows
    8px gap
-  */
+   ========================================================= */
 
 .fx-card-grid {
     flex: 1 1 auto;
@@ -80,9 +80,9 @@
 }
 
 
-/* 
+/* =========================================================
    SINGLE FX CARD
-   */
+   ========================================================= */
 
 .fx-card {
     min-width: 0;
@@ -96,9 +96,9 @@
 }
 
 
-/* 
+/* =========================================================
    CARD HEADER
- */
+   ========================================================= */
 
 .fx-card-header {
     min-height: 25px;
@@ -145,9 +145,10 @@
 }
 
 
-/* 
+/* =========================================================
+   CARD MAIN BODY
    SELL | CENTER | BUY
- */
+   ========================================================= */
 
 .fx-card-body {
     flex: 1 1 auto;
@@ -175,7 +176,7 @@
 }
 
 
-/* 
+/* =========================================================
    FX PRICE
    Example:
 
@@ -183,7 +184,7 @@
         ^^
 
    The middle digits are enlarged.
- */
+   ========================================================= */
 
 .fx-price {
     display: flex;
@@ -228,9 +229,9 @@
 }
 
 
-/* 
+/* =========================================================
    CENTER COLUMN
-   */
+   ========================================================= */
 
 .fx-center {
     display: flex;
@@ -270,9 +271,9 @@
 }
 
 
-/* 
+/* =========================================================
    CARD FOOTER
-   */
+   ========================================================= */
 
 .fx-card-footer {
     min-height: 21px;
@@ -290,9 +291,9 @@
 }
 
 
-/* 
+/* =========================================================
    SMALLER PANEL RESPONSIVENESS
-  */
+   ========================================================= */
 
 @media (max-width: 1150px) {
 
@@ -315,11 +316,11 @@
         font-size: 10px;
     }
 }
+//24.03.2026
 /* =========================================================
    FX INTERNAL TABS
    G10 | EM | Crosses
    ========================================================= */
-
 .fx-subtabs {
     flex: 0 0 32px;
     height: 32px;
@@ -374,72 +375,9 @@
 }
 
 
-/* 24.09.2026
-   FX TAB CONTENT
-   */
-
 /* 
-   FX INTERNAL TABS
-   G10 | EM | Crosses
+   FX TAB CONTENT
  */
-
-.fx-subtabs {
-    flex: 0 0 32px;
-    height: 32px;
-    display: flex;
-    align-items: stretch;
-    background: #f2f2f3;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-
-.fx-subtab {
-    position: relative;
-    min-width: 58px;
-    height: 32px;
-    padding: 0 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    border: 0;
-    border-right: 1px solid rgba(0, 0, 0, 0.04);
-    background: #eeeeef;
-    color: rgba(15, 23, 42, 0.55);
-    font-family: Inter, "Segoe UI", Arial, sans-serif;
-    font-size: 11px;
-    cursor: pointer;
-}
-
-
-    .fx-subtab:hover {
-        background: #f7f7f8;
-        color: #334155;
-    }
-
-
-    .fx-subtab.active {
-        background: #ffffff;
-        color: #334155;
-    }
-
-
-.fx-tab-close {
-    display: none;
-    color: rgba(15, 23, 42, 0.55);
-    font-size: 14px;
-    line-height: 1;
-}
-
-
-.fx-subtab.active .fx-tab-close {
-    display: inline-block;
-}
-
-
-/* 
-   FX TAB CONTENT
-    */
 
 .fx-tab-pane {
     display: none;
@@ -455,9 +393,9 @@
     }
 
 
-/*
+/* 
    EMPTY CROSSES PLACEHOLDER
-  */
+   */
 
 .fx-empty-state {
     grid-column: 1 / -1;
