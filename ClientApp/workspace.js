@@ -1162,7 +1162,112 @@ class RightHeaderActions {
     }
 }
 
+/* 
+   FX RATES INTERNAL TABS
+   G10 / EM / Crosses
+   24.09.2026
+ */
 
+function initializeFxTabs() {
+
+    document.addEventListener(
+        "click",
+        (event) => {
+
+            const tab =
+                event.target.closest(
+                    "[data-fx-tab]"
+                );
+
+
+            if (!tab) {
+
+                return;
+            }
+
+
+            const fxPanel =
+                tab.closest(
+                    "[data-fx-panel]"
+                );
+
+
+            if (!fxPanel) {
+
+                return;
+            }
+
+
+            const selectedTab =
+                tab.dataset.fxTab;
+
+
+            /*
+                Remove active state
+                from all FX tabs.
+            */
+
+            fxPanel
+                .querySelectorAll(
+                    "[data-fx-tab]"
+                )
+                .forEach(
+                    item => {
+
+                        item.classList.remove(
+                            "active"
+                        );
+                    }
+                );
+
+
+            /*
+                Hide all panes.
+            */
+
+            fxPanel
+                .querySelectorAll(
+                    "[data-fx-pane]"
+                )
+                .forEach(
+                    pane => {
+
+                        pane.classList.remove(
+                            "active"
+                        );
+                    }
+                );
+
+
+            /*
+                Activate clicked tab.
+            */
+
+            tab.classList.add(
+                "active"
+            );
+
+
+            /*
+                Find matching content.
+            */
+
+            const selectedPane =
+                fxPanel.querySelector(
+                    `[data-fx-pane="${selectedTab}"]`
+                );
+
+
+            if (selectedPane) {
+
+                selectedPane.classList.add(
+                    "active"
+                );
+            }
+
+        }
+    );
+}
 /* 
    12. GET DOCKVIEW HTML CONTAINER
    23.09.2026
