@@ -1168,6 +1168,7 @@ class RightHeaderActions {
    23.09.2026
     */
 
+
 const container =
     document.getElementById(
         "dockview-container"

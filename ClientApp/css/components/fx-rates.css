@@ -315,3 +315,156 @@
         font-size: 10px;
     }
 }
+/* =========================================================
+   FX INTERNAL TABS
+   G10 | EM | Crosses
+   ========================================================= */
+
+.fx-subtabs {
+    flex: 0 0 32px;
+    height: 32px;
+    display: flex;
+    align-items: stretch;
+    background: #f2f2f3;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+
+.fx-subtab {
+    position: relative;
+    min-width: 58px;
+    height: 32px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.04);
+    background: #eeeeef;
+    color: rgba(15, 23, 42, 0.55);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+
+    .fx-subtab:hover {
+        background: #f7f7f8;
+        color: #334155;
+    }
+
+
+    .fx-subtab.active {
+        background: #ffffff;
+        color: #334155;
+    }
+
+
+.fx-tab-close {
+    display: none;
+    color: rgba(15, 23, 42, 0.55);
+    font-size: 14px;
+    line-height: 1;
+}
+
+
+.fx-subtab.active .fx-tab-close {
+    display: inline-block;
+}
+
+
+/* 24.09.2026
+   FX TAB CONTENT
+   */
+
+/* 
+   FX INTERNAL TABS
+   G10 | EM | Crosses
+ */
+
+.fx-subtabs {
+    flex: 0 0 32px;
+    height: 32px;
+    display: flex;
+    align-items: stretch;
+    background: #f2f2f3;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+
+.fx-subtab {
+    position: relative;
+    min-width: 58px;
+    height: 32px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border: 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.04);
+    background: #eeeeef;
+    color: rgba(15, 23, 42, 0.55);
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+
+    .fx-subtab:hover {
+        background: #f7f7f8;
+        color: #334155;
+    }
+
+
+    .fx-subtab.active {
+        background: #ffffff;
+        color: #334155;
+    }
+
+
+.fx-tab-close {
+    display: none;
+    color: rgba(15, 23, 42, 0.55);
+    font-size: 14px;
+    line-height: 1;
+}
+
+
+.fx-subtab.active .fx-tab-close {
+    display: inline-block;
+}
+
+
+/* 
+   FX TAB CONTENT
+    */
+
+.fx-tab-pane {
+    display: none;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+}
+
+
+    .fx-tab-pane.active {
+        display: block;
+        height: 100%;
+    }
+
+
+/*
+   EMPTY CROSSES PLACEHOLDER
+  */
+
+.fx-empty-state {
+    grid-column: 1 / -1;
+    min-height: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 11px;
+}

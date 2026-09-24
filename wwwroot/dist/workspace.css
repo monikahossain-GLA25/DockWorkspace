@@ -3884,6 +3884,237 @@
   bottom: auto;
 }
 
+/* ClientApp/css/components/fx-rates.css */
+.fx-panel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  color: #0f172a;
+  overflow: hidden;
+  font-family:
+    Inter,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+.fx-subtabs {
+  height: 32px;
+  display: flex;
+  align-items: stretch;
+  flex: 0 0 32px;
+  background: #f5f5f6;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.fx-subtab {
+  min-width: 55px;
+  padding: 0 12px;
+  border: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.04);
+  background: transparent;
+  color: rgba(15, 23, 42, 0.56);
+  font-family:
+    Inter,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+}
+.fx-subtab:hover {
+  background: rgba(0, 0, 0, 0.035);
+}
+.fx-subtab.active {
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 500;
+  border-bottom: 2px solid #ffffff;
+}
+.fx-card-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+  grid-auto-rows: 108px;
+  align-content: start;
+  gap: 8px;
+  background: #ffffff;
+}
+.fx-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: rgb(248, 250, 252);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  box-shadow: rgba(15, 23, 42, 0.06) 0 1px 2px, rgba(255, 255, 255, 0.6) 0 1px 0 inset;
+}
+.fx-card-header {
+  min-height: 25px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 7px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: linear-gradient(rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0));
+}
+.fx-direction {
+  font-size: 11px;
+  line-height: 1;
+}
+.fx-down {
+  color: rgb(225, 29, 46);
+}
+.fx-up {
+  color: rgb(10, 157, 78);
+}
+.fx-pair {
+  color: rgb(15, 23, 42);
+  font-family:
+    "IBM Plex Mono",
+    Consolas,
+    monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.fx-account {
+  margin-left: auto;
+  color: rgba(15, 23, 42, 0.44);
+  font-size: 8.5px;
+  white-space: nowrap;
+}
+.fx-card-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px 7px;
+}
+.fx-side {
+  min-width: 0;
+  text-align: center;
+}
+.fx-side-title {
+  margin-bottom: 2px;
+  color: rgba(15, 23, 42, 0.62);
+  font-family:
+    Inter,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.fx-price {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  min-width: 0;
+  font-family:
+    "IBM Plex Mono",
+    Consolas,
+    monospace;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+}
+.fx-price-prefix {
+  color: rgb(51, 65, 85);
+  font-size: 14px;
+  font-weight: 500;
+}
+.fx-price-main {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+.fx-price-last {
+  margin-left: 2px;
+  color: rgba(15, 23, 42, 0.62);
+  font-size: 12px;
+}
+.fx-red {
+  color: rgb(225, 29, 46);
+}
+.fx-green {
+  color: rgb(10, 157, 78);
+}
+.fx-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 2px;
+}
+.fx-size-row {
+  display: flex;
+  gap: 3px;
+}
+.fx-size {
+  padding: 1px 4px;
+  color: rgba(15, 23, 42, 0.62);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 2px;
+  font-family:
+    "IBM Plex Mono",
+    Consolas,
+    monospace;
+  font-size: 8.5px;
+  white-space: nowrap;
+}
+.fx-spread {
+  padding: 1px 5px;
+  color: rgb(51, 65, 85);
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 2px;
+  font-family:
+    "IBM Plex Mono",
+    Consolas,
+    monospace;
+  font-size: 9px;
+}
+.fx-card-footer {
+  min-height: 21px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 3px 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  color: rgba(15, 23, 42, 0.44);
+  font-family:
+    "IBM Plex Mono",
+    Consolas,
+    monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.03em;
+}
+@media (max-width: 1150px) {
+  .fx-card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+  .fx-price-main {
+    font-size: 29px;
+  }
+  .fx-price-prefix {
+    font-size: 12px;
+  }
+  .fx-price-last {
+    font-size: 10px;
+  }
+}
+
 /* ClientApp/workspace.css */
 * {
   box-sizing: border-box;
