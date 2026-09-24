@@ -1162,8 +1162,10 @@ class RightHeaderActions {
     }
 }
 
-/* 
-   FX RATES INTERNAL TABS
+
+
+/*
+   FX RATES INTERNAL TAB SWITCHING
    G10 / EM / Crosses
    24.09.2026
  */
@@ -1172,7 +1174,7 @@ function initializeFxTabs() {
 
     document.addEventListener(
         "click",
-        (event) => {
+        function (event) {
 
             const tab =
                 event.target.closest(
@@ -1186,13 +1188,13 @@ function initializeFxTabs() {
             }
 
 
-            const fxPanel =
+            const panel =
                 tab.closest(
                     "[data-fx-panel]"
                 );
 
 
-            if (!fxPanel) {
+            if (!panel) {
 
                 return;
             }
@@ -1202,12 +1204,11 @@ function initializeFxTabs() {
                 tab.dataset.fxTab;
 
 
-            /*
-                Remove active state
-                from all FX tabs.
-            */
+            /* 
+               Remove current tab active state
+               */
 
-            fxPanel
+            panel
                 .querySelectorAll(
                     "[data-fx-tab]"
                 )
@@ -1217,15 +1218,16 @@ function initializeFxTabs() {
                         item.classList.remove(
                             "active"
                         );
+
                     }
                 );
 
 
-            /*
-                Hide all panes.
-            */
+            /* 
+               Hide all FX content
+           */
 
-            fxPanel
+            panel
                 .querySelectorAll(
                     "[data-fx-pane]"
                 )
@@ -1235,25 +1237,26 @@ function initializeFxTabs() {
                         pane.classList.remove(
                             "active"
                         );
+
                     }
                 );
 
 
-            /*
-                Activate clicked tab.
-            */
+            /* 
+               Activate clicked tab
+              */
 
             tab.classList.add(
                 "active"
             );
 
 
-            /*
-                Find matching content.
-            */
+            /* 
+               Show corresponding content
+                */
 
             const selectedPane =
-                fxPanel.querySelector(
+                panel.querySelector(
                     `[data-fx-pane="${selectedTab}"]`
                 );
 
@@ -1263,6 +1266,7 @@ function initializeFxTabs() {
                 selectedPane.classList.add(
                     "active"
                 );
+
             }
 
         }

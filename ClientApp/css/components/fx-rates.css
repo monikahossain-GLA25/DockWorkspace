@@ -57,16 +57,18 @@
     }
 
 
-/* =========================================================
+/* 
    FX CARD GRID
 
    Original parsed demo uses:
    repeat(auto-fill, minmax(186px, 1fr))
    108px rows
    8px gap
-   ========================================================= */
+ */
 
 .fx-card-grid {
+    width: 100%;
+    height: 100%;
     flex: 1 1 auto;
     min-height: 0;
     overflow: auto;
@@ -76,13 +78,12 @@
     grid-auto-rows: 108px;
     align-content: start;
     gap: 8px;
-    background: #ffffff;
 }
 
 
-/* =========================================================
+/*
    SINGLE FX CARD
-   ========================================================= */
+  */
 
 .fx-card {
     min-width: 0;
@@ -386,12 +387,12 @@
     overflow: hidden;
 }
 
-
     .fx-tab-pane.active {
-        display: block;
-        height: 100%;
+        display: flex;
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
     }
-
 
 /* 
    EMPTY CROSSES PLACEHOLDER
