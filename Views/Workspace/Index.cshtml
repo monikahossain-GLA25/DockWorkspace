@@ -1,113 +1,26 @@
-﻿@{
-    ViewData["Title"] = "Dock Workspace";
-    Layout = null;
-}
+﻿<template id="fxrates-template">
 
-<!DOCTYPE html>
+    <partial name="Partials/_FxRatesPanel" />
 
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8" />
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0" />
-
-    <title>Dock Workspace</title>
-
-    <link rel="stylesheet"
-          href="~/dist/workspace.css"
-          asp-append-version="true" />
-
-</head>
-
-<body>
-
-    <!-- 
-         TOP APPLICATION HEADER
-         -->
-
-    <header class="app-header">
-
-        <div class="brand">
-
-            <div class="brand-logo">
-
-                <span class="logo-block logo-cyan"></span>
-
-                <span class="logo-block logo-blue"></span>
-
-                <span class="logo-block logo-pink"></span>
-
-            </div>
-
-            <span class="brand-name">
-                dockview
-            </span>
-
-        </div>
-
-    </header>
+</template>
 
 
-    <!--
-         WHOLE DOCKVIEW WORKSPACE
-         -->
+<template id="orders-template">
 
-    <main class="workspace-shell">
+    <partial name="Partials/_OrdersPanel" />
 
-        <div id="dockview-container">
-        </div>
-
-    </main>
-    <!-- 
-     MIDDLE COLUMN - FX RATES
-    -->
-
-    <template id="fxrates-template">
-
-        <partial name="Partials/_FxRatesPanel" />
-
-    </template>
+</template>
 
 
-    <!-- 
-     MIDDLE COLUMN - ORDERS
- -->
+<template id="positions-template">
 
-    <template id="orders-template">
+    <partial name="Partials/_PositionsPanel" />
 
-        <partial name="Partials/_OrdersPanel" />
-
-    </template>
+</template>
 
 
-    <!-- 
-     ORDERS GROUP SECOND TAB
-    -->
+<template id="volsurface-template">
 
-    <template id="positions-template">
+    <partial name="Partials/_VolSurfacePanel" />
 
-        <partial name="Partials/_PositionsPanel" />
-
-    </template>
-
-
-    <!--
-     MIDDLE COLUMN - VOL SURFACE
-     -->
-
-    <template id="volsurface-template">
-
-        <partial name="Partials/_VolSurfacePanel" />
-
-    </template>
-
-    <script src="~/dist/workspace.js"
-            asp-append-version="true">
-    </script>
-
-</body>
-
-</html>
+</template>
