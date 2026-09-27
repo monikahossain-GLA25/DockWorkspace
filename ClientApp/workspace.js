@@ -1,9 +1,28 @@
-﻿import {
+﻿
+import {
     DockviewComponent,
     themeLight
 } from "dockview";
 
 
+import {
+    setupFxRates
+} from "./js/components/fx-rates.js";
+
+
+import {
+    setupOrders
+} from "./js/components/orders.js";
+
+
+import {
+    setupPositions
+} from "./js/components/positions.js";
+
+
+import {
+    setupVolSurface
+} from "./js/components/vol-surface.js";
 /* 
    DockWorkspace
 s
@@ -85,14 +104,18 @@ class EmptyPanel {
 
 class TemplatePanel {
 
-    constructor(templateId) {
+    constructor(
+        templateId
+    ) {
 
         this.templateId =
             templateId;
 
 
         this.element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         this.element.className =
@@ -117,13 +140,64 @@ class TemplatePanel {
 
 
         const content =
-            template.content.cloneNode(true);
+            template
+                .content
+                .cloneNode(true);
 
 
         this.element.appendChild(
             content
         );
+
+
+        /* 
+           COMPONENT-SPECIFIC JAVASCRIPT
+   */
+
+        switch (
+        this.templateId
+        ) {
+
+
+            case "fxrates-template":
+
+                setupFxRates(
+                    this.element
+                );
+
+                break;
+
+
+            case "orders-template":
+
+                setupOrders(
+                    this.element
+                );
+
+                break;
+
+
+            case "positions-template":
+
+                setupPositions(
+                    this.element
+                );
+
+                break;
+
+
+            case "volsurface-template":
+
+                setupVolSurface(
+                    this.element
+                );
+
+                break;
+
+        }
+
     }
+
 }
 
 
@@ -1198,140 +1272,140 @@ class RightHeaderActions {
    Crosses
    */
 
-function initializeFxTabs() {
+// function initializeFxTabs() {
 
-    /*
-     * Event delegation is used because
-     * FX Rates content is cloned dynamically
-     * from a Razor <template>.
-     */
+//     /*
+//      * Event delegation is used because
+//      * FX Rates content is cloned dynamically
+//      * from a Razor <template>.
+//      */
 
-    document.addEventListener(
-        "click",
-        function (event) {
+//     document.addEventListener(
+//         "click",
+//         function (event) {
 
-            /*
-             * Check whether an FX internal tab
-             * was clicked.
-             */
+//             /*
+//              * Check whether an FX internal tab
+//              * was clicked.
+//              */
 
-            const clickedTab =
-                event.target.closest(
-                    "[data-fx-tab]"
-                );
-
-
-            /*
-             * Ignore all other page clicks.
-             */
-
-            if (!clickedTab) {
-
-                return;
-            }
+//             const clickedTab =
+//                 event.target.closest(
+//                     "[data-fx-tab]"
+//                 );
 
 
-            /*
-             * Find only the FX panel containing
-             * the clicked tab.
-             */
+//             /*
+//              * Ignore all other page clicks.
+//              */
 
-            const fxPanel =
-                clickedTab.closest(
-                    "[data-fx-panel]"
-                );
+//             if (!clickedTab) {
 
-
-            if (!fxPanel) {
-
-                return;
-            }
+//                 return;
+//             }
 
 
-            /*
-             * Returns:
-             *
-             * g10
-             * em
-             * crosses
-             */
+//             /*
+//              * Find only the FX panel containing
+//              * the clicked tab.
+//              */
 
-            const selectedTab =
-                clickedTab.dataset.fxTab;
-
-
-            /*
-               REMOVE ACTIVE CLASS FROM ALL FX TABS
-               */
-
-            fxPanel
-                .querySelectorAll(
-                    "[data-fx-tab]"
-                )
-                .forEach(
-                    tab => {
-
-                        tab.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
+//             const fxPanel =
+//                 clickedTab.closest(
+//                     "[data-fx-panel]"
+//                 );
 
 
-            /*
-               HIDE ALL FX CONTENT PANES
-               */
+//             if (!fxPanel) {
 
-            fxPanel
-                .querySelectorAll(
-                    "[data-fx-pane]"
-                )
-                .forEach(
-                    pane => {
-
-                        pane.classList.remove(
-                            "active"
-                        );
-
-                    }
-                );
+//                 return;
+//             }
 
 
-            /* 
-               ACTIVATE CLICKED TAB
-              */
+//             /*
+//              * Returns:
+//              *
+//              * g10
+//              * em
+//              * crosses
+//              */
 
-            clickedTab.classList.add(
-                "active"
-            );
-
-
-            /* 
-               FIND MATCHING CONTENT PANE
-          */
-
-            const selectedPane =
-                fxPanel.querySelector(
-                    `[data-fx-pane="${selectedTab}"]`
-                );
+//             const selectedTab =
+//                 clickedTab.dataset.fxTab;
 
 
-            /*
-               SHOW MATCHING PANE
-          */
+//             /*
+//                REMOVE ACTIVE CLASS FROM ALL FX TABS
+//                */
 
-            if (selectedPane) {
+//             fxPanel
+//                 .querySelectorAll(
+//                     "[data-fx-tab]"
+//                 )
+//                 .forEach(
+//                     tab => {
 
-                selectedPane.classList.add(
-                    "active"
-                );
+//                         tab.classList.remove(
+//                             "active"
+//                         );
 
-            }
+//                     }
+//                 );
 
-        }
-    );
-}
+
+//             /*
+//                HIDE ALL FX CONTENT PANES
+//                */
+
+//             fxPanel
+//                 .querySelectorAll(
+//                     "[data-fx-pane]"
+//                 )
+//                 .forEach(
+//                     pane => {
+
+//                         pane.classList.remove(
+//                             "active"
+//                         );
+
+//                     }
+//                 );
+
+
+//             /* 
+//                ACTIVATE CLICKED TAB
+//               */
+
+//             clickedTab.classList.add(
+//                 "active"
+//             );
+
+
+//             /* 
+//                FIND MATCHING CONTENT PANE
+//           */
+
+//             const selectedPane =
+//                 fxPanel.querySelector(
+//                     `[data-fx-pane="${selectedTab}"]`
+//                 );
+
+
+//             /*
+//                SHOW MATCHING PANE
+//           */
+
+//             if (selectedPane) {
+
+//                 selectedPane.classList.add(
+//                     "active"
+//                 );
+
+//             }
+
+//         }
+//     );
+// }
 
 
 /* 
