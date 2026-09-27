@@ -16375,10 +16375,180 @@
     }
   });
 
+  // ClientApp/js/components/fx-rates.js
+  function setupFxRates(rootElement) {
+    const panel = rootElement.querySelector(
+      "[data-fx-panel]"
+    );
+    if (!panel) {
+      return;
+    }
+    const tabs = panel.querySelectorAll(
+      "[data-fx-tab]"
+    );
+    const panes = panel.querySelectorAll(
+      "[data-fx-pane]"
+    );
+    function activateTab(tabName) {
+      tabs.forEach(
+        (tab) => {
+          tab.classList.toggle(
+            "active",
+            tab.dataset.fxTab === tabName
+          );
+        }
+      );
+      panes.forEach(
+        (pane) => {
+          pane.classList.toggle(
+            "active",
+            pane.dataset.fxPane === tabName
+          );
+        }
+      );
+    }
+    tabs.forEach(
+      (tab) => {
+        tab.addEventListener(
+          "click",
+          (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            activateTab(
+              tab.dataset.fxTab
+            );
+          }
+        );
+      }
+    );
+    activateTab(
+      "g10"
+    );
+  }
+  var init_fx_rates = __esm({
+    "ClientApp/js/components/fx-rates.js"() {
+    }
+  });
+
+  // ClientApp/js/components/orders.js
+  function setupOrders(rootElement) {
+    const panel = rootElement.querySelector(
+      "[data-orders-panel]"
+    );
+    if (!panel) {
+      return;
+    }
+    panel.addEventListener(
+      "click",
+      (event) => {
+        const row = event.target.closest(
+          ".orders-row"
+        );
+        if (!row) {
+          return;
+        }
+        panel.querySelectorAll(
+          ".orders-row.selected"
+        ).forEach(
+          (item) => {
+            item.classList.remove(
+              "selected"
+            );
+          }
+        );
+        row.classList.add(
+          "selected"
+        );
+      }
+    );
+  }
+  var init_orders = __esm({
+    "ClientApp/js/components/orders.js"() {
+    }
+  });
+
+  // ClientApp/js/components/positions.js
+  function setupPositions(rootElement) {
+    const panel = rootElement.querySelector(
+      "[data-positions-panel]"
+    );
+    if (!panel) {
+      return;
+    }
+    panel.addEventListener(
+      "click",
+      (event) => {
+        const row = event.target.closest(
+          ".position-row"
+        );
+        if (!row) {
+          return;
+        }
+        panel.querySelectorAll(
+          ".position-row.selected"
+        ).forEach(
+          (item) => {
+            item.classList.remove(
+              "selected"
+            );
+          }
+        );
+        row.classList.add(
+          "selected"
+        );
+      }
+    );
+  }
+  var init_positions = __esm({
+    "ClientApp/js/components/positions.js"() {
+    }
+  });
+
+  // ClientApp/js/components/vol-surface.js
+  function setupVolSurface(rootElement) {
+    const panel = rootElement.querySelector(
+      "[data-vol-panel]"
+    );
+    if (!panel) {
+      return;
+    }
+    panel.addEventListener(
+      "click",
+      (event) => {
+        const cell = event.target.closest(
+          ".vol-cell"
+        );
+        if (!cell) {
+          return;
+        }
+        panel.querySelectorAll(
+          ".vol-cell.selected"
+        ).forEach(
+          (item) => {
+            item.classList.remove(
+              "selected"
+            );
+          }
+        );
+        cell.classList.add(
+          "selected"
+        );
+      }
+    );
+  }
+  var init_vol_surface = __esm({
+    "ClientApp/js/components/vol-surface.js"() {
+    }
+  });
+
   // ClientApp/workspace.js
   var require_workspace = __commonJS({
     "ClientApp/workspace.js"() {
       init_main_esm2();
+      init_fx_rates();
+      init_orders();
+      init_positions();
+      init_vol_surface();
       var newTabNumber = 0;
       var BlankPanel = class {
         constructor() {
@@ -16401,7 +16571,9 @@
       var TemplatePanel = class {
         constructor(templateId) {
           this.templateId = templateId;
-          this.element = document.createElement("div");
+          this.element = document.createElement(
+            "div"
+          );
           this.element.className = "dock-panel-host";
         }
         init() {
@@ -16417,6 +16589,28 @@
           this.element.appendChild(
             content
           );
+          switch (this.templateId) {
+            case "fxrates-template":
+              setupFxRates(
+                this.element
+              );
+              break;
+            case "orders-template":
+              setupOrders(
+                this.element
+              );
+              break;
+            case "positions-template":
+              setupPositions(
+                this.element
+              );
+              break;
+            case "volsurface-template":
+              setupVolSurface(
+                this.element
+              );
+              break;
+          }
         }
       };
       var assets = [
@@ -17131,55 +17325,6 @@
           this.element.remove();
         }
       };
-      function initializeFxTabs() {
-        document.addEventListener(
-          "click",
-          function(event) {
-            const clickedTab = event.target.closest(
-              "[data-fx-tab]"
-            );
-            if (!clickedTab) {
-              return;
-            }
-            const fxPanel = clickedTab.closest(
-              "[data-fx-panel]"
-            );
-            if (!fxPanel) {
-              return;
-            }
-            const selectedTab = clickedTab.dataset.fxTab;
-            fxPanel.querySelectorAll(
-              "[data-fx-tab]"
-            ).forEach(
-              (tab) => {
-                tab.classList.remove(
-                  "active"
-                );
-              }
-            );
-            fxPanel.querySelectorAll(
-              "[data-fx-pane]"
-            ).forEach(
-              (pane) => {
-                pane.classList.remove(
-                  "active"
-                );
-              }
-            );
-            clickedTab.classList.add(
-              "active"
-            );
-            const selectedPane = fxPanel.querySelector(
-              `[data-fx-pane="${selectedTab}"]`
-            );
-            if (selectedPane) {
-              selectedPane.classList.add(
-                "active"
-              );
-            }
-          }
-        );
-      }
       var container = document.getElementById(
         "dockview-container"
       );
