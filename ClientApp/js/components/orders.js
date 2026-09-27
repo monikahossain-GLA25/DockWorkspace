@@ -1,4 +1,4 @@
-﻿namespaexport function setupOrders(
+﻿export function setupOrders(
     rootElement
 ) {
 
