@@ -3,8 +3,37 @@
 
 @import "./css/components/fx-rates.css";
 
+@import "dockview/dist/styles/dockview.css";
 
 
+
+@import "./css/components/fx-rates.css";
+@import "./css/components/orders.css";
+@import "./css/components/positions.css";
+@import "./css/components/vol-surface.css";
+
+
+:root {
+    /* Powder blue */
+    --ui-powder-blue: #b9ddf4;
+    /* Stronger powder blue */
+    --ui-blue: #6fa9dc;
+    /* Blue lavender */
+    --ui-blue-lavender: #929fe0;
+    /* Lavender */
+    --ui-lavender: #ddd2f5;
+    /* Purple */
+    --ui-purple: #8068ba;
+    /* Mint */
+    --ui-mint: #bce9d7;
+    /* Strong mint */
+    --ui-mint-deep: #73c6a8;
+    --ui-text: #48536b;
+    --ui-muted: #8f99ad;
+    --ui-border: #e1e6ee;
+    --ui-surface: #ffffff;
+    --ui-soft: #f8f9fc;
+}
 /* 
    PAGE
   */
