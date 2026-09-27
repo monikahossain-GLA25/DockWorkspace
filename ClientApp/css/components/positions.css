@@ -1,2 +1,160 @@
-﻿body {
+﻿.positions-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #ffffff;
+    color: var(--ui-text);
 }
+
+
+.positions-net {
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--ui-border);
+    color: var(--ui-muted);
+    font-size: 8px;
+}
+
+
+.net-value {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+    .net-value strong {
+        color: #4e5870;
+        font-size: 18px;
+    }
+
+
+.net-change {
+    color: var(--ui-purple);
+    font-size: 8px;
+    font-weight: 700;
+}
+
+
+.net-count {
+    padding: 2px 5px;
+    border-radius: 3px;
+    background: #e6f1fb;
+    color: #668ab0;
+}
+
+
+.position-summary {
+    display: grid;
+    grid-template-columns: repeat( 3, 1fr );
+    min-height: 52px;
+    border-bottom: 1px solid var(--ui-border);
+}
+
+
+    .position-summary > div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px 12px;
+        border-right: 1px solid var(--ui-border);
+    }
+
+
+    .position-summary span {
+        color: var(--ui-muted);
+        font-size: 7px;
+    }
+
+
+    .position-summary strong {
+        font-size: 9px;
+    }
+
+
+.positions-header,
+.position-row {
+    display: grid;
+    grid-template-columns: 70px 65px minmax(150px, 1.4fr) minmax(80px, 1fr) 80px 60px;
+    align-items: center;
+    min-width: 650px;
+    padding: 0 12px;
+}
+
+
+.positions-header {
+    min-height: 25px;
+    color: #a1a9b8;
+    border-bottom: 1px solid #e9edf3;
+    font-size: 7px;
+}
+
+
+.positions-body {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+}
+
+
+.position-row {
+    min-height: 31px;
+    border-bottom: 1px solid #edf0f4;
+    font-size: 8px;
+}
+
+
+    .position-row:hover,
+    .position-row.selected {
+        background: #f8f6ff;
+    }
+
+
+.position-side {
+    display: inline-block;
+    min-width: 31px;
+    padding: 3px 5px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+
+.position-long {
+    background: #e4f3fc;
+    color: #5d8cac;
+}
+
+
+.position-short {
+    background: #ebe3fb;
+    color: #7459aa;
+}
+
+
+.position-profit {
+    color: #559986;
+}
+
+
+.position-loss {
+    color: var(--ui-purple);
+}
+
+
+.position-weight {
+    width: 45px;
+    height: 3px;
+    background: #edf0f4;
+}
+
+
+    .position-weight span {
+        display: block;
+        height: 100%;
+        background: var(--ui-blue);
+    }
