@@ -71,7 +71,7 @@ class EmptyPanel {
 }
 
 
-/* =========================================================
+/* 
    4. TEMPLATE PANEL
 
    Loads HTML from Razor <template> elements.
@@ -81,7 +81,7 @@ class EmptyPanel {
    - Orders
    - Positions
    - Vol Surface
-   ========================================================= */
+ */
 
 class TemplatePanel {
 
@@ -127,10 +127,10 @@ class TemplatePanel {
 }
 
 
-/* =========================================================
+/*
    5. CORRELATION DATA
    Dummy interface data only.
-   ========================================================= */
+= */
 
 const assets = [
 

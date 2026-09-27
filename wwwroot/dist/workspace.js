@@ -16395,15 +16395,7 @@
           this.element.className = "demo-empty-panel";
         }
         init() {
-          this.element.innerHTML = `
-
-            <div class="empty-tab-content">
-
-                Empty Panel
-
-            </div>
-
-        `;
+          this.element.innerHTML = "";
         }
       };
       var TemplatePanel = class {
@@ -16571,8 +16563,7 @@
                         -1
                     </span>
 
-                    <span
-                        class="scale-gradient">
+                    <span class="scale-gradient">
                     </span>
 
                     <span>
@@ -16586,17 +16577,18 @@
 
             <div class="correlation-scroll">
 
-                <div
-                    class="correlation-grid"
-                    id="correlation-grid">
+                <div class="correlation-grid">
                 </div>
 
             </div>
 
         `;
           const grid = this.element.querySelector(
-            "#correlation-grid"
+            ".correlation-grid"
           );
+          if (!grid) {
+            return;
+          }
           grid.appendChild(
             document.createElement("span")
           );
@@ -16614,13 +16606,13 @@
           );
           correlationData.forEach(
             (row, rowIndex) => {
-              const rowName = document.createElement(
+              const rowHeading = document.createElement(
                 "span"
               );
-              rowName.className = "correlation-row-heading";
-              rowName.textContent = assets[rowIndex];
+              rowHeading.className = "correlation-row-heading";
+              rowHeading.textContent = assets[rowIndex];
               grid.appendChild(
-                rowName
+                rowHeading
               );
               row.forEach(
                 (value, columnIndex) => {
@@ -16738,6 +16730,10 @@
             </div>
 
 
+            <!-- =========================================
+                 MARKET STATISTICS
+                 ========================================= -->
+
             <div class="market-stat-row">
 
                 <div>
@@ -16807,6 +16803,10 @@
             </div>
 
 
+            <!-- =========================================
+                 TABLE HEADER
+                 ========================================= -->
+
             <div class="order-table-header">
 
                 <span>
@@ -16824,7 +16824,9 @@
             </div>
 
 
-            <!-- SELL ORDERS -->
+            <!-- =========================================
+                 SELL / ASK ORDERS
+                 ========================================= -->
 
             <div class="order-row ask">
 
@@ -16894,7 +16896,9 @@
             </div>
 
 
-            <!-- SPREAD -->
+            <!-- =========================================
+                 CURRENT PRICE / SPREAD
+                 ========================================= -->
 
             <div class="spread-row">
 
@@ -16915,7 +16919,9 @@
             </div>
 
 
-            <!-- BUY ORDERS -->
+            <!-- =========================================
+                 BUY / BID ORDERS
+                 ========================================= -->
 
             <div class="order-row bid">
 
@@ -16985,7 +16991,9 @@
             </div>
 
 
-            <!-- TIME & SALES -->
+            <!-- =========================================
+                 TIME & SALES
+                 ========================================= -->
 
             <div class="time-sales-title">
 
@@ -17100,7 +17108,7 @@
           expandButton.type = "button";
           expandButton.className = "dock-header-button expand-button";
           expandButton.title = "Expand / Restore";
-          expandButton.innerHTML = "\u26F6";
+          expandButton.textContent = "\u26F6";
           expandButton.addEventListener(
             "click",
             () => {
@@ -17123,6 +17131,55 @@
           this.element.remove();
         }
       };
+      function initializeFxTabs() {
+        document.addEventListener(
+          "click",
+          function(event) {
+            const clickedTab = event.target.closest(
+              "[data-fx-tab]"
+            );
+            if (!clickedTab) {
+              return;
+            }
+            const fxPanel = clickedTab.closest(
+              "[data-fx-panel]"
+            );
+            if (!fxPanel) {
+              return;
+            }
+            const selectedTab = clickedTab.dataset.fxTab;
+            fxPanel.querySelectorAll(
+              "[data-fx-tab]"
+            ).forEach(
+              (tab) => {
+                tab.classList.remove(
+                  "active"
+                );
+              }
+            );
+            fxPanel.querySelectorAll(
+              "[data-fx-pane]"
+            ).forEach(
+              (pane) => {
+                pane.classList.remove(
+                  "active"
+                );
+              }
+            );
+            clickedTab.classList.add(
+              "active"
+            );
+            const selectedPane = fxPanel.querySelector(
+              `[data-fx-pane="${selectedTab}"]`
+            );
+            if (selectedPane) {
+              selectedPane.classList.add(
+                "active"
+              );
+            }
+          }
+        );
+      }
       var container = document.getElementById(
         "dockview-container"
       );
@@ -17134,23 +17191,26 @@
       var dockview = new DockviewComponent(
         container,
         {
+          /* 
+              THEME
+          */
           theme: themeLight,
           /* 
-             PANEL COMPONENT FACTORY
-             */
+                   PANEL COMPONENT FACTORY
+          */
           createComponent: (options) => {
             switch (options.name) {
-              /*
-                  LEFT WORKSPACE
-              */
+              /* 
+                 LEFT WORKSPACE
+                 */
               case "correlation":
                 return new CorrelationPanel();
               case "order-book":
                 return new OrderBookPanel();
-              /*
-                  MIDDLE WORKSPACE
-                  Razor <template> components
-              */
+              /* 
+                 MIDDLE WORKSPACE
+                 Razor templates
+               */
               case "fx-rates":
                 return new TemplatePanel(
                   "fxrates-template"
@@ -17167,14 +17227,14 @@
                 return new TemplatePanel(
                   "volsurface-template"
                 );
-              /*
-                  DYNAMIC + TAB
-              */
+              /* 
+                 DYNAMIC + TAB
+                 */
               case "empty":
                 return new EmptyPanel();
-              /*
-                  TEMPORARY RIGHT SIDE
-              */
+              /* 
+                 TEMPORARY BLANK RIGHT SIDE
+               */
               case "blank":
                 return new BlankPanel();
               default:
@@ -17182,19 +17242,20 @@
             }
           },
           /* 
-             ☰ BEFORE TABS
-             */
+                   BEFORE TABS
+          */
           createPrefixHeaderActionComponent: () => new MenuHeaderAction(),
           /* 
              + AFTER TABS
              */
           createLeftHeaderActionComponent: () => new AddTabHeaderAction(),
           /* 
-             ⛶ AT RIGHT SIDE
+              RIGHT SIDE
             */
           createRightHeaderActionComponent: () => new RightHeaderActions()
         }
       );
+      initializeFxTabs();
       var workspaceWidth = container.clientWidth;
       var workspaceHeight = container.clientHeight;
       var leftWidth = Math.floor(
