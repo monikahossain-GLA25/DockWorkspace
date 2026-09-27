@@ -1,27 +1,34 @@
-﻿<div class="trade-panel orders-panel">
+﻿<div class="orders-panel"
+     data-orders-panel>
 
-    <div class="panel-inner-toolbar">
+    <div class="orders-toolbar">
 
-        <div class="panel-inner-title">
+        <div class="orders-title">
 
             <strong>
                 Order Blotter
             </strong>
 
-            <span class="working-badge">
-                38 WORKING
+
+            <span class="orders-count orders-working">
+                37 WORKING
             </span>
 
-            <span class="filled-badge">
-                21 FILLED
+
+            <span class="orders-count orders-filled">
+                24 FILLED
             </span>
 
         </div>
 
 
-        <div class="order-gross">
+        <div class="orders-gross">
 
-            Gross $23.53M
+            Gross
+
+            <strong>
+                $25.05M
+            </strong>
 
         </div>
 
@@ -30,23 +37,503 @@
 
     <div class="orders-table">
 
+
         <div class="orders-header">
 
             <span>SIDE</span>
+
             <span>SYMBOL</span>
+
             <span>TYPE</span>
+
             <span>PRICE</span>
+
             <span>NOTIONAL</span>
+
             <span>FILL</span>
+
             <span>STATUS</span>
+
             <span>TIME</span>
 
         </div>
 
 
-        <div class="orders-body"
-             data-orders-body>
+        <!-- TSLA -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-buy">
+                    BUY
+                </span>
+
+            </span>
+
+            <strong>TSLA</strong>
+
+            <span>MKT</span>
+
+            <span>253.46</span>
+
+            <span>157.65K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+
+                    <span class="fill-bar fill-full">
+                    </span>
+
+                </span>
+
+                <small>
+                    100%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-filled">
+                    FILLED
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                03:01
+            </span>
+
         </div>
+
+
+        <!-- AMZN -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-buy">
+                    BUY
+                </span>
+
+            </span>
+
+            <strong>AMZN</strong>
+
+            <span>MKT</span>
+
+            <span>180.62</span>
+
+            <span>281.77K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+
+                    <span class="fill-bar fill-full">
+                    </span>
+
+                </span>
+
+                <small>
+                    100%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-filled">
+                    FILLED
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                01:06
+            </span>
+
+        </div>
+
+
+        <!-- META -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-sell">
+                    SELL
+                </span>
+
+            </span>
+
+            <strong>META</strong>
+
+            <span>LMT</span>
+
+            <span>482.34</span>
+
+            <span>43.89K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+                </span>
+
+                <small>
+                    0%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-cancel">
+                    CANCEL
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                00:39
+            </span>
+
+        </div>
+
+
+        <!-- JPM -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-buy">
+                    BUY
+                </span>
+
+            </span>
+
+            <strong>JPM</strong>
+
+            <span>MKT</span>
+
+            <span>199.67</span>
+
+            <span>95.67K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+
+                    <span class="fill-bar fill-full">
+                    </span>
+
+                </span>
+
+                <small>
+                    100%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-filled">
+                    FILLED
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                22:34
+            </span>
+
+        </div>
+
+
+        <!-- GS -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-buy">
+                    BUY
+                </span>
+
+            </span>
+
+            <strong>GS</strong>
+
+            <span>MKT</span>
+
+            <span>422.60</span>
+
+            <span>365.97K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+                </span>
+
+                <small>
+                    0%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-cancel">
+                    CANCEL
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                22:04
+            </span>
+
+        </div>
+
+
+        <!-- TSLA -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-sell">
+                    SELL
+                </span>
+
+            </span>
+
+            <strong>TSLA</strong>
+
+            <span>STP</span>
+
+            <span>242.81</span>
+
+            <span>194.01K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+                </span>
+
+                <small>
+                    0%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-working">
+                    WORKING
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                22:00
+            </span>
+
+        </div>
+
+
+        <!-- META -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-buy">
+                    BUY
+                </span>
+
+            </span>
+
+            <strong>META</strong>
+
+            <span>MKT</span>
+
+            <span>499.41</span>
+
+            <span>678.01K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+                </span>
+
+                <small>
+                    0%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-cancel">
+                    CANCEL
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                21:39
+            </span>
+
+        </div>
+
+
+        <!-- ORCL -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-buy">
+                    BUY
+                </span>
+
+            </span>
+
+            <strong>ORCL</strong>
+
+            <span>LMT</span>
+
+            <span>116.73</span>
+
+            <span>185.25K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+                </span>
+
+                <small>
+                    0%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-working">
+                    WORKING
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                21:32
+            </span>
+
+        </div>
+
+
+        <!-- BAC -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-buy">
+                    BUY
+                </span>
+
+            </span>
+
+            <strong>BAC</strong>
+
+            <span>MKT</span>
+
+            <span>38.04</span>
+
+            <span>40.74K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+
+                    <span class="fill-bar fill-44">
+                    </span>
+
+                </span>
+
+                <small>
+                    44%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-partial">
+                    PARTIAL
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                21:07
+            </span>
+
+        </div>
+
+
+        <!-- NFLX -->
+
+        <div class="orders-row">
+
+            <span>
+
+                <span class="order-side order-sell">
+                    SELL
+                </span>
+
+            </span>
+
+            <strong>NFLX</strong>
+
+            <span>STP</span>
+
+            <span>593.41</span>
+
+            <span>478.29K</span>
+
+            <span class="fill-cell">
+
+                <span class="fill-track">
+                </span>
+
+                <small>
+                    0%
+                </small>
+
+            </span>
+
+            <span>
+
+                <span class="status status-cancel">
+                    CANCEL
+                </span>
+
+            </span>
+
+            <span class="order-time">
+                20:25
+            </span>
+
+        </div>
+
 
     </div>
 

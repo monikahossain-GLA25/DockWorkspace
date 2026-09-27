@@ -1,2 +1,206 @@
-﻿body {
+﻿.orders-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #ffffff;
+    color: var(--ui-text);
+}
+
+
+.orders-toolbar {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--ui-border);
+}
+
+
+.orders-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+}
+
+
+.orders-count {
+    padding: 3px 7px;
+    border-radius: 3px;
+    font-size: 7px;
+    font-weight: 600;
+}
+
+
+.orders-working {
+    background: #ece6fb;
+    color: var(--ui-purple);
+}
+
+
+.orders-filled {
+    background: var(--ui-mint);
+    color: #477f70;
+}
+
+
+.orders-gross {
+    color: var(--ui-muted);
+    font-size: 8px;
+}
+
+
+    .orders-gross strong {
+        margin-left: 5px;
+        color: #5e6981;
+    }
+
+
+.orders-table {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+}
+
+
+.orders-header,
+.orders-row {
+    display: grid;
+    grid-template-columns: 65px 80px 65px minmax(75px, 1fr) minmax(90px, 1fr) 120px 90px 55px;
+    align-items: center;
+    min-width: 740px;
+    padding: 0 12px;
+}
+
+
+.orders-header {
+    height: 25px;
+    background: #fafbfe;
+    color: #a1a9ba;
+    border-bottom: 1px solid #e9ecf2;
+    font-size: 7px;
+}
+
+
+.orders-row {
+    min-height: 31px;
+    border-bottom: 1px solid #edf0f4;
+    font-size: 8px;
+    cursor: default;
+}
+
+
+    .orders-row:hover,
+    .orders-row.selected {
+        background: #f7f5ff;
+    }
+
+
+.order-side {
+    display: inline-block;
+    min-width: 40px;
+    padding: 3px 6px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 7px;
+    font-weight: 700;
+}
+
+
+/* BUY */
+
+.order-buy {
+    background: #e9e1fb;
+    color: #7457aa;
+    border: 1px solid #d7c8f5;
+}
+
+
+/* SELL */
+
+.order-sell {
+    background: #e6e9fb;
+    color: #636ca8;
+    border: 1px solid #ced5f0;
+}
+
+
+.fill-cell {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+.fill-track {
+    width: 62px;
+    height: 3px;
+    background: #eceff5;
+}
+
+
+.fill-bar {
+    display: block;
+    height: 100%;
+    background: var(--ui-blue-lavender);
+}
+
+
+.fill-full {
+    width: 100%;
+}
+
+
+.fill-44 {
+    width: 44%;
+}
+
+
+.fill-cell small {
+    color: #9aa3b4;
+    font-size: 6px;
+}
+
+
+.status {
+    display: inline-block;
+    min-width: 54px;
+    padding: 3px 6px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 7px;
+    font-weight: 600;
+}
+
+
+.status-filled {
+    background: var(--ui-mint);
+    color: #487f6e;
+}
+
+
+.status-working {
+    background: #e6f2fb;
+    color: #5c819e;
+}
+
+
+.status-cancel {
+    background: var(--ui-lavender);
+    color: #7254a1;
+}
+
+
+.status-partial {
+    background: #e3e8fa;
+    color: #646ea5;
+}
+
+
+.order-time {
+    text-align: right;
+    color: #9ca4b3;
 }
