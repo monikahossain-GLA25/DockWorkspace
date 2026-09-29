@@ -1,16 +1,21 @@
 ﻿@import "dockview/dist/styles/dockview.css";
 
 
-@import "./css/components/fx-rates.css";
+@import "./css/components/correlation.css";
 
-@import "dockview/dist/styles/dockview.css";
-
-
+@import "./css/components/order-book.css";
 
 @import "./css/components/fx-rates.css";
+
 @import "./css/components/orders.css";
+
 @import "./css/components/positions.css";
+
 @import "./css/components/vol-surface.css";
+
+@import "./css/components/news.css";
+
+@import "./css/components/tech-view.css";
 
 
 :root {
