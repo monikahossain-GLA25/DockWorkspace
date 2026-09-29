@@ -1,6 +1,223 @@
-﻿namespace DockWorkspace.ClientApp.css.components
-{
-    public class order_book
-    {
-    }
+﻿/* 
+   ORDER BOOK
+  */
+
+.order-book-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: auto;
+    background: #ffffff;
+    color: #49566f;
 }
+
+
+.order-book-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+}
+
+
+.order-book-instrument {
+    color: #45526b;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+.order-book-tag {
+    margin-left: 5px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    background: #edf2f8;
+    color: #8995a8;
+    font-size: 7px;
+}
+
+
+.order-book-price {
+    margin-top: 4px;
+    color: var(--ui-purple);
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+.order-book-index {
+    margin-top: 3px;
+    color: #8e99ac;
+    font-size: 7px;
+}
+
+
+.order-book-chart {
+    width: 140px;
+    height: 45px;
+}
+
+
+    .order-book-chart polyline {
+        stroke: var(--ui-blue-lavender);
+    }
+
+
+/* 
+   STATISTICS
+= */
+
+.order-book-stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--ui-border);
+    border-bottom: 1px solid var(--ui-border);
+}
+
+
+.order-book-stat {
+    padding: 8px 10px;
+    border-right: 1px solid var(--ui-border);
+}
+
+
+    .order-book-stat span {
+        display: block;
+        margin-bottom: 4px;
+        color: #9aa4b7;
+        font-size: 7px;
+    }
+
+
+    .order-book-stat strong {
+        color: #56637b;
+        font-size: 9px;
+    }
+
+
+/* 
+   TABLE
+ */
+
+.order-book-header,
+.order-book-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 0 12px;
+}
+
+
+.order-book-header {
+    min-height: 26px;
+    color: #9ca6b8;
+    border-bottom: 1px solid #edf0f4;
+    font-size: 7px;
+}
+
+
+    .order-book-header span:nth-child(2),
+    .order-book-row span:nth-child(2) {
+        text-align: center;
+    }
+
+
+    .order-book-header span:last-child,
+    .order-book-row span:last-child {
+        text-align: right;
+    }
+
+
+.order-book-row {
+    min-height: 29px;
+    font-size: 8px;
+    border-bottom: 1px solid #f0f2f6;
+    cursor: pointer;
+}
+
+
+    .order-book-row:hover,
+    .order-book-row.selected {
+        background: #f7f5ff;
+    }
+
+
+.order-book-ask {
+    color: #7962ad;
+    background: linear-gradient( 90deg, transparent 0%, transparent 55%, #f2edf9 55%, #f2edf9 100% );
+}
+
+
+.order-book-bid {
+    color: #5f87a3;
+    background: linear-gradient( 90deg, transparent 0%, transparent 55%, #eaf4f8 55%, #eaf4f8 100% );
+}
+
+
+/* 
+   SPREAD
+    */
+
+.order-book-spread {
+    min-height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--ui-border);
+}
+
+
+.order-book-current {
+    color: var(--ui-purple);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.order-book-spread-text {
+    color: #8994a7;
+    font-size: 7px;
+}
+
+
+/*
+   TIME & SALES
+    */
+
+.order-book-time-header,
+.order-book-time-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0 12px;
+}
+
+
+.order-book-time-header {
+    min-height: 25px;
+    align-items: center;
+    background: #f9fafc;
+    color: #9ba4b5;
+    font-size: 7px;
+}
+
+
+.order-book-time-row {
+    min-height: 28px;
+    align-items: center;
+    font-size: 8px;
+}
+
+
+    .order-book-time-row span:nth-child(2) {
+        color: var(--ui-purple);
+        text-align: center;
+    }
+
+
+    .order-book-time-row span:last-child {
+        text-align: right;
+    }
