@@ -4488,6 +4488,33 @@ body {
     Arial,
     sans-serif;
 }
+.workspace-brand-bar {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background: #ffffff;
+  border-bottom: 1px solid #e4e8ef;
+}
+.workspace-logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #465169;
+  font-size: 16px;
+}
+.logo-block {
+  display: inline-block;
+  width: 7px;
+  height: 19px;
+  border-radius: 2px;
+}
+.logo-blue {
+  background: #70b7e4;
+}
+.logo-purple {
+  background: #9682cf;
+}
 .app-header {
   flex: 0 0 48px;
   height: 48px;

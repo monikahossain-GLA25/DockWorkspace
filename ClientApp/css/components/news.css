@@ -1,6 +1,235 @@
-﻿namespace DockWorkspace.ClientApp.css.components
-{
-    public class news
-    {
+﻿
+
+.news-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    background: #ffffff;
+    color: #48556d;
+}
+
+
+/* 
+   INTERNAL TOOLBAR
+    */
+
+.newswire-toolbar {
+    flex: 0 0 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 11px;
+    border-bottom: 1px solid var(--ui-border);
+    background: #fbfbfe;
+}
+
+
+.newswire-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+    .newswire-title strong {
+        color: #4d5871;
+        font-size: 10px;
     }
+
+
+.news-live-dot {
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #8b72c6;
+    box-shadow: 0 0 0 3px rgba(139, 114, 198, 0.10);
+}
+
+
+.news-live-text {
+    color: #9c8ec2;
+    font-size: 7px;
+    font-weight: 700;
+}
+
+
+.news-story-count {
+    color: #929bae;
+    font-size: 8px;
+}
+
+
+/* 
+   LIST
+*/
+
+.news-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #ffffff;
+}
+
+
+/* 
+   STORY
+  */
+
+.news-item {
+    position: relative;
+    min-height: 56px;
+    padding: 8px 12px 8px 17px;
+    border-bottom: 1px solid #edf0f5;
+    cursor: pointer;
+    transition: background 0.12s ease;
+}
+
+
+    /* left accent */
+
+    .news-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--ui-blue-lavender);
+    }
+
+
+    .news-item:hover {
+        background: #faf9ff;
+    }
+
+
+    .news-item.selected {
+        background: #f3effc;
+    }
+
+
+/* 
+   STORY TONES
+ */
+
+.news-tone-blue::before {
+    background: var(--ui-blue);
+}
+
+
+.news-tone-lavender::before {
+    background: var(--ui-blue-lavender);
+}
+
+
+.news-tone-purple::before {
+    background: var(--ui-purple);
+}
+
+
+.news-tone-mint::before {
+    background: var(--ui-mint-deep);
+}
+
+
+/*
+   META
+ */
+
+.news-meta {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 4px;
+}
+
+
+.news-time {
+    width: 34px;
+    color: #9da6b7;
+    font-family: Consolas, "IBM Plex Mono", monospace;
+    font-size: 7px;
+}
+
+
+.news-source {
+    color: #939daf;
+    font-size: 7px;
+}
+
+
+/* 
+   TAGS
+ */
+
+.news-tag {
+    display: inline-block;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 7px;
+    font-weight: 700;
+}
+
+
+.news-tag-blue {
+    background: #dcecf8;
+    color: #567e9f;
+}
+
+
+.news-tag-lavender {
+    background: #ebe4fa;
+    color: #7460a7;
+}
+
+
+.news-tag-purple {
+    background: #e3d9f4;
+    color: #71549c;
+}
+
+
+.news-tag-mint {
+    background: #dcf2e9;
+    color: #4f8a76;
+}
+
+
+/* 
+   HEADLINE
+  */
+
+.news-headline {
+    padding-left: 41px;
+    color: #4d5870;
+    font-size: 9px;
+    line-height: 1.45;
+    font-weight: 500;
+}
+
+
+/* 
+   SCROLLBAR
+ */
+
+.news-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+
+.news-list::-webkit-scrollbar-track {
+    background: #f3f5f8;
+}
+
+
+.news-list::-webkit-scrollbar-thumb {
+    background: #c4c9d8;
+    border-radius: 5px;
 }

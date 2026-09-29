@@ -16610,6 +16610,8 @@
                 this.element
               );
               break;
+            default:
+              break;
           }
         }
       };
@@ -16730,7 +16732,9 @@
       }
       var CorrelationPanel = class {
         constructor() {
-          this.element = document.createElement("div");
+          this.element = document.createElement(
+            "div"
+          );
           this.element.className = "trade-panel correlation-panel";
         }
         init() {
@@ -16784,7 +16788,9 @@
             return;
           }
           grid.appendChild(
-            document.createElement("span")
+            document.createElement(
+              "span"
+            )
           );
           assets.forEach(
             (asset) => {
@@ -16838,7 +16844,9 @@
       };
       var OrderBookPanel = class {
         constructor() {
-          this.element = document.createElement("div");
+          this.element = document.createElement(
+            "div"
+          );
           this.element.className = "trade-panel order-book-panel";
         }
         init() {
@@ -16872,7 +16880,9 @@
                         67,338.3
 
                         <span class="negative">
+
                             -0.14%
+
                         </span>
 
                     </div>
@@ -16889,25 +16899,26 @@
                         <polyline
 
                             points="
-                            0,31
-                            10,26
-                            16,30
-                            23,21
-                            32,24
-                            39,13
-                            46,18
-                            54,10
-                            62,17
-                            69,15
-                            76,7
-                            83,11
-                            91,9
-                            99,5
-                            108,12
-                            116,8
-                            124,17
-                            132,23
-                            140,28"
+                                0,31
+                                10,26
+                                16,30
+                                23,21
+                                32,24
+                                39,13
+                                46,18
+                                54,10
+                                62,17
+                                69,15
+                                76,7
+                                83,11
+                                91,9
+                                99,5
+                                108,12
+                                116,8
+                                124,17
+                                132,23
+                                140,28
+                            "
 
                             fill="none"
 
@@ -16924,9 +16935,7 @@
             </div>
 
 
-            <!-- =========================================
-                 MARKET STATISTICS
-                 ========================================= -->
+            <!-- MARKET STATS -->
 
             <div class="market-stat-row">
 
@@ -16997,9 +17006,7 @@
             </div>
 
 
-            <!-- =========================================
-                 TABLE HEADER
-                 ========================================= -->
+            <!-- TABLE HEADER -->
 
             <div class="order-table-header">
 
@@ -17018,9 +17025,7 @@
             </div>
 
 
-            <!-- =========================================
-                 SELL / ASK ORDERS
-                 ========================================= -->
+            <!-- ASK -->
 
             <div class="order-row ask">
 
@@ -17090,9 +17095,7 @@
             </div>
 
 
-            <!-- =========================================
-                 CURRENT PRICE / SPREAD
-                 ========================================= -->
+            <!-- CURRENT PRICE -->
 
             <div class="spread-row">
 
@@ -17113,9 +17116,7 @@
             </div>
 
 
-            <!-- =========================================
-                 BUY / BID ORDERS
-                 ========================================= -->
+            <!-- BID -->
 
             <div class="order-row bid">
 
@@ -17185,9 +17186,7 @@
             </div>
 
 
-            <!-- =========================================
-                 TIME & SALES
-                 ========================================= -->
+            <!-- TIME & SALES -->
 
             <div class="time-sales-title">
 
@@ -17223,7 +17222,9 @@
       };
       var MenuHeaderAction = class {
         constructor() {
-          this.element = document.createElement("div");
+          this.element = document.createElement(
+            "div"
+          );
           this.element.className = "header-action-container";
         }
         init() {
@@ -17252,7 +17253,9 @@
       };
       var AddTabHeaderAction = class {
         constructor() {
-          this.element = document.createElement("div");
+          this.element = document.createElement(
+            "div"
+          );
           this.element.className = "header-action-container";
         }
         init(parameters) {
@@ -17292,7 +17295,9 @@
       };
       var RightHeaderActions = class {
         constructor() {
-          this.element = document.createElement("div");
+          this.element = document.createElement(
+            "div"
+          );
           this.element.className = "right-header-actions";
         }
         init(parameters) {
@@ -17336,26 +17341,13 @@
       var dockview = new DockviewComponent(
         container,
         {
-          /* 
-              THEME
-          */
           theme: themeLight,
-          /* 
-                   PANEL COMPONENT FACTORY
-          */
           createComponent: (options) => {
             switch (options.name) {
-              /* 
-                 LEFT WORKSPACE
-                 */
               case "correlation":
                 return new CorrelationPanel();
               case "order-book":
                 return new OrderBookPanel();
-              /* 
-                 MIDDLE WORKSPACE
-                 Razor templates
-               */
               case "fx-rates":
                 return new TemplatePanel(
                   "fxrates-template"
@@ -17372,35 +17364,19 @@
                 return new TemplatePanel(
                   "volsurface-template"
                 );
-              /* 
-                 DYNAMIC + TAB
-                 */
               case "empty":
                 return new EmptyPanel();
-              /* 
-                 TEMPORARY BLANK RIGHT SIDE
-               */
               case "blank":
                 return new BlankPanel();
               default:
                 return new BlankPanel();
             }
           },
-          /* 
-                   BEFORE TABS
-          */
           createPrefixHeaderActionComponent: () => new MenuHeaderAction(),
-          /* 
-             + AFTER TABS
-             */
           createLeftHeaderActionComponent: () => new AddTabHeaderAction(),
-          /* 
-              RIGHT SIDE
-            */
           createRightHeaderActionComponent: () => new RightHeaderActions()
         }
       );
-      initializeFxTabs();
       var workspaceWidth = container.clientWidth;
       var workspaceHeight = container.clientHeight;
       var leftWidth = Math.floor(
@@ -17444,7 +17420,7 @@
         }
       });
       rightPlaceholder.group.header.hidden = true;
-      var orderBook = dockview.addPanel({
+      dockview.addPanel({
         id: "order-book",
         component: "order-book",
         title: "Order Book",
@@ -17476,7 +17452,7 @@
           direction: "within"
         }
       });
-      var volSurface = dockview.addPanel({
+      dockview.addPanel({
         id: "vol-surface",
         component: "vol-surface",
         title: "Vol Surface",

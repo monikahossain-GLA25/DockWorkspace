@@ -1,5 +1,4 @@
-﻿
-import {
+﻿import {
     DockviewComponent,
     themeLight
 } from "dockview";
@@ -23,28 +22,18 @@ import {
 import {
     setupVolSurface
 } from "./js/components/vol-surface.js";
-/* 
-   DockWorkspace
-s
-   Updated: 27.09.2026
-   */
 
 
-/* 
-   1. GLOBAL VARIABLES
-   */
+/* =========================================================
+   GLOBAL VARIABLES
+   ========================================================= */
 
 let newTabNumber = 0;
 
 
-/* 
-   2. BLANK PANEL
-
-   Used temporarily for the right-side workspace.
-   Later this will be replaced by:
-   - News
-   - Tech View
- */
+/* =========================================================
+   BASIC PANELS
+   ========================================================= */
 
 class BlankPanel {
 
@@ -62,14 +51,9 @@ class BlankPanel {
 
         this.element.innerHTML = "";
     }
+
 }
 
-
-/* =========================================================
-   3. EMPTY PANEL
-
-   Used when user clicks the + button.
-   ========================================================= */
 
 class EmptyPanel {
 
@@ -87,26 +71,23 @@ class EmptyPanel {
 
         this.element.innerHTML = "";
     }
+
 }
 
 
-/* 
-   4. TEMPLATE PANEL
+/* =========================================================
+   TEMPLATE PANEL
 
-   Loads HTML from Razor <template> elements.
-
-   Used by:
-   - FX Rates
-   - Orders
-   - Positions
-   - Vol Surface
- */
+   Used for Razor partial content:
+   FX Rates
+   Orders
+   Positions
+   Vol Surface
+   ========================================================= */
 
 class TemplatePanel {
 
-    constructor(
-        templateId
-    ) {
+    constructor(templateId) {
 
         this.templateId =
             templateId;
@@ -136,6 +117,7 @@ class TemplatePanel {
             throw new Error(
                 `Template '${this.templateId}' was not found.`
             );
+
         }
 
 
@@ -150,9 +132,9 @@ class TemplatePanel {
         );
 
 
-        /* 
+        /* ==========================================
            COMPONENT-SPECIFIC JAVASCRIPT
-   */
+           ========================================== */
 
         switch (
         this.templateId
@@ -194,6 +176,11 @@ class TemplatePanel {
 
                 break;
 
+
+            default:
+
+                break;
+
         }
 
     }
@@ -201,10 +188,9 @@ class TemplatePanel {
 }
 
 
-/*
-   5. CORRELATION DATA
-   Dummy interface data only.
-= */
+/* =========================================================
+   CORRELATION DATA
+   ========================================================= */
 
 const assets = [
 
@@ -314,20 +300,13 @@ const correlationData = [
 
 
 /* =========================================================
-   6. CORRELATION CELL COLOR
+   CORRELATION COLOR
    ========================================================= */
 
 function getCorrelationColor(
     value,
     diagonal
 ) {
-
-    /*
-     * Diagonal:
-     * BTC/BTC
-     * ETH/ETH
-     * etc.
-     */
 
     if (diagonal) {
 
@@ -338,7 +317,9 @@ function getCorrelationColor(
 
             color:
                 "#334155"
+
         };
+
     }
 
 
@@ -354,10 +335,6 @@ function getCorrelationColor(
         (strength * 0.72);
 
 
-    /*
-     * Positive values = green.
-     */
-
     if (value >= 0) {
 
         return {
@@ -369,13 +346,11 @@ function getCorrelationColor(
                 strength > 0.48
                     ? "#ffffff"
                     : "#334155"
+
         };
+
     }
 
-
-    /*
-     * Negative values = red.
-     */
 
     return {
 
@@ -386,12 +361,14 @@ function getCorrelationColor(
             strength > 0.48
                 ? "#ffffff"
                 : "#334155"
+
     };
+
 }
 
 
 /* =========================================================
-   7. CORRELATION PANEL
+   CORRELATION PANEL
    LEFT TOP
    ========================================================= */
 
@@ -400,11 +377,14 @@ class CorrelationPanel {
     constructor() {
 
         this.element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         this.element.className =
             "trade-panel correlation-panel";
+
     }
 
 
@@ -464,21 +444,20 @@ class CorrelationPanel {
         if (!grid) {
 
             return;
+
         }
 
 
-        /* =================================================
-           Empty top-left grid position
-           ================================================= */
+        /* Empty top-left grid item */
 
         grid.appendChild(
-            document.createElement("span")
+            document.createElement(
+                "span"
+            )
         );
 
 
-        /* =================================================
-           Column headings
-           ================================================= */
+        /* Column headings */
 
         assets.forEach(
             asset => {
@@ -505,9 +484,7 @@ class CorrelationPanel {
         );
 
 
-        /* =================================================
-           Matrix rows
-           ================================================= */
+        /* Matrix */
 
         correlationData.forEach(
             (
@@ -515,9 +492,6 @@ class CorrelationPanel {
                 rowIndex
             ) => {
 
-                /*
-                 * Row name.
-                 */
 
                 const rowHeading =
                     document.createElement(
@@ -538,15 +512,12 @@ class CorrelationPanel {
                 );
 
 
-                /*
-                 * Matrix values.
-                 */
-
                 row.forEach(
                     (
                         value,
                         columnIndex
                     ) => {
+
 
                         const cell =
                             document.createElement(
@@ -600,14 +571,15 @@ class CorrelationPanel {
 
             }
         );
+
     }
+
 }
 
 
 /* =========================================================
-   8. ORDER BOOK PANEL
+   ORDER BOOK PANEL
    LEFT BOTTOM
-   Dummy UI only.
    ========================================================= */
 
 class OrderBookPanel {
@@ -615,11 +587,14 @@ class OrderBookPanel {
     constructor() {
 
         this.element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         this.element.className =
             "trade-panel order-book-panel";
+
     }
 
 
@@ -655,7 +630,9 @@ class OrderBookPanel {
                         67,338.3
 
                         <span class="negative">
+
                             -0.14%
+
                         </span>
 
                     </div>
@@ -672,25 +649,26 @@ class OrderBookPanel {
                         <polyline
 
                             points="
-                            0,31
-                            10,26
-                            16,30
-                            23,21
-                            32,24
-                            39,13
-                            46,18
-                            54,10
-                            62,17
-                            69,15
-                            76,7
-                            83,11
-                            91,9
-                            99,5
-                            108,12
-                            116,8
-                            124,17
-                            132,23
-                            140,28"
+                                0,31
+                                10,26
+                                16,30
+                                23,21
+                                32,24
+                                39,13
+                                46,18
+                                54,10
+                                62,17
+                                69,15
+                                76,7
+                                83,11
+                                91,9
+                                99,5
+                                108,12
+                                116,8
+                                124,17
+                                132,23
+                                140,28
+                            "
 
                             fill="none"
 
@@ -707,9 +685,7 @@ class OrderBookPanel {
             </div>
 
 
-            <!-- =========================================
-                 MARKET STATISTICS
-                 ========================================= -->
+            <!-- MARKET STATS -->
 
             <div class="market-stat-row">
 
@@ -780,9 +756,7 @@ class OrderBookPanel {
             </div>
 
 
-            <!-- =========================================
-                 TABLE HEADER
-                 ========================================= -->
+            <!-- TABLE HEADER -->
 
             <div class="order-table-header">
 
@@ -801,9 +775,7 @@ class OrderBookPanel {
             </div>
 
 
-            <!-- =========================================
-                 SELL / ASK ORDERS
-                 ========================================= -->
+            <!-- ASK -->
 
             <div class="order-row ask">
 
@@ -873,9 +845,7 @@ class OrderBookPanel {
             </div>
 
 
-            <!-- =========================================
-                 CURRENT PRICE / SPREAD
-                 ========================================= -->
+            <!-- CURRENT PRICE -->
 
             <div class="spread-row">
 
@@ -896,9 +866,7 @@ class OrderBookPanel {
             </div>
 
 
-            <!-- =========================================
-                 BUY / BID ORDERS
-                 ========================================= -->
+            <!-- BID -->
 
             <div class="order-row bid">
 
@@ -968,9 +936,7 @@ class OrderBookPanel {
             </div>
 
 
-            <!-- =========================================
-                 TIME & SALES
-                 ========================================= -->
+            <!-- TIME & SALES -->
 
             <div class="time-sales-title">
 
@@ -1002,26 +968,29 @@ class OrderBookPanel {
             </div>
 
         `;
+
     }
+
 }
 
 
 /* =========================================================
-   9. MENU BUTTON
-
-   Appears before Dockview tabs.
-    */
+   MENU HEADER BUTTON
+   ========================================================= */
 
 class MenuHeaderAction {
 
     constructor() {
 
         this.element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         this.element.className =
             "header-action-container";
+
     }
 
 
@@ -1045,32 +1014,36 @@ class MenuHeaderAction {
             </button>
 
         `;
+
     }
 
 
     dispose() {
 
         this.element.remove();
+
     }
+
 }
 
 
-/* 
-   10. + ADD TAB BUTTON
-
-   Adds a new tab inside the current Dockview group.
- = */
+/* =========================================================
+   ADD TAB BUTTON
+   ========================================================= */
 
 class AddTabHeaderAction {
 
     constructor() {
 
         this.element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         this.element.className =
             "header-action-container";
+
     }
 
 
@@ -1102,9 +1075,6 @@ class AddTabHeaderAction {
             "click",
             () => {
 
-                /*
-                 * Current active Dockview panel.
-                 */
 
                 const referencePanel =
                     parameters
@@ -1115,16 +1085,12 @@ class AddTabHeaderAction {
                 if (!referencePanel) {
 
                     return;
+
                 }
 
 
                 newTabNumber++;
 
-
-                /*
-                 * Add another panel as a tab
-                 * inside the same Dockview group.
-                 */
 
                 parameters
                     .containerApi
@@ -1146,6 +1112,7 @@ class AddTabHeaderAction {
 
                             direction:
                                 "within"
+
                         }
 
                     });
@@ -1157,32 +1124,36 @@ class AddTabHeaderAction {
         this.element.appendChild(
             button
         );
+
     }
 
 
     dispose() {
 
         this.element.remove();
+
     }
+
 }
 
 
-/*
-   11. EXPAND / RESTORE
-
-   Appears at the top-right of every Dockview group.
-    */
+/* =========================================================
+   EXPAND / RESTORE BUTTON
+   ========================================================= */
 
 class RightHeaderActions {
 
     constructor() {
 
         this.element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
 
         this.element.className =
             "right-header-actions";
+
     }
 
 
@@ -1214,6 +1185,7 @@ class RightHeaderActions {
             "click",
             () => {
 
+
                 const panel =
                     parameters
                         .group
@@ -1223,13 +1195,9 @@ class RightHeaderActions {
                 if (!panel) {
 
                     return;
+
                 }
 
-
-                /*
-                 * If group is already maximized,
-                 * restore original workspace.
-                 */
 
                 if (
                     panel.api.isMaximized()
@@ -1238,12 +1206,9 @@ class RightHeaderActions {
                     panel.api.exitMaximized();
 
                     return;
+
                 }
 
-
-                /*
-                 * Otherwise maximize this group.
-                 */
 
                 panel.api.maximize();
 
@@ -1254,163 +1219,22 @@ class RightHeaderActions {
         this.element.appendChild(
             expandButton
         );
+
     }
 
 
     dispose() {
 
         this.element.remove();
+
     }
+
 }
 
 
-/* 
-   12. FX RATES INTERNAL TAB SWITCHING
-
-   G10
-   EM
-   Crosses
-   */
-
-// function initializeFxTabs() {
-
-//     /*
-//      * Event delegation is used because
-//      * FX Rates content is cloned dynamically
-//      * from a Razor <template>.
-//      */
-
-//     document.addEventListener(
-//         "click",
-//         function (event) {
-
-//             /*
-//              * Check whether an FX internal tab
-//              * was clicked.
-//              */
-
-//             const clickedTab =
-//                 event.target.closest(
-//                     "[data-fx-tab]"
-//                 );
-
-
-//             /*
-//              * Ignore all other page clicks.
-//              */
-
-//             if (!clickedTab) {
-
-//                 return;
-//             }
-
-
-//             /*
-//              * Find only the FX panel containing
-//              * the clicked tab.
-//              */
-
-//             const fxPanel =
-//                 clickedTab.closest(
-//                     "[data-fx-panel]"
-//                 );
-
-
-//             if (!fxPanel) {
-
-//                 return;
-//             }
-
-
-//             /*
-//              * Returns:
-//              *
-//              * g10
-//              * em
-//              * crosses
-//              */
-
-//             const selectedTab =
-//                 clickedTab.dataset.fxTab;
-
-
-//             /*
-//                REMOVE ACTIVE CLASS FROM ALL FX TABS
-//                */
-
-//             fxPanel
-//                 .querySelectorAll(
-//                     "[data-fx-tab]"
-//                 )
-//                 .forEach(
-//                     tab => {
-
-//                         tab.classList.remove(
-//                             "active"
-//                         );
-
-//                     }
-//                 );
-
-
-//             /*
-//                HIDE ALL FX CONTENT PANES
-//                */
-
-//             fxPanel
-//                 .querySelectorAll(
-//                     "[data-fx-pane]"
-//                 )
-//                 .forEach(
-//                     pane => {
-
-//                         pane.classList.remove(
-//                             "active"
-//                         );
-
-//                     }
-//                 );
-
-
-//             /* 
-//                ACTIVATE CLICKED TAB
-//               */
-
-//             clickedTab.classList.add(
-//                 "active"
-//             );
-
-
-//             /* 
-//                FIND MATCHING CONTENT PANE
-//           */
-
-//             const selectedPane =
-//                 fxPanel.querySelector(
-//                     `[data-fx-pane="${selectedTab}"]`
-//                 );
-
-
-//             /*
-//                SHOW MATCHING PANE
-//           */
-
-//             if (selectedPane) {
-
-//                 selectedPane.classList.add(
-//                     "active"
-//                 );
-
-//             }
-
-//         }
-//     );
-// }
-
-
-/* 
-   13. FIND DOCKVIEW CONTAINER
-   */
+/* =========================================================
+   FIND DOCKVIEW CONTAINER
+   ========================================================= */
 
 const container =
     document.getElementById(
@@ -1423,41 +1247,31 @@ if (!container) {
     throw new Error(
         "Dockview container was not found."
     );
+
 }
 
 
-/* 
-   14. CREATE DOCKVIEW
- */
+/* =========================================================
+   CREATE DOCKVIEW
+   ========================================================= */
 
 const dockview =
     new DockviewComponent(
         container,
         {
 
-            /* 
-               THEME
-           */
-
             theme:
                 themeLight,
 
 
-            /* 
-               PANEL COMPONENT FACTORY
-      */
-
             createComponent:
-                (options) => {
+                options => {
+
 
                     switch (
-                        options.name
+                    options.name
                     ) {
 
-
-                        /* 
-                           LEFT WORKSPACE
-                           */
 
                         case "correlation":
 
@@ -1468,11 +1282,6 @@ const dockview =
 
                             return new OrderBookPanel();
 
-
-                        /* 
-                           MIDDLE WORKSPACE
-                           Razor templates
-                         */
 
                         case "fx-rates":
 
@@ -1502,18 +1311,10 @@ const dockview =
                             );
 
 
-                        /* 
-                           DYNAMIC + TAB
-                           */
-
                         case "empty":
 
                             return new EmptyPanel();
 
-
-                        /* 
-                           TEMPORARY BLANK RIGHT SIDE
-                         */
 
                         case "blank":
 
@@ -1529,27 +1330,15 @@ const dockview =
                 },
 
 
-            /* 
-                BEFORE TABS
-       */
-
             createPrefixHeaderActionComponent:
                 () =>
                     new MenuHeaderAction(),
 
 
-            /* 
-               + AFTER TABS
-               */
-
             createLeftHeaderActionComponent:
                 () =>
                     new AddTabHeaderAction(),
 
-
-            /* 
-                RIGHT SIDE
-              */
 
             createRightHeaderActionComponent:
                 () =>
@@ -1559,17 +1348,9 @@ const dockview =
     );
 
 
-/* 
-  
-   G10 / EM / Crosses will not switch.
- */
-
-initializeFxTabs();
-
-
-/* 
-   15. INITIAL WORKSPACE DIMENSIONS
- */
+/* =========================================================
+   WORKSPACE DIMENSIONS
+   ========================================================= */
 
 const workspaceWidth =
     container.clientWidth;
@@ -1579,13 +1360,7 @@ const workspaceHeight =
     container.clientHeight;
 
 
-/*
-   Main workspace proportions
-
-   LEFT   = 30%
-   MIDDLE = 47%
-   RIGHT  = 23%
-  = */
+/* LEFT 30% */
 
 const leftWidth =
     Math.floor(
@@ -1593,11 +1368,15 @@ const leftWidth =
     );
 
 
+/* MIDDLE 47% */
+
 const middleWidth =
     Math.floor(
         workspaceWidth * 0.47
     );
 
+
+/* RIGHT = remaining */
 
 const rightWidth =
     workspaceWidth -
@@ -1605,13 +1384,7 @@ const rightWidth =
     middleWidth;
 
 
-/* 
-   Middle column has three rows:
-
-   1. FX Rates
-   2. Orders / Positions
-   3. Vol Surface
- */
+/* 3 rows in middle workspace */
 
 const middleRowHeight =
     Math.floor(
@@ -1619,10 +1392,10 @@ const middleRowHeight =
     );
 
 
-/* 
-   16. LEFT TOP
+/* =========================================================
+   LEFT TOP
    CORRELATION
-   */
+   ========================================================= */
 
 const correlation =
     dockview.addPanel({
@@ -1647,10 +1420,10 @@ const correlation =
     });
 
 
-/* 
-   17. MIDDLE TOP
+/* =========================================================
+   MIDDLE TOP
    FX RATES
-    */
+   ========================================================= */
 
 const fxRates =
     dockview.addPanel({
@@ -1677,19 +1450,15 @@ const fxRates =
 
             direction:
                 "right"
+
         }
 
     });
 
 
-/*
-   18. RIGHT COLUMN
-   TEMPORARY BLANK PLACEHOLDER
-
-   Later:
-   - News
-   - Tech View
- */
+/* =========================================================
+   RIGHT PLACEHOLDER
+   ========================================================= */
 
 const rightPlaceholder =
     dockview.addPanel({
@@ -1713,14 +1482,13 @@ const rightPlaceholder =
 
             direction:
                 "right"
+
         }
 
     });
 
 
-/*
- * Hide the header of the temporary blank panel.
- */
+/* Hide temporary right header */
 
 rightPlaceholder
     .group
@@ -1728,44 +1496,44 @@ rightPlaceholder
     .hidden = true;
 
 
-/* 
-   19. LEFT BOTTOM
+/* =========================================================
+   LEFT BOTTOM
    ORDER BOOK
- */
+   ========================================================= */
 
-const orderBook =
-    dockview.addPanel({
+dockview.addPanel({
 
-        id:
-            "order-book",
+    id:
+        "order-book",
 
-        component:
-            "order-book",
+    component:
+        "order-book",
 
-        title:
-            "Order Book",
+    title:
+        "Order Book",
 
-        initialHeight:
-            Math.floor(
-                workspaceHeight / 2
-            ),
+    initialHeight:
+        Math.floor(
+            workspaceHeight / 2
+        ),
 
-        position: {
+    position: {
 
-            referencePanel:
-                correlation,
+        referencePanel:
+            correlation,
 
-            direction:
-                "below"
-        }
+        direction:
+            "below"
 
-    });
+    }
+
+});
 
 
-/* 
-   20. MIDDLE CENTER
+/* =========================================================
+   MIDDLE CENTER
    ORDERS
-    */
+   ========================================================= */
 
 const orders =
     dockview.addPanel({
@@ -1789,17 +1557,19 @@ const orders =
 
             direction:
                 "below"
+
         }
 
     });
 
 
-/* 
-   21. POSITIONS
+/* =========================================================
+   POSITIONS
 
+   Same Dockview group as Orders.
 
    Orders | Positions
-   */
+   ========================================================= */
 
 dockview.addPanel({
 
@@ -1822,43 +1592,44 @@ dockview.addPanel({
 
         direction:
             "within"
+
     }
 
 });
 
 
-/* 
-   22. MIDDLE BOTTOM
+/* =========================================================
+   MIDDLE BOTTOM
    VOL SURFACE
-    */
+   ========================================================= */
 
-const volSurface =
-    dockview.addPanel({
+dockview.addPanel({
 
-        id:
-            "vol-surface",
+    id:
+        "vol-surface",
 
-        component:
-            "vol-surface",
+    component:
+        "vol-surface",
 
-        title:
-            "Vol Surface",
+    title:
+        "Vol Surface",
 
-        initialHeight:
-            middleRowHeight,
+    initialHeight:
+        middleRowHeight,
 
-        position: {
+    position: {
 
-            referencePanel:
-                orders,
+        referencePanel:
+            orders,
 
-            direction:
-                "below"
-        }
+        direction:
+            "below"
 
-    });
+    }
+
+});
 
 
-/* 
-   END OF INITIAL WORKSPACE
- */
+/* =========================================================
+   END
+   ========================================================= */

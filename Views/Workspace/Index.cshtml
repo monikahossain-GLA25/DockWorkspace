@@ -1,26 +1,127 @@
-﻿<template id="fxrates-template">
+﻿@{
+    ViewData["Title"] = "Dock Workspace";
+    Layout = null;
+}
 
-    <partial name="Partials/_FxRatesPanel" />
+<!DOCTYPE html>
 
-</template>
+<html>
 
+<head>
 
-<template id="orders-template">
+    <meta charset="utf-8" />
 
-    <partial name="Partials/_OrdersPanel" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
 
-</template>
-
-
-<template id="positions-template">
-
-    <partial name="Partials/_PositionsPanel" />
-
-</template>
+    <title>
+        Dock Workspace
+    </title>
 
 
-<template id="volsurface-template">
+    <!-- 
+         COMPILED WORKSPACE CSS
+         -->
 
-    <partial name="Partials/_VolSurfacePanel" />
+    <link rel="stylesheet"
+          href="/dist/workspace.css" />
 
-</template>
+</head>
+
+
+<body>
+
+
+    <!-- 
+         TOP BRAND BAR
+      -->
+
+    <header class="workspace-brand-bar">
+
+        <div class="workspace-logo">
+
+            <span class="logo-block logo-blue">
+            </span>
+
+            <span class="logo-block logo-purple">
+            </span>
+
+            <strong>
+                dockview
+            </strong>
+
+        </div>
+
+    </header>
+
+
+    <!-- 
+         MAIN DOCKVIEW WORKSPACE
+
+         workspace.js searches for this exact ID.
+      
+          -->
+
+    <main id="dockview-container">
+    </main>
+
+
+    <!-- 
+         FX RATES TEMPLATE
+       -->
+
+    <template id="fxrates-template">
+
+        <partial name="Partials/_FxRatesPanel" />
+
+    </template>
+
+
+    <!-- 
+         ORDERS TEMPLATE
+  -->
+
+    <template id="orders-template">
+
+        <partial name="Partials/_OrdersPanel" />
+
+    </template>
+
+
+    <!-- 
+         POSITIONS TEMPLATE
+ -->
+
+    <template id="positions-template">
+
+        <partial name="Partials/_PositionsPanel" />
+
+    </template>
+
+
+    <!-- 
+         VOL SURFACE TEMPLATE
+      = -->
+
+    <template id="volsurface-template">
+
+        <partial name="Partials/_VolSurfacePanel" />
+
+    </template>
+
+
+    <!-- 
+         COMPILED WORKSPACE JAVASCRIPT
+
+         type="module" is REQUIRED because
+         workspace.js uses import statements.
+       -->
+
+    <script type="module"
+            src="/dist/workspace.js">
+    </script>
+
+
+</body>
+
+</html>
