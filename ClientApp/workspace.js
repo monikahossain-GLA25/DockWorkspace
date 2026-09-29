@@ -23,17 +23,31 @@ import {
     setupVolSurface
 } from "./js/components/vol-surface.js";
 
+import {
+    setupNews
+} from "./js/components/news.js";
 
-/* =========================================================
+
+import {
+    setupTechView
+} from "./js/components/tech-view.js";
+
+
+
+/* 
+
    GLOBAL VARIABLES
-   ========================================================= */
+   
+   */
 
 let newTabNumber = 0;
 
 
-/* =========================================================
+/* 
+
    BASIC PANELS
-   ========================================================= */
+
+ */
 
 class BlankPanel {
 
@@ -75,7 +89,7 @@ class EmptyPanel {
 }
 
 
-/* =========================================================
+/*
    TEMPLATE PANEL
 
    Used for Razor partial content:
@@ -83,7 +97,7 @@ class EmptyPanel {
    Orders
    Positions
    Vol Surface
-   ========================================================= */
+  */
 
 class TemplatePanel {
 
@@ -132,9 +146,9 @@ class TemplatePanel {
         );
 
 
-        /* ==========================================
+        /* 
            COMPONENT-SPECIFIC JAVASCRIPT
-           ========================================== */
+        */
 
         switch (
         this.templateId
@@ -175,7 +189,23 @@ class TemplatePanel {
                 );
 
                 break;
+            //29.09.2026
+            case "news-template":
 
+                setupNews(
+                    this.element
+                );
+
+                break;
+
+
+            case "techview-template":
+
+                setupTechView(
+                    this.element
+                );
+
+                break;
 
             default:
 
@@ -1232,9 +1262,9 @@ class RightHeaderActions {
 }
 
 
-/* =========================================================
+/* 
    FIND DOCKVIEW CONTAINER
-   ========================================================= */
+   */
 
 const container =
     document.getElementById(
@@ -1310,7 +1340,19 @@ const dockview =
                                 "volsurface-template"
                             );
 
+                        //29.09.2026
+                        case "news":
 
+                            return new TemplatePanel(
+                                "news-template"
+                            );
+
+
+                        case "tech-view":
+
+                            return new TemplatePanel(
+                                "techview-template"
+                            );
                         case "empty":
 
                             return new EmptyPanel();
