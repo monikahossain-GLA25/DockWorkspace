@@ -1,6 +1,238 @@
-﻿namespace DockWorkspace.ClientApp.css.components
-{
-    public class tech_view
-    {
+﻿/*
+   TECH VIEW
+   Lavender + Purple + Mint Theme
+  */
+
+.tech-view-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    background: #ffffff;
+    color: #49556d;
+}
+
+
+/*
+   TOOLBAR
+ */
+
+.tech-toolbar {
+    flex: 0 0 38px;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 11px;
+    border-bottom: 1px solid var(--ui-border);
+}
+
+
+.tech-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+    .tech-title strong {
+        color: #4a5770;
+        font-size: 10px;
     }
+
+
+    .tech-title span {
+        color: #9aa3b6;
+        font-size: 7px;
+    }
+
+
+/* 
+   SUMMARY
+   */
+
+.tech-summary {
+    display: flex;
+    gap: 5px;
+}
+
+
+    .tech-summary span {
+        padding: 3px 6px;
+        border-radius: 3px;
+        font-size: 7px;
+        font-weight: 700;
+    }
+
+
+.tech-summary-bull {
+    background: #daf0e7;
+    color: #518a78;
+}
+
+
+.tech-summary-bear {
+    background: #e8def6;
+    color: #74569f;
+}
+
+
+/* 
+   SCROLL
+= */
+
+.tech-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding: 8px;
+}
+
+
+/*
+   GRID
+ */
+
+.tech-grid {
+    min-width: 620px;
+    display: grid;
+    grid-template-columns: 120px repeat( 4, minmax(100px, 1fr) );
+    grid-auto-rows: 38px;
+    gap: 3px;
+}
+
+
+/* 
+   HEADER
+   */
+
+.tech-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #98a2b5;
+    font-size: 7px;
+    font-weight: 600;
+}
+
+
+    .tech-header:first-child {
+        justify-content: flex-start;
+    }
+
+
+/* 
+   INSTRUMENT
+   */
+
+.tech-instrument {
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+    color: #4f5a72;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+
+/* 
+   SIGNAL
+*/
+
+.tech-signal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+
+    .tech-signal strong {
+        font-size: 8px;
+    }
+
+
+    .tech-signal small {
+        font-size: 6px;
+        opacity: 0.78;
+    }
+
+
+    .tech-signal:hover,
+    .tech-signal.selected {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 6px rgba(80, 87, 125, 0.18);
+    }
+
+
+/* 
+   BULL = MINT
+  = */
+
+.tech-bull {
+    background: #d8f0e6;
+    border-color: #c1e4d6;
+    color: #4d8975;
+}
+
+
+    .tech-bull:nth-child(3n) {
+        background: #bfe5d6;
+    }
+
+
+/*
+   BEAR = LAVENDER / PURPLE
+ */
+
+.tech-bear {
+    background: #e8ddf5;
+    border-color: #dacced;
+    color: #76579d;
+}
+
+
+    .tech-bear:nth-child(2n) {
+        background: #d9c8eb;
+        color: #69478f;
+    }
+
+
+/* 
+   FLAT = POWDER BLUE
+ */
+
+.tech-flat {
+    background: #e8f1f8;
+    border-color: #dbe7f0;
+    color: #617d97;
+}
+
+
+/*
+   SCROLLBAR
+   */
+
+.tech-scroll::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+
+.tech-scroll::-webkit-scrollbar-track {
+    background: #f3f4f8;
+}
+
+
+.tech-scroll::-webkit-scrollbar-thumb {
+    background: #c5cad8;
+    border-radius: 5px;
 }
