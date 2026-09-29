@@ -1,6 +1,188 @@
-﻿namespace DockWorkspace.ClientApp.css.components
-{
-    public class correlation
-    {
+﻿/* 
+   CORRELATION PANEL
+    */
+
+.correlation-panel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    background: #ffffff;
+    color: #46526b;
+}
+
+
+/* 
+   INTERNAL TOOLBAR
+= */
+
+.correlation-toolbar {
+    flex: 0 0 38px;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--ui-border);
+    background: #ffffff;
+}
+
+
+.correlation-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+    .correlation-title strong {
+        color: #48556e;
+        font-size: 11px;
     }
+
+
+    .correlation-title span {
+        color: #9aa4b7;
+        font-size: 8px;
+    }
+
+
+/* 
+   COLOR SCALE
+ */
+
+.correlation-scale {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #909bad;
+    font-size: 7px;
+}
+
+
+.correlation-scale-bar {
+    width: 58px;
+    height: 7px;
+    border-radius: 5px;
+    background: linear-gradient( 90deg, #a99adb, #eef2fa, #92cae6 );
+}
+
+
+/* 
+   SCROLL AREA
+  */
+
+.correlation-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding: 9px;
+    background: #ffffff;
+}
+
+
+/* 
+   GRID
+  */
+
+.correlation-grid {
+    min-width: 570px;
+    display: grid;
+    grid-template-columns: 42px repeat(8, minmax(64px, 1fr));
+    gap: 3px;
+    align-items: center;
+}
+
+
+/* 
+   HEADINGS
+ */
+
+.correlation-column-heading,
+.correlation-row-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+    color: #758198;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+
+.correlation-row-heading {
+    justify-content: flex-start;
+}
+
+
+/* 
+   CELLS
+*/
+
+.correlation-cell {
+    min-height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    font-family: Consolas, "IBM Plex Mono", monospace;
+    font-size: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+
+    .correlation-cell:hover,
+    .correlation-cell.selected {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 6px rgba(77, 88, 130, 0.20);
+    }
+
+
+/* 
+    */
+
+.correlation-diagonal {
+    background: #f0f2f6;
+    color: #47536a;
+}
+
+
+.correlation-positive-low {
+    background: #dceef8;
+    color: #52728d;
+}
+
+
+.correlation-positive-medium {
+    background: #b7dbef;
+    color: #426882;
+}
+
+
+.correlation-positive-high {
+    background: #84bbdc;
+    color: #ffffff;
+}
+
+
+.correlation-negative-low {
+    background: #ebe7f7;
+    color: #74658f;
+}
+
+
+.correlation-negative-medium {
+    background: #d6c9ec;
+    color: #6a5788;
+}
+
+
+.correlation-negative-high {
+    background: #a993d1;
+    color: #ffffff;
 }
