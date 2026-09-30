@@ -1,5 +1,6 @@
 ﻿@import "dockview/dist/styles/dockview.css";
 
+@import "./css/components/controls-theme.css";
 
 @import "./css/components/correlation.css";
 
