@@ -1,6 +1,631 @@
-﻿namespace DockWorkspace.ClientApp.css.components
-{
-    public class controls_theme
-    {
+﻿/* =========================================================
+   CONTROLS & THEME
+   ========================================================= */
+
+
+:root {
+    --workspace-panel-spacing: 0px;
+    --workspace-panel-padding: 0px;
+    --settings-width: 340px;
+    --settings-bg: #ffffff;
+    --settings-soft: #f7f8fc;
+    --settings-border: #e1e5ee;
+    --settings-text: #46516a;
+    --settings-muted: #8f99ad;
+    --settings-accent: #6f86df;
+}
+
+
+/* =========================================================
+   TOP ACTIONS
+   ========================================================= */
+
+.workspace-brand-bar {
+    position: relative;
+    z-index: 2000;
+}
+
+
+.workspace-top-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.quick-theme-select {
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid #d7ddea;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #56627a;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+}
+
+
+    .quick-theme-select:hover {
+        border-color: #aeb9d3;
+    }
+
+
+.controls-theme-button {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 11px;
+    border: 1px solid #6784db;
+    border-radius: 6px;
+    background: #748fe3;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+    .controls-theme-button:hover {
+        background: #6681d7;
+    }
+
+
+/* =========================================================
+   BACKDROP
+   ========================================================= */
+
+.workspace-settings-backdrop {
+    position: fixed;
+    inset: 54px 0 0 0;
+    z-index: 2998;
+    background: rgba(20, 28, 48, 0.10);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+}
+
+
+    .workspace-settings-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+
+/* =========================================================
+   DRAWER
+   ========================================================= */
+
+.workspace-settings-drawer {
+    position: fixed;
+    top: 54px;
+    right: 0;
+    bottom: 0;
+    z-index: 2999;
+    width: var(--settings-width);
+    display: flex;
+    flex-direction: column;
+    background: var(--settings-bg);
+    border-left: 1px solid var(--settings-border);
+    box-shadow: -8px 0 25px rgba(37, 48, 73, 0.12);
+    transform: translateX(100%);
+    transition: transform 0.20s ease;
+}
+
+
+    .workspace-settings-drawer.open {
+        transform: translateX(0);
+    }
+
+
+/* =========================================================
+   DRAWER HEADER
+   ========================================================= */
+
+.settings-drawer-header {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--settings-border);
+}
+
+
+.settings-drawer-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--settings-text);
+    font-size: 11px;
+}
+
+
+.settings-icon {
+    color: #6e87df;
+}
+
+
+.settings-header-actions {
+    display: flex;
+    gap: 6px;
+}
+
+
+.settings-reset-button,
+.settings-close-button {
+    height: 27px;
+    border: 1px solid #dce1ea;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #65718a;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+
+.settings-reset-button {
+    padding: 0 9px;
+}
+
+
+.settings-close-button {
+    width: 28px;
+    font-size: 15px;
+}
+
+
+    .settings-reset-button:hover,
+    .settings-close-button:hover {
+        background: #f4f6fa;
+    }
+
+
+/* =========================================================
+   MAIN TABS
+   ========================================================= */
+
+.settings-main-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    padding: 7px 10px;
+    background: #f5f6fa;
+}
+
+
+.settings-main-tab {
+    height: 29px;
+    border: 0;
+    border-radius: 5px;
+    background: transparent;
+    color: #748098;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+
+    .settings-main-tab.active {
+        background: #6f8fe8;
+        color: #ffffff;
+        box-shadow: 0 2px 5px rgba(77, 106, 191, 0.22);
+    }
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.settings-drawer-body {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    padding: 9px;
+    background: #f5f6fa;
+}
+
+
+.settings-pane {
+    display: none;
+}
+
+
+    .settings-pane.active {
+        display: block;
+    }
+
+
+/* =========================================================
+   SECTION
+   ========================================================= */
+
+.settings-section {
+    margin-bottom: 9px;
+    padding: 11px;
+    border: 1px solid var(--settings-border);
+    border-radius: 7px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(50, 61, 86, 0.05);
+}
+
+
+.settings-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 9px;
+    color: #55617a;
+    font-size: 10px;
+}
+
+
+.settings-help-text {
+    margin: -2px 0 10px;
+    color: #9099ab;
+    font-size: 8px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   THEME LIST
+   ========================================================= */
+
+.theme-option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+
+.theme-option {
+    width: 100%;
+    min-height: 55px;
+    display: grid;
+    grid-template-columns: 56px 1fr 20px;
+    align-items: center;
+    gap: 9px;
+    padding: 6px;
+    border: 1px solid #e1e5ed;
+    border-radius: 6px;
+    background: #ffffff;
+    text-align: left;
+    cursor: pointer;
+}
+
+
+    .theme-option:hover {
+        border-color: #b9c4e0;
+        background: #fafbfe;
+    }
+
+
+    .theme-option.active {
+        border-color: #748fe3;
+        background: #f4f6ff;
+    }
+
+
+.theme-option-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+    .theme-option-copy strong {
+        color: #536078;
+        font-size: 9px;
+    }
+
+
+    .theme-option-copy small {
+        color: #97a0b2;
+        font-size: 7px;
+    }
+
+
+.theme-check {
+    display: none;
+    color: #6e87df;
+    font-weight: 700;
+}
+
+
+.theme-option.active
+.theme-check {
+    display: block;
+}
+
+
+/* =========================================================
+   THEME PREVIEWS
+   ========================================================= */
+
+.theme-preview {
+    width: 52px;
+    height: 36px;
+    display: grid;
+    grid-template-columns: 15px 1fr;
+    grid-template-rows: 10px 1fr;
+    overflow: hidden;
+    border: 1px solid #d8dce5;
+    border-radius: 4px;
+}
+
+
+    .theme-preview span:nth-child(1) {
+        grid-column: 1 / 3;
+    }
+
+
+.theme-preview-light {
+    background: #ffffff;
+}
+
+
+    .theme-preview-light span:nth-child(1) {
+        background: #f2f3f5;
+    }
+
+
+    .theme-preview-light span:nth-child(2) {
+        background: #e8ebf0;
+    }
+
+
+    .theme-preview-light span:nth-child(3) {
+        background: #ffffff;
+    }
+
+
+.theme-preview-dark {
+    background: #181818;
+}
+
+
+    .theme-preview-dark span:nth-child(1) {
+        background: #252526;
+    }
+
+
+    .theme-preview-dark span:nth-child(2) {
+        background: #333333;
+    }
+
+
+    .theme-preview-dark span:nth-child(3) {
+        background: #1e1e1e;
+    }
+
+
+.theme-preview-vs {
+    background: #1e1e1e;
+}
+
+
+    .theme-preview-vs span:nth-child(1) {
+        background: #2d2d30;
+    }
+
+
+    .theme-preview-vs span:nth-child(2) {
+        background: #007acc;
+    }
+
+
+    .theme-preview-vs span:nth-child(3) {
+        background: #252526;
+    }
+
+
+.theme-preview-nord {
+    background: #2e3440;
+}
+
+
+    .theme-preview-nord span:nth-child(1) {
+        background: #3b4252;
+    }
+
+
+    .theme-preview-nord span:nth-child(2) {
+        background: #88c0d0;
+    }
+
+
+    .theme-preview-nord span:nth-child(3) {
+        background: #434c5e;
+    }
+
+
+.theme-preview-catppuccin {
+    background: #1e1e2e;
+}
+
+
+    .theme-preview-catppuccin span:nth-child(1) {
+        background: #313244;
+    }
+
+
+    .theme-preview-catppuccin span:nth-child(2) {
+        background: #cba6f7;
+    }
+
+
+    .theme-preview-catppuccin span:nth-child(3) {
+        background: #181825;
+    }
+
+
+/* =========================================================
+   RANGE CONTROLS
+   ========================================================= */
+
+.settings-range-row {
+    min-height: 37px;
+    display: grid;
+    grid-template-columns: 82px 1fr 42px;
+    align-items: center;
+    gap: 8px;
+}
+
+
+    .settings-range-row label {
+        color: #69748b;
+        font-size: 8px;
+    }
+
+
+    .settings-range-row input[type="range"] {
+        width: 100%;
+        accent-color: #6d8ee9;
+        cursor: pointer;
+    }
+
+
+    .settings-range-row output {
+        color: #8792a6;
+        font-family: Consolas, monospace;
+        font-size: 7px;
+        text-align: right;
+    }
+
+
+/* =========================================================
+   INFORMATION
+   ========================================================= */
+
+.settings-information {
+    color: #8490a5;
+    font-size: 8px;
+    line-height: 1.55;
+}
+
+
+    .settings-information strong {
+        color: #5f6a82;
+    }
+
+
+    .settings-information p {
+        margin: 7px 0;
+    }
+
+
+/* =========================================================
+   PANEL SPACING / PADDING
+
+   Spacing = outer breathing room.
+   Padding = internal component padding.
+   ========================================================= */
+
+.dock-panel-host {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    padding: var(--workspace-panel-spacing);
+    overflow: hidden;
+}
+
+
+.dock-panel-content {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    padding: var(--workspace-panel-padding);
+    overflow: hidden;
+}
+
+
+    .dock-panel-content > * {
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+        min-height: 0;
+    }
+
+
+/* =========================================================
+   DARK-THEME BRIDGE FOR CUSTOM RAZOR PANELS
+
+   Dockview handles its own theme.
+   These rules allow our custom panel shells to follow it.
+   ========================================================= */
+
+body[data-workspace-scheme="dark"] {
+    --ui-surface: #1d2028;
+    --ui-soft: #252936;
+    --ui-text: #e4e8f1;
+    --ui-muted: #929caf;
+    --ui-border: #383e4d;
+}
+
+
+body[data-workspace-scheme="dark"] {
+    background: #171a21;
+    color: var(--ui-text);
+}
+
+
+    body[data-workspace-scheme="dark"]
+    .workspace-brand-bar {
+        background: #1c2028;
+        border-color: #353a48;
+    }
+
+
+    body[data-workspace-scheme="dark"]
+    .workspace-logo {
+        color: #e4e8f1;
+    }
+
+
+    body[data-workspace-scheme="dark"]
+    .quick-theme-select {
+        background: #252a34;
+        border-color: #3d4454;
+        color: #e1e6ee;
+    }
+
+
+    /* main component surfaces */
+
+    body[data-workspace-scheme="dark"]
+    :is( .correlation-panel, .order-book-panel, .fx-panel, .orders-panel, .positions-panel, .vol-panel, .news-panel, .tech-view-panel ) {
+        background: var(--ui-surface) !important;
+        color: var(--ui-text) !important;
+    }
+
+
+    /* internal bars */
+
+    body[data-workspace-scheme="dark"]
+    :is( .correlation-toolbar, .newswire-toolbar, .tech-toolbar, .orders-toolbar, .positions-net, .vol-toolbar, .fx-subtabs ) {
+        background: var(--ui-soft) !important;
+        border-color: var(--ui-border) !important;
+    }
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .workspace-settings-drawer {
+        width: min( 92vw, 340px );
+    }
+
+
+    .quick-theme-select {
+        display: none;
     }
 }
