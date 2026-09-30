@@ -16731,6 +16731,13 @@
             "div"
           );
           this.element.className = "dock-panel-host";
+          this.contentElement = document.createElement(
+            "div"
+          );
+          this.contentElement.className = "dock-panel-content";
+          this.element.appendChild(
+            this.contentElement
+          );
         }
         init() {
           const template = document.getElementById(
@@ -16742,57 +16749,48 @@
             );
           }
           const content = template.content.cloneNode(true);
-          this.element.appendChild(
+          this.contentElement.appendChild(
             content
           );
           switch (this.templateId) {
-            /* 
-               LEFT
-              */
             case "correlation-template":
               setupCorrelation(
-                this.element
+                this.contentElement
               );
               break;
             case "orderbook-template":
               setupOrderBook(
-                this.element
+                this.contentElement
               );
               break;
-            /*
-               MIDDLE
-               */
             case "fxrates-template":
               setupFxRates(
-                this.element
+                this.contentElement
               );
               break;
             case "orders-template":
               setupOrders(
-                this.element
+                this.contentElement
               );
               break;
             case "positions-template":
               setupPositions(
-                this.element
+                this.contentElement
               );
               break;
             case "volsurface-template":
               setupVolSurface(
-                this.element
+                this.contentElement
               );
               break;
-            /* 
-               RIGHT
-               */
             case "news-template":
               setupNews(
-                this.element
+                this.contentElement
               );
               break;
             case "techview-template":
               setupTechView(
-                this.element
+                this.contentElement
               );
               break;
             default:
@@ -17089,6 +17087,10 @@
           direction: "below"
         }
       });
+      setupControlsTheme(
+        dockview,
+        container
+      );
     }
   });
   require_workspace();
