@@ -55,7 +55,9 @@ import {
     setupTechView
 } from "./js/components/tech-view.js";
 
-
+import {
+    setupControlsTheme
+} from "./js/components/controls-theme.js";
 /* 
    GLOBAL VARIABLES
  */

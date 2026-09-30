@@ -553,12 +553,12 @@
     }
 
 
-/* =========================================================
+/* 
    DARK-THEME BRIDGE FOR CUSTOM RAZOR PANELS
 
    Dockview handles its own theme.
    These rules allow our custom panel shells to follow it.
-   ========================================================= */
+ */
 
 body[data-workspace-scheme="dark"] {
     --ui-surface: #1d2028;
@@ -628,4 +628,89 @@ body[data-workspace-scheme="dark"] {
     .quick-theme-select {
         display: none;
     }
+}
+/* =========================================================
+   LIGHT
+   ========================================================= */
+
+body[data-workspace-theme="light"] {
+    --ui-surface: #ffffff;
+    --ui-soft: #f8f9fc;
+    --ui-text: #48536b;
+    --ui-muted: #8f99ad;
+    --ui-border: #e1e6ee;
+}
+
+
+/* =========================================================
+   DARK
+   ========================================================= */
+
+body[data-workspace-theme="dark"] {
+    --ui-surface: #1e2128;
+    --ui-soft: #292d36;
+    --ui-text: #e4e8ef;
+    --ui-muted: #9ca6b8;
+    --ui-border: #3b414d;
+    background: #181b21;
+}
+
+
+/* =========================================================
+   VISUAL STUDIO
+   ========================================================= */
+
+body[data-workspace-theme="visual-studio"] {
+    --ui-surface: #1e1e1e;
+    --ui-soft: #252526;
+    --ui-text: #dddddd;
+    --ui-muted: #969696;
+    --ui-border: #3f3f46;
+    background: #181818;
+}
+
+
+/* =========================================================
+   NORD
+   ========================================================= */
+
+body[data-workspace-theme="nord"] {
+    --ui-surface: #2e3440;
+    --ui-soft: #3b4252;
+    --ui-text: #eceff4;
+    --ui-muted: #a7b1c2;
+    --ui-border: #4c566a;
+    background: #2e3440;
+}
+
+
+/* =========================================================
+   CATPPUCCIN MOCHA
+   ========================================================= */
+
+body[data-workspace-theme="catppuccin"] {
+    --ui-surface: #1e1e2e;
+    --ui-soft: #313244;
+    --ui-text: #cdd6f4;
+    --ui-muted: #a6adc8;
+    --ui-border: #45475a;
+    background: #181825;
+}
+
+
+/* =========================================================
+   CUSTOM RAZOR COMPONENTS FOLLOW CURRENT THEME
+   ========================================================= */
+
+body[data-workspace-scheme="dark"]
+:is( .correlation-panel, .order-book-panel, .fx-panel, .orders-panel, .positions-panel, .vol-panel, .news-panel, .tech-view-panel ) {
+    background: var(--ui-surface);
+    color: var(--ui-text);
+}
+
+
+body[data-workspace-scheme="dark"]
+:is( .correlation-toolbar, .newswire-toolbar, .tech-toolbar, .orders-toolbar, .positions-net, .vol-toolbar, .fx-subtabs ) {
+    background: var(--ui-soft);
+    border-color: var(--ui-border);
 }
