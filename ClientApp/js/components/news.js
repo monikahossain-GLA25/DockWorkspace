@@ -1,4 +1,4 @@
-﻿nexport function setupNews(
+﻿export function setupNews(
     rootElement
 ) {
 
@@ -30,9 +30,9 @@
             }
 
 
-            /*
-             * Clear previous selection.
-             */
+            /* 
+               REMOVE PREVIOUS SELECTION
+            */
 
             panel
                 .querySelectorAll(
@@ -49,9 +49,9 @@
                 );
 
 
-            /*
-             * Highlight selected news story.
-             */
+            /* 
+               SELECT CLICKED NEWS ITEM
+              */
 
             story.classList.add(
                 "selected"
