@@ -21,7 +21,7 @@
 
     <!-- 
          COMPILED WORKSPACE CSS
-         -->
+     -->
 
     <link rel="stylesheet"
           href="/dist/workspace.css" />
@@ -34,9 +34,10 @@
 
     <!-- 
          TOP BRAND BAR
-      -->
+ -->
 
     <header class="workspace-brand-bar">
+
 
         <div class="workspace-logo">
 
@@ -52,23 +53,99 @@
 
         </div>
 
+
+        <!--
+         WORKSPACE CONTROLS
+      -->
+
+        <div class="workspace-top-actions">
+
+
+            <!-- QUICK THEME -->
+
+            <select id="quick-theme-select"
+                    class="quick-theme-select"
+                    title="Change theme">
+
+                <option value="light">
+                    Light
+                </option>
+
+                <option value="dark">
+                    Dark
+                </option>
+
+                <option value="visual-studio">
+                    Visual Studio
+                </option>
+
+                <option value="nord">
+                    Nord
+                </option>
+
+                <option value="catppuccin">
+                    Catppuccin Mocha
+                </option>
+
+            </select>
+
+
+            <!-- CONTROLS BUTTON -->
+
+            <button type="button"
+                    class="controls-theme-button"
+                    id="controls-theme-button">
+
+                <span>
+                    ⚙
+                </span>
+
+                Controls &amp; Theme
+
+            </button>
+
+
+        </div>
+
+
     </header>
 
-
+    <partial name="Partials/_ControlsThemePanel" />
     <!-- 
-         MAIN DOCKVIEW WORKSPACE
+         MAIN DOCKVIEW CONTAINER
 
-         workspace.js searches for this exact ID.
-      
-          -->
+         workspace.js requires this exact id.
+        -->
 
     <main id="dockview-container">
     </main>
 
 
     <!-- 
-         FX RATES TEMPLATE
-       -->
+         LEFT WORKSPACE
+     -->
+    <!-- CORRELATION -->
+
+    <template id="correlation-template">
+
+        <partial name="Partials/_CorrelationPanel" />
+
+    </template>
+
+
+    <!-- ORDER BOOK -->
+
+    <template id="orderbook-template">
+
+        <partial name="Partials/_OrderBookPanel" />
+
+    </template>
+
+
+    <!--
+         MIDDLE WORKSPACE
+          -->
+    <!-- FX RATES -->
 
     <template id="fxrates-template">
 
@@ -77,9 +154,7 @@
     </template>
 
 
-    <!-- 
-         ORDERS TEMPLATE
-  -->
+    <!-- ORDERS -->
 
     <template id="orders-template">
 
@@ -88,9 +163,7 @@
     </template>
 
 
-    <!-- 
-         POSITIONS TEMPLATE
- -->
+    <!-- POSITIONS -->
 
     <template id="positions-template">
 
@@ -99,18 +172,19 @@
     </template>
 
 
-    <!-- 
-         VOL SURFACE TEMPLATE
-      = -->
+    <!-- VOL SURFACE -->
 
     <template id="volsurface-template">
 
         <partial name="Partials/_VolSurfacePanel" />
 
     </template>
+
+
     <!--
-     NEWSWIRE
-  -->
+         RIGHT WORKSPACE
+        -->
+    <!-- NEWS -->
 
     <template id="news-template">
 
@@ -119,9 +193,7 @@
     </template>
 
 
-    <!-- 
-     TECH VIEW
-   -->
+    <!-- TECH VIEW -->
 
     <template id="techview-template">
 
@@ -129,12 +201,11 @@
 
     </template>
 
-    <!-- 
-         COMPILED WORKSPACE JAVASCRIPT
 
-         type="module" is REQUIRED because
-         workspace.js uses import statements.
-       -->
+    <!--
+         COMPILED JAVASCRIPT
+
+          -->
 
     <script type="module"
             src="/dist/workspace.js">
