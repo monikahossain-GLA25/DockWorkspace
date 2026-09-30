@@ -18,11 +18,6 @@
         Dock Workspace
     </title>
 
-
-    <!-- 
-         COMPILED WORKSPACE CSS
-     -->
-
     <link rel="stylesheet"
           href="/dist/workspace.css" />
 
@@ -33,8 +28,8 @@
 
 
     <!-- 
-         TOP BRAND BAR
- -->
+         TOP BAR
+        -->
 
     <header class="workspace-brand-bar">
 
@@ -53,10 +48,6 @@
 
         </div>
 
-
-        <!--
-         WORKSPACE CONTROLS
-      -->
 
         <div class="workspace-top-actions">
 
@@ -90,7 +81,7 @@
             </select>
 
 
-            <!-- CONTROLS BUTTON -->
+            <!-- CONTROLS -->
 
             <button type="button"
                     class="controls-theme-button"
@@ -110,21 +101,33 @@
 
     </header>
 
+
+    <!-- =
+         CONTROLS DRAWER
+
+         Hidden until button is clicked.
+       -->
+
     <partial name="Partials/_ControlsThemePanel" />
+
+
     <!-- 
-         MAIN DOCKVIEW CONTAINER
+         WORKSPACE SHELL
 
-         workspace.js requires this exact id.
-        -->
+        
+         = -->
 
-    <main id="dockview-container">
-    </main>
+    <div class="workspace-shell">
+
+        <main id="dockview-container">
+        </main>
+
+    </div>
 
 
     <!-- 
          LEFT WORKSPACE
-     -->
-    <!-- CORRELATION -->
+         -->
 
     <template id="correlation-template">
 
@@ -133,8 +136,6 @@
     </template>
 
 
-    <!-- ORDER BOOK -->
-
     <template id="orderbook-template">
 
         <partial name="Partials/_OrderBookPanel" />
@@ -142,10 +143,9 @@
     </template>
 
 
-    <!--
+    <!-- 
          MIDDLE WORKSPACE
           -->
-    <!-- FX RATES -->
 
     <template id="fxrates-template">
 
@@ -154,16 +154,12 @@
     </template>
 
 
-    <!-- ORDERS -->
-
     <template id="orders-template">
 
         <partial name="Partials/_OrdersPanel" />
 
     </template>
 
-
-    <!-- POSITIONS -->
 
     <template id="positions-template">
 
@@ -172,8 +168,6 @@
     </template>
 
 
-    <!-- VOL SURFACE -->
-
     <template id="volsurface-template">
 
         <partial name="Partials/_VolSurfacePanel" />
@@ -181,10 +175,9 @@
     </template>
 
 
-    <!--
+    <!-- 
          RIGHT WORKSPACE
-        -->
-    <!-- NEWS -->
+         -->
 
     <template id="news-template">
 
@@ -193,8 +186,6 @@
     </template>
 
 
-    <!-- TECH VIEW -->
-
     <template id="techview-template">
 
         <partial name="Partials/_TechViewPanel" />
@@ -202,9 +193,8 @@
     </template>
 
 
-    <!--
-         COMPILED JAVASCRIPT
-
+    <!-- 
+         JAVASCRIPT
           -->
 
     <script type="module"
