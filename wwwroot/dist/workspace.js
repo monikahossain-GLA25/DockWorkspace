@@ -983,7 +983,7 @@
       });
     });
   }
-  var _LocalSelectionTransfer, TransferObject, PanelTransfer, LocalSelectionTransfer, Disposable, CompositeDisposable, MutableDisposable, Event, DockviewEvent, AcceptableEvent, LeakageMonitor, Stacktrace, Listener, Emitter, AsapEvent, OverflowObserver, removeClasses, addClasses, toggleClass, FocusTracker, QUASI_PREVENT_DEFAULT_KEY, Classnames, DEBOUCE_DELAY, clamp, sequentialNumberGenerator, range, ViewItem, Sizing, Splitview, PROPERTY_KEYS_SPLITVIEW, LeafNode, BranchNode, orthogonal, serializeBranchNode, Gridview, PROPERTY_KEYS_GRIDVIEW, Resizable, nextLayoutId$1, BaseGrid, DEFAULT_MESSAGES, DockviewApi, DragAndDropObserver, DEFAULT_SIZE, SMALL_WIDTH_BOUNDARY, SMALL_HEIGHT_BOUNDARY, WillShowOverlayEvent, DEFAULT_ACTIVATION_SIZE$1, Droptarget, PointerDragController, DEFAULT_ACTIVATION_SIZE, PointerDropTarget, DEFAULT_THRESHOLD, DEFAULT_TOUCH_INITIATION_DELAY, DEFAULT_PRESS_TOLERANCE, PointerDragSource, PointerGhost, Html5DragSource, Html5DragBackend, PointerDragBackend, html5Backend, pointerBackend, PROPERTY_KEYS_PANEVIEW, WillFocusEvent, PanelApiImpl, BasePanelView, _contentId, nextContentId, ContentContainer, createSvgElementFromPath, createCloseButton, createPinButton, createChevronRightButton, DEFAULT_DELAY, DEFAULT_TOLERANCE, LongPressDetector, _tabId, nextTabId, Tab, DockviewWillShowOverlayLocationEvent, GroupDragSource, VoidContainer, Scrollbar, OVERFLOW_WRAP_TABS_CLASS, DockviewUnhandledDragOverEvent, PROPERTY_KEYS_DOCKVIEW, DEFAULT_TAB_GROUP_COLORS, TabGroupColorPalette, _fallbackPalette, TabGroupChip, TAB_GROUP_CHIP_CONTINUATION_CLASS, CONTINUATION_PIP_SIZE, BaseTabGroupIndicator, WrapTabGroupIndicator, NoneTabGroupIndicator, EMPTY_MAP, TabGroupManager, TabReorderController, Tabs, TabsContainer, TabGroup, DockviewDidDropEvent, DockviewWillDropEvent, DockviewGroupPanelModel, GridviewPanelApiImpl, GridviewPanel, NOT_INITIALIZED_MESSAGE, DockviewGroupPanelApiImpl, MINIMUM_DOCKVIEW_GROUP_PANEL_WIDTH, MINIMUM_DOCKVIEW_GROUP_PANEL_HEIGHT, DockviewGroupPanel, themeLight, themeAbyss, DockviewPanelApiImpl, DockviewPanel, DefaultTab, DockviewPanelModel, DefaultDockviewDeserialzier, Watermark, AriaLevelTracker, arialLevelTracker, Overlay, FloatingTitleBar, ENTERPRISE_MODULE_NAMES, _warnedMissingModule, ModuleRegistry, _globalModules, OPTION_MODULE_RULES, DEFAULT_FLOATING_GROUP_POSITION, DockviewFloatingGroupPanel, FloatingGroupService, FloatingGroupModule, PopoutWindowService, PopoutWindowModule, WatermarkService, WatermarkModule, EdgeGroupService, EdgeGroupModule, DEFAULT_ROOT_OVERLAY_MODEL, AUTO_EDGE_ROOT_OVERLAY_MODEL, RootDropTargetService, RootDropTargetModule, SLOT_OPTION_KEY, HeaderActionsService, HeaderActionsModule, isBulk, LiveRegionService, LiveRegionModule, GROUP_DRAG_GHOST_OFFSET_X, GROUP_DRAG_GHOST_OFFSET_Y, AdvancedDnDService, AdvancedDnDModule, TabGroupChipsService, TabGroupChipsModule, _nextId, nextContextMenuItemId, ContextMenuController, ContextMenuModule, AllModules, PositionCache, SCHEDULED, OverlayRenderContainer, PopoutWindow, StrictEventsSequencing, PopupService, DropTargetAnchorContainer, EdgeGroupView, CenterView, MiddleColumnView, ShellManager, NO_EVENT, NO_LAYOUT_HISTORY_CHANGES, DockviewComponent, nextLayoutId, MAXIMUM_BODY_SIZE;
+  var _LocalSelectionTransfer, TransferObject, PanelTransfer, LocalSelectionTransfer, Disposable, CompositeDisposable, MutableDisposable, Event, DockviewEvent, AcceptableEvent, LeakageMonitor, Stacktrace, Listener, Emitter, AsapEvent, OverflowObserver, removeClasses, addClasses, toggleClass, FocusTracker, QUASI_PREVENT_DEFAULT_KEY, Classnames, DEBOUCE_DELAY, clamp, sequentialNumberGenerator, range, ViewItem, Sizing, Splitview, PROPERTY_KEYS_SPLITVIEW, LeafNode, BranchNode, orthogonal, serializeBranchNode, Gridview, PROPERTY_KEYS_GRIDVIEW, Resizable, nextLayoutId$1, BaseGrid, DEFAULT_MESSAGES, DockviewApi, DragAndDropObserver, DEFAULT_SIZE, SMALL_WIDTH_BOUNDARY, SMALL_HEIGHT_BOUNDARY, WillShowOverlayEvent, DEFAULT_ACTIVATION_SIZE$1, Droptarget, PointerDragController, DEFAULT_ACTIVATION_SIZE, PointerDropTarget, DEFAULT_THRESHOLD, DEFAULT_TOUCH_INITIATION_DELAY, DEFAULT_PRESS_TOLERANCE, PointerDragSource, PointerGhost, Html5DragSource, Html5DragBackend, PointerDragBackend, html5Backend, pointerBackend, PROPERTY_KEYS_PANEVIEW, WillFocusEvent, PanelApiImpl, BasePanelView, _contentId, nextContentId, ContentContainer, createSvgElementFromPath, createCloseButton, createPinButton, createChevronRightButton, DEFAULT_DELAY, DEFAULT_TOLERANCE, LongPressDetector, _tabId, nextTabId, Tab, DockviewWillShowOverlayLocationEvent, GroupDragSource, VoidContainer, Scrollbar, OVERFLOW_WRAP_TABS_CLASS, DockviewUnhandledDragOverEvent, PROPERTY_KEYS_DOCKVIEW, DEFAULT_TAB_GROUP_COLORS, TabGroupColorPalette, _fallbackPalette, TabGroupChip, TAB_GROUP_CHIP_CONTINUATION_CLASS, CONTINUATION_PIP_SIZE, BaseTabGroupIndicator, WrapTabGroupIndicator, NoneTabGroupIndicator, EMPTY_MAP, TabGroupManager, TabReorderController, Tabs, TabsContainer, TabGroup, DockviewDidDropEvent, DockviewWillDropEvent, DockviewGroupPanelModel, GridviewPanelApiImpl, GridviewPanel, NOT_INITIALIZED_MESSAGE, DockviewGroupPanelApiImpl, MINIMUM_DOCKVIEW_GROUP_PANEL_WIDTH, MINIMUM_DOCKVIEW_GROUP_PANEL_HEIGHT, DockviewGroupPanel, themeDark, themeLight, themeVisualStudio, themeAbyss, themeNord, themeCatppuccinMocha, DockviewPanelApiImpl, DockviewPanel, DefaultTab, DockviewPanelModel, DefaultDockviewDeserialzier, Watermark, AriaLevelTracker, arialLevelTracker, Overlay, FloatingTitleBar, ENTERPRISE_MODULE_NAMES, _warnedMissingModule, ModuleRegistry, _globalModules, OPTION_MODULE_RULES, DEFAULT_FLOATING_GROUP_POSITION, DockviewFloatingGroupPanel, FloatingGroupService, FloatingGroupModule, PopoutWindowService, PopoutWindowModule, WatermarkService, WatermarkModule, EdgeGroupService, EdgeGroupModule, DEFAULT_ROOT_OVERLAY_MODEL, AUTO_EDGE_ROOT_OVERLAY_MODEL, RootDropTargetService, RootDropTargetModule, SLOT_OPTION_KEY, HeaderActionsService, HeaderActionsModule, isBulk, LiveRegionService, LiveRegionModule, GROUP_DRAG_GHOST_OFFSET_X, GROUP_DRAG_GHOST_OFFSET_Y, AdvancedDnDService, AdvancedDnDModule, TabGroupChipsService, TabGroupChipsModule, _nextId, nextContextMenuItemId, ContextMenuController, ContextMenuModule, AllModules, PositionCache, SCHEDULED, OverlayRenderContainer, PopoutWindow, StrictEventsSequencing, PopupService, DropTargetAnchorContainer, EdgeGroupView, CenterView, MiddleColumnView, ShellManager, NO_EVENT, NO_LAYOUT_HISTORY_CHANGES, DockviewComponent, nextLayoutId, MAXIMUM_BODY_SIZE;
   var init_main_esm = __esm({
     "node_modules/dockview-core/dist/package/main.esm.mjs"() {
       TransferObject = class {
@@ -10318,16 +10318,37 @@
           return this.model.toJSON();
         }
       };
+      themeDark = {
+        name: "dark",
+        className: "dockview-theme-dark",
+        colorScheme: "dark"
+      };
       themeLight = {
         name: "light",
         className: "dockview-theme-light",
         colorScheme: "light"
+      };
+      themeVisualStudio = {
+        name: "visualStudio",
+        className: "dockview-theme-vs",
+        colorScheme: "dark",
+        edgeGroupCollapsedSize: 22
       };
       themeAbyss = {
         name: "abyss",
         className: "dockview-theme-abyss",
         colorScheme: "dark",
         tabGroupIndicator: "none"
+      };
+      themeNord = {
+        name: "nord",
+        className: "dockview-theme-nord",
+        colorScheme: "dark"
+      };
+      themeCatppuccinMocha = {
+        name: "catppuccinMocha",
+        className: "dockview-theme-catppuccin-mocha",
+        colorScheme: "dark"
       };
       DockviewPanelApiImpl = class extends GridviewPanelApiImpl {
         get location() {
@@ -16689,6 +16710,300 @@
     }
   });
 
+  // ClientApp/js/components/controls-theme.js
+  function setupControlsTheme(dockview, dockviewContainer) {
+    const openButton = document.getElementById(
+      "controls-theme-button"
+    );
+    const drawer = document.getElementById(
+      "workspace-settings-drawer"
+    );
+    const backdrop = document.getElementById(
+      "workspace-settings-backdrop"
+    );
+    const closeButton = document.getElementById(
+      "settings-close-button"
+    );
+    const resetButton = document.getElementById(
+      "settings-reset-button"
+    );
+    const quickThemeSelect = document.getElementById(
+      "quick-theme-select"
+    );
+    if (!openButton || !drawer || !backdrop) {
+      console.warn(
+        "Controls & Theme UI was not found."
+      );
+      return;
+    }
+    const state = {
+      ...defaultSettings
+    };
+    function openDrawer() {
+      drawer.classList.add(
+        "open"
+      );
+      backdrop.classList.add(
+        "open"
+      );
+      drawer.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+    }
+    function closeDrawer() {
+      drawer.classList.remove(
+        "open"
+      );
+      backdrop.classList.remove(
+        "open"
+      );
+      drawer.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+    }
+    openButton.addEventListener(
+      "click",
+      openDrawer
+    );
+    closeButton?.addEventListener(
+      "click",
+      closeDrawer
+    );
+    backdrop.addEventListener(
+      "click",
+      closeDrawer
+    );
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (event.key === "Escape") {
+          closeDrawer();
+        }
+      }
+    );
+    const settingsTabs = drawer.querySelectorAll(
+      "[data-settings-tab]"
+    );
+    const settingsPanes = drawer.querySelectorAll(
+      "[data-settings-pane]"
+    );
+    function activateSettingsTab(tabName) {
+      settingsTabs.forEach(
+        (tab) => {
+          tab.classList.toggle(
+            "active",
+            tab.dataset.settingsTab === tabName
+          );
+        }
+      );
+      settingsPanes.forEach(
+        (pane) => {
+          pane.classList.toggle(
+            "active",
+            pane.dataset.settingsPane === tabName
+          );
+        }
+      );
+    }
+    settingsTabs.forEach(
+      (tab) => {
+        tab.addEventListener(
+          "click",
+          () => {
+            activateSettingsTab(
+              tab.dataset.settingsTab
+            );
+          }
+        );
+      }
+    );
+    function applyDockviewTheme() {
+      const definition = workspaceThemes[state.theme] ?? workspaceThemes.light;
+      const configuredTheme = {
+        ...definition.theme,
+        gap: state.gap
+      };
+      dockview.updateOptions({
+        theme: configuredTheme
+      });
+      document.body.dataset.workspaceScheme = definition.scheme;
+      document.body.dataset.workspaceTheme = state.theme;
+      dockviewContainer.style.setProperty(
+        "--dv-tabs-and-actions-container-height",
+        `${state.tabBarHeight}px`
+      );
+      dockviewContainer.style.setProperty(
+        "--dv-tabs-and-actions-container-font-size",
+        `${state.fontSize}px`
+      );
+      document.documentElement.style.setProperty(
+        "--workspace-panel-spacing",
+        `${state.spacing}px`
+      );
+      document.documentElement.style.setProperty(
+        "--workspace-panel-padding",
+        `${state.padding}px`
+      );
+    }
+    const themeButtons = drawer.querySelectorAll(
+      "[data-theme-key]"
+    );
+    function updateThemeUI() {
+      themeButtons.forEach(
+        (button) => {
+          button.classList.toggle(
+            "active",
+            button.dataset.themeKey === state.theme
+          );
+        }
+      );
+      if (quickThemeSelect) {
+        quickThemeSelect.value = state.theme;
+      }
+    }
+    function setTheme(themeKey) {
+      if (!workspaceThemes[themeKey]) {
+        return;
+      }
+      state.theme = themeKey;
+      updateThemeUI();
+      applyDockviewTheme();
+    }
+    themeButtons.forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            setTheme(
+              button.dataset.themeKey
+            );
+          }
+        );
+      }
+    );
+    quickThemeSelect?.addEventListener(
+      "change",
+      (event) => {
+        setTheme(
+          event.target.value
+        );
+      }
+    );
+    const rangeControls = drawer.querySelectorAll(
+      "[data-layout-control]"
+    );
+    function updateOutput(key, value) {
+      const outputMap = {
+        gap: "layout-gap-value",
+        spacing: "layout-spacing-value",
+        padding: "layout-padding-value",
+        tabBarHeight: "tab-bar-height-value",
+        fontSize: "workspace-font-size-value"
+      };
+      const output = document.getElementById(
+        outputMap[key]
+      );
+      if (output) {
+        output.textContent = `${value}px`;
+      }
+    }
+    rangeControls.forEach(
+      (control) => {
+        control.addEventListener(
+          "input",
+          () => {
+            const key = control.dataset.layoutControl;
+            const value = Number(
+              control.value
+            );
+            if (!Object.prototype.hasOwnProperty.call(
+              state,
+              key
+            )) {
+              return;
+            }
+            state[key] = value;
+            updateOutput(
+              key,
+              value
+            );
+            applyDockviewTheme();
+          }
+        );
+      }
+    );
+    function resetSettings() {
+      Object.assign(
+        state,
+        defaultSettings
+      );
+      rangeControls.forEach(
+        (control) => {
+          const key = control.dataset.layoutControl;
+          control.value = state[key];
+          updateOutput(
+            key,
+            state[key]
+          );
+        }
+      );
+      updateThemeUI();
+      applyDockviewTheme();
+    }
+    resetButton?.addEventListener(
+      "click",
+      resetSettings
+    );
+    activateSettingsTab(
+      "theme"
+    );
+    updateThemeUI();
+    applyDockviewTheme();
+  }
+  var workspaceThemes, defaultSettings;
+  var init_controls_theme = __esm({
+    "ClientApp/js/components/controls-theme.js"() {
+      init_main_esm2();
+      workspaceThemes = {
+        light: {
+          label: "Light",
+          theme: themeLight,
+          scheme: "light"
+        },
+        dark: {
+          label: "Dark",
+          theme: themeDark,
+          scheme: "dark"
+        },
+        "visual-studio": {
+          label: "Visual Studio",
+          theme: themeVisualStudio,
+          scheme: "dark"
+        },
+        nord: {
+          label: "Nord",
+          theme: themeNord,
+          scheme: "dark"
+        },
+        catppuccin: {
+          label: "Catppuccin Mocha",
+          theme: themeCatppuccinMocha,
+          scheme: "dark"
+        }
+      };
+      defaultSettings = {
+        theme: "light",
+        gap: 0,
+        spacing: 0,
+        padding: 0,
+        tabBarHeight: 35,
+        fontSize: 13
+      };
+    }
+  });
+
   // ClientApp/workspace.js
   var require_workspace = __commonJS({
     "ClientApp/workspace.js"() {
@@ -16701,6 +17016,7 @@
       init_vol_surface();
       init_news();
       init_tech_view();
+      init_controls_theme();
       var newTabNumber = 0;
       var BlankPanel = class {
         constructor() {
