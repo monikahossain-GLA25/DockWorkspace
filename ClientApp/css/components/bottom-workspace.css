@@ -1,0 +1,440 @@
+﻿/*
+   BOTTOM TOOL WORKSPACE
+
+   Logs
+   Terminal
+   Output
+   Problems
+  */
+
+
+/* 
+   ROOT PANEL
+ */
+
+.bottom-tool-panel {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--ui-surface, #ffffff);
+    color: var(--ui-text, #4d5870);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+/* 
+   INTERNAL TITLE BAR
+
+   This produces the top row visible in your screenshot:
+
+   Terminal                                  ▾ ×
+ */
+
+.bottom-tool-titlebar {
+    flex: 0 0 28px;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--ui-border, #dde2ea);
+    background: var(--ui-soft, #fbfbfd);
+}
+
+
+.bottom-tool-title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 0;
+}
+
+
+    .bottom-tool-title strong {
+        color: var(--ui-text, #4f5970);
+        font-size: 9px;
+        font-weight: 600;
+    }
+
+
+.bottom-tool-title-icon {
+    color: #8290aa;
+    font-size: 10px;
+}
+
+
+/*
+   TITLE ACTIONS
+ */
+
+.bottom-tool-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+
+.bottom-tool-action {
+    width: 23px;
+    height: 21px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 3px;
+    background: transparent;
+    color: #738099;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+
+    .bottom-tool-action:hover {
+        background: #ece8f7;
+        color: #715b9c;
+    }
+
+
+/* 
+   LOGS
+ */
+
+.logs-toolbar {
+    flex: 0 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--ui-border, #e4e7ed);
+}
+
+
+.logs-filter-group {
+    display: flex;
+    gap: 4px;
+}
+
+
+.logs-filter {
+    height: 21px;
+    padding: 0 7px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+    color: #7f899d;
+    font-size: 7px;
+    cursor: pointer;
+}
+
+
+    .logs-filter:hover {
+        background: #f1eef8;
+    }
+
+
+    .logs-filter.active {
+        border-color: #c9bce8;
+        background: #e8e0f7;
+        color: #70599e;
+        font-weight: 600;
+    }
+
+
+.logs-count {
+    color: #9aa3b4;
+    font-size: 7px;
+}
+
+
+.logs-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    font-family: Consolas, "IBM Plex Mono", monospace;
+}
+
+
+.log-row {
+    min-height: 24px;
+    display: grid;
+    grid-template-columns: 65px 52px 1fr;
+    align-items: center;
+    gap: 7px;
+    padding: 0 8px;
+    border-bottom: 1px solid rgba(210, 216, 227, 0.45);
+    font-size: 7px;
+}
+
+
+    .log-row:hover {
+        background: rgba(230, 226, 245, 0.35);
+    }
+
+
+.log-time {
+    color: #97a0af;
+}
+
+
+.log-level {
+    font-weight: 700;
+}
+
+
+.log-level-info {
+    color: #688fb1;
+}
+
+
+.log-level-warning {
+    color: #a48558;
+}
+
+
+.log-level-error {
+    color: #94658c;
+}
+
+
+.log-message {
+    color: var(--ui-text, #59657b);
+}
+
+
+/* 
+   TERMINAL
+  */
+
+.terminal-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+
+.terminal-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: #8c95a6;
+    font-size: 8px;
+}
+
+
+.terminal-placeholder-icon {
+    color: #78879c;
+    font-size: 15px;
+}
+
+
+.terminal-placeholder strong {
+    color: #68758b;
+    font-size: 9px;
+}
+
+
+/* 
+   OUTPUT
+  */
+
+.output-toolbar {
+    flex: 0 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--ui-border, #e0e4eb);
+    color: #8993a5;
+    font-size: 7px;
+}
+
+
+.output-select {
+    height: 22px;
+    padding: 0 6px;
+    border: 1px solid #d7dce5;
+    border-radius: 4px;
+    background: var(--ui-surface, #ffffff);
+    color: var(--ui-text, #576278);
+    font-size: 7px;
+}
+
+
+.output-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding: 7px 9px;
+    font-family: Consolas, "IBM Plex Mono", monospace;
+    font-size: 7px;
+    line-height: 1.8;
+}
+
+
+.output-line {
+    display: flex;
+    gap: 9px;
+}
+
+
+.output-time {
+    color: #a0a8b6;
+}
+
+
+.output-success {
+    color: #648f7f;
+}
+
+
+/* 
+   PROBLEMS
+  */
+
+.problems-toolbar {
+    flex: 0 0 31px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--ui-border, #e0e4eb);
+}
+
+
+.problem-summary {
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 7px;
+    font-weight: 600;
+}
+
+
+.problem-error-summary {
+    background: #f0e5ef;
+    color: #885f82;
+}
+
+
+.problem-warning-summary {
+    background: #f5eddf;
+    color: #9a7951;
+}
+
+
+.problem-info-summary {
+    background: #e5eff7;
+    color: #6685a1;
+}
+
+
+.problems-empty {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    color: #939cac;
+    font-size: 8px;
+}
+
+
+.problems-empty-icon {
+    width: 27px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #dff0e8;
+    color: #5b907b;
+    font-size: 12px;
+}
+
+
+.problems-empty strong {
+    color: #66738a;
+    font-size: 9px;
+}
+
+
+/* 
+   BOTTOM EDGE GROUP DOCKVIEW OVERRIDES
+
+   Keep the bottom tab strip compact.
+ */
+
+#dockview-container
+.dv-groupview.dv-edge-bottom {
+    border-top: 1px solid var(--ui-border, #dcdfe6);
+}
+
+
+/* Dockview uses the normal theme for its tabs.
+   These are only subtle application-level accents. */
+
+#dockview-container
+.dv-tab {
+    transition: background 0.12s ease, color 0.12s ease;
+}
+
+
+/* 
+   DARK THEME SUPPORT
+ */
+
+body[data-workspace-scheme="dark"]
+.bottom-tool-panel {
+    background: var(--ui-surface);
+    color: var(--ui-text);
+}
+
+
+body[data-workspace-scheme="dark"]
+.bottom-tool-titlebar,
+body[data-workspace-scheme="dark"]
+.logs-toolbar,
+body[data-workspace-scheme="dark"]
+.output-toolbar,
+body[data-workspace-scheme="dark"]
+.problems-toolbar {
+    background: var(--ui-soft);
+    border-color: var(--ui-border);
+}
+
+
+body[data-workspace-scheme="dark"]
+.bottom-tool-action:hover {
+    background: rgba(161, 134, 205, 0.18);
+    color: #c8b5ec;
+}
+
+
+/* 
+   SCROLLBARS
+ */
+
+.logs-content::-webkit-scrollbar,
+.output-content::-webkit-scrollbar,
+.terminal-content::-webkit-scrollbar {
+    width: 7px;
+}
+
+
+.logs-content::-webkit-scrollbar-thumb,
+.output-content::-webkit-scrollbar-thumb,
+.terminal-content::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #c8ced9;
+}
