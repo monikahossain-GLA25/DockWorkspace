@@ -698,8 +698,6 @@ const dockview =
 
 
 
-
-
             /* 
                COMPONENT FACTORY
                */
