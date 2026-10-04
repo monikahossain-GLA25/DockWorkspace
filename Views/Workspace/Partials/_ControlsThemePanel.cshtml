@@ -1,6 +1,6 @@
-﻿<!-- 
-     SETTINGS BACKDROP
- -->
+﻿<!--
+     BACKDROP
+     -->
 
 <div class="workspace-settings-backdrop"
      id="workspace-settings-backdrop">
@@ -8,19 +8,20 @@
 
 
 <!-- 
-     CONTROLS & THEME DRAWER
- -->
+     CONTROLS & THEME
+     -->
 
 <aside class="workspace-settings-drawer"
        id="workspace-settings-drawer"
        aria-hidden="true">
 
 
-    <!--
+    <!-- 
          HEADER
-         -->
+        -->
 
     <div class="settings-drawer-header">
+
 
         <div class="settings-drawer-title">
 
@@ -57,12 +58,13 @@
 
         </div>
 
+
     </div>
 
 
     <!-- 
-         THEME / CONTROLS TABS
-     -->
+         MAIN TABS
+         -->
 
     <div class="settings-main-tabs">
 
@@ -87,22 +89,25 @@
 
 
     <!-- 
-         BODY
-    -->
+         DRAWER BODY
+       -->
 
     <div class="settings-drawer-body">
 
 
         <!-- 
-             THEME PANEL
-          -->
+             THEME
+            -->
 
         <section class="settings-pane active"
                  data-settings-pane="theme">
 
 
-            <div class="settings-section">
+            <!-- 
+                 THEME PRESETS
+                 -->
 
+            <div class="settings-section">
 
                 <div class="settings-section-heading">
 
@@ -117,30 +122,12 @@
                 </div>
 
 
-                <p class="settings-help-text">
-
-                    Choose one of the five workspace themes.
-
-                </p>
-
-
                 <div class="theme-option-list">
 
-
-                    <!-- LIGHT -->
 
                     <button type="button"
                             class="theme-option active"
                             data-theme-key="light">
-
-                        <span class="theme-preview theme-preview-light">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </span>
-
 
                         <span class="theme-option-copy">
 
@@ -154,28 +141,12 @@
 
                         </span>
 
-
-                        <span class="theme-check">
-                            ✓
-                        </span>
-
                     </button>
 
-
-                    <!-- DARK -->
 
                     <button type="button"
                             class="theme-option"
                             data-theme-key="dark">
-
-                        <span class="theme-preview theme-preview-dark">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </span>
-
 
                         <span class="theme-option-copy">
 
@@ -184,33 +155,17 @@
                             </strong>
 
                             <small>
-                                Standard dark workspace
+                                Standard dark
                             </small>
 
-                        </span>
-
-
-                        <span class="theme-check">
-                            ✓
                         </span>
 
                     </button>
 
 
-                    <!-- VISUAL STUDIO -->
-
                     <button type="button"
                             class="theme-option"
                             data-theme-key="visual-studio">
-
-                        <span class="theme-preview theme-preview-vs">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </span>
-
 
                         <span class="theme-option-copy">
 
@@ -219,33 +174,17 @@
                             </strong>
 
                             <small>
-                                Visual Studio inspired
+                                IDE-style dark theme
                             </small>
 
-                        </span>
-
-
-                        <span class="theme-check">
-                            ✓
                         </span>
 
                     </button>
 
 
-                    <!-- NORD -->
-
                     <button type="button"
                             class="theme-option"
                             data-theme-key="nord">
-
-                        <span class="theme-preview theme-preview-nord">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </span>
-
 
                         <span class="theme-option-copy">
 
@@ -254,33 +193,17 @@
                             </strong>
 
                             <small>
-                                Cool blue Nord palette
+                                Cool blue palette
                             </small>
 
-                        </span>
-
-
-                        <span class="theme-check">
-                            ✓
                         </span>
 
                     </button>
 
 
-                    <!-- CATPPUCCIN -->
-
                     <button type="button"
                             class="theme-option"
                             data-theme-key="catppuccin">
-
-                        <span class="theme-preview theme-preview-catppuccin">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </span>
-
 
                         <span class="theme-option-copy">
 
@@ -289,14 +212,9 @@
                             </strong>
 
                             <small>
-                                Soft purple dark workspace
+                                Lavender dark palette
                             </small>
 
-                        </span>
-
-
-                        <span class="theme-check">
-                            ✓
                         </span>
 
                     </button>
@@ -306,23 +224,510 @@
 
             </div>
 
+
+            <!-- 
+                 LAYOUT
+                 -->
+
+            <details class="theme-accordion"
+                     open>
+
+                <summary>
+                    Layout
+                </summary>
+
+
+                <div class="theme-accordion-content">
+
+
+                    <div class="settings-range-row">
+
+                        <label for="layout-gap">
+                            Gap
+                        </label>
+
+                        <input type="range"
+                               id="layout-gap"
+                               data-layout-control="gap"
+                               min="0"
+                               max="20"
+                               value="0" />
+
+                        <output id="layout-gap-value">
+                            0px
+                        </output>
+
+                    </div>
+
+
+                    <div class="settings-range-row">
+
+                        <label for="layout-spacing">
+                            Spacing
+                        </label>
+
+                        <input type="range"
+                               id="layout-spacing"
+                               data-layout-control="spacing"
+                               min="0"
+                               max="20"
+                               value="0" />
+
+                        <output id="layout-spacing-value">
+                            0px
+                        </output>
+
+                    </div>
+
+
+                    <div class="settings-range-row">
+
+                        <label for="layout-padding">
+                            Padding
+                        </label>
+
+                        <input type="range"
+                               id="layout-padding"
+                               data-layout-control="padding"
+                               min="0"
+                               max="24"
+                               value="0" />
+
+                        <output id="layout-padding-value">
+                            0px
+                        </output>
+
+                    </div>
+
+
+                    <div class="settings-range-row">
+
+                        <label for="tab-bar-height">
+                            Tab height
+                        </label>
+
+                        <input type="range"
+                               id="tab-bar-height"
+                               data-layout-control="tabBarHeight"
+                               min="28"
+                               max="50"
+                               value="35" />
+
+                        <output id="tab-bar-height-value">
+                            35px
+                        </output>
+
+                    </div>
+
+
+                    <div class="settings-range-row">
+
+                        <label for="workspace-font-size">
+                            Font size
+                        </label>
+
+                        <input type="range"
+                               id="workspace-font-size"
+                               data-layout-control="fontSize"
+                               min="10"
+                               max="18"
+                               value="13" />
+
+                        <output id="workspace-font-size-value">
+                            13px
+                        </output>
+
+                    </div>
+
+
+                </div>
+
+            </details>
+
+
+            <!-- 
+                 DRAG & DROP
+                  -->
+
+            <details class="theme-accordion"
+                     open>
+
+                <summary>
+                    ✥ Drag &amp; Drop
+                </summary>
+
+
+                <div class="theme-accordion-content">
+
+
+                    <!-- OVERLAY MOUNTING -->
+
+                    <div class="theme-setting-row">
+
+                        <span>
+                            DnD Overlay
+                        </span>
+
+
+                        <div class="settings-segmented">
+
+                            <button type="button"
+                                    class="active"
+                                    data-theme-choice="dndOverlayMounting"
+                                    data-theme-value="relative">
+
+                                relative
+
+                            </button>
+
+
+                            <button type="button"
+                                    data-theme-choice="dndOverlayMounting"
+                                    data-theme-value="absolute">
+
+                                absolute
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PANEL TARGET -->
+
+                    <div class="theme-setting-row">
+
+                        <span>
+                            DnD Panel Target
+                        </span>
+
+
+                        <div class="settings-segmented">
+
+                            <button type="button"
+                                    class="active"
+                                    data-theme-choice="dndPanelOverlay"
+                                    data-theme-value="content">
+
+                                content
+
+                            </button>
+
+
+                            <button type="button"
+                                    data-theme-choice="dndPanelOverlay"
+                                    data-theme-value="group">
+
+                                group
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TAB INDICATOR -->
+
+                    <div class="theme-setting-row">
+
+                        <span>
+                            Tab Indicator
+                        </span>
+
+
+                        <div class="settings-segmented">
+
+                            <button type="button"
+                                    class="active"
+                                    data-theme-choice="dndTabIndicator"
+                                    data-theme-value="fill">
+
+                                fill
+
+                            </button>
+
+
+                            <button type="button"
+                                    data-theme-choice="dndTabIndicator"
+                                    data-theme-value="line">
+
+                                line
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DRAG BACKGROUND -->
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Drag-over bg
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-drag-over-background-color"
+                               placeholder="#35395d80" />
+
+                    </label>
+
+
+                    <!-- DRAG BORDER -->
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Drag-over border
+                        </span>
+
+                        <input type="text"
+                               data-theme-border
+                               placeholder="none" />
+
+                    </label>
+
+
+                </div>
+
+            </details>
+
+
+            <!-- 
+                 BACKGROUNDS
+                  -->
+
+            <details class="theme-accordion"
+                     open>
+
+                <summary>
+                    Backgrounds
+                </summary>
+
+
+                <div class="theme-accordion-content">
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Panel background
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-group-view-background-color"
+                               placeholder="#ffffff" />
+
+                    </label>
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Tab bar background
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-tabs-and-actions-container-background-color"
+                               placeholder="#f3f3f3" />
+
+                    </label>
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Separator
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-separator-border"
+                               placeholder="#80808059" />
+
+                    </label>
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Pane header border
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-paneview-header-border-color"
+                               placeholder="#333333" />
+
+                    </label>
+
+
+                </div>
+
+            </details>
+
+
+            <!-- 
+                 ACTIVE GROUP TABS
+                  -->
+
+            <details class="theme-accordion"
+                     open>
+
+                <summary>
+                    Active Group Tabs
+                </summary>
+
+
+                <div class="theme-accordion-content">
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Visible tab bg
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-activegroup-visiblepanel-tab-background-color"
+                               placeholder="#ffffff" />
+
+                    </label>
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Hidden tab bg
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-activegroup-hiddenpanel-tab-background-color"
+                               placeholder="#ececec" />
+
+                    </label>
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Visible tab text
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-activegroup-visiblepanel-tab-color"
+                               placeholder="#333333" />
+
+                    </label>
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Hidden tab text
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-activegroup-hiddenpanel-tab-color"
+                               placeholder="#333333b3" />
+
+                    </label>
+
+
+                </div>
+
+            </details>
+
+
+            <!-- 
+                 INACTIVE GROUP TABS
+              -->
+
+            <details class="theme-accordion">
+
+                <summary>
+                    Inactive Group Tabs
+                </summary>
+
+
+                <div class="theme-accordion-content">
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Visible tab bg
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-inactivegroup-visiblepanel-tab-background-color"
+                               placeholder="#ffffff" />
+
+                    </label>
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Hidden tab bg
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-inactivegroup-hiddenpanel-tab-background-color"
+                               placeholder="#ececec" />
+
+                    </label>
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Visible tab text
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-inactivegroup-visiblepanel-tab-color"
+                               placeholder="#333333" />
+
+                    </label>
+
+
+                    <label class="theme-variable-row">
+
+                        <span>
+                            Hidden tab text
+                        </span>
+
+                        <input type="text"
+                               data-dv-variable="--dv-inactivegroup-hiddenpanel-tab-color"
+                               placeholder="#333333b3" />
+
+                    </label>
+
+
+                </div>
+
+            </details>
+
+
         </section>
 
 
         <!-- 
-             CONTROLS PANEL
-         -->
+             CONTROLS
+              -->
 
         <section class="settings-pane"
                  data-settings-pane="controls">
 
 
             <!-- 
-                 LAYOUT
-             -->
+                 GRID
+              -->
 
             <div class="settings-section">
-
 
                 <div class="settings-section-heading">
 
@@ -331,198 +736,231 @@
                     </span>
 
                     <strong>
-                        Layout
+                        Grid
                     </strong>
 
                 </div>
 
 
-                <!-- GAP -->
-
-                <div class="settings-range-row">
-
-                    <label for="layout-gap">
-
-                        Gap
-
-                    </label>
+                <div class="control-button-grid">
 
 
-                    <input type="range"
-                           id="layout-gap"
-                           data-layout-control="gap"
-                           min="0"
-                           max="20"
-                           value="0"
-                           step="1" />
+                    <button type="button"
+                            data-layout-action="load">
+
+                        Load
+
+                    </button>
 
 
-                    <output id="layout-gap-value">
-                        0px
-                    </output>
+                    <button type="button"
+                            data-layout-action="save">
+
+                        Save
+
+                    </button>
+
+
+                    <button type="button"
+                            data-layout-action="clear-saved">
+
+                        Clear
+
+                    </button>
+
+
+                    <button type="button"
+                            data-layout-action="reset-layout">
+
+                        ↻ Reset
+
+                    </button>
+
 
                 </div>
 
 
-                <!-- SPACING -->
-
-                <div class="settings-range-row">
-
-                    <label for="layout-spacing">
-
-                        Spacing
-
-                    </label>
+                <div class="control-button-grid control-button-grid-wide">
 
 
-                    <input type="range"
-                           id="layout-spacing"
-                           data-layout-control="spacing"
-                           min="0"
-                           max="20"
-                           value="0"
-                           step="1" />
+                    <button type="button"
+                            data-layout-action="add-panel">
+
+                        + Add Panel
+
+                    </button>
 
 
-                    <output id="layout-spacing-value">
-                        0px
-                    </output>
+                    <button type="button"
+                            data-layout-action="add-group">
+
+                        ⊞ Add Group
+
+                    </button>
+
 
                 </div>
 
 
-                <!-- PADDING -->
-
-                <div class="settings-range-row">
-
-                    <label for="layout-padding">
-
-                        Padding
-
-                    </label>
-
-
-                    <input type="range"
-                           id="layout-padding"
-                           data-layout-control="padding"
-                           min="0"
-                           max="24"
-                           value="0"
-                           step="1" />
-
-
-                    <output id="layout-padding-value">
-                        0px
-                    </output>
-
+                <div class="control-status"
+                     id="control-status">
                 </div>
-
-
-                <!-- TAB BAR HEIGHT -->
-
-                <div class="settings-range-row">
-
-                    <label for="tab-bar-height">
-
-                        Tab Bar Height
-
-                    </label>
-
-
-                    <input type="range"
-                           id="tab-bar-height"
-                           data-layout-control="tabBarHeight"
-                           min="28"
-                           max="50"
-                           value="35"
-                           step="1" />
-
-
-                    <output id="tab-bar-height-value">
-                        35px
-                    </output>
-
-                </div>
-
-
-                <!-- FONT SIZE -->
-
-                <div class="settings-range-row">
-
-                    <label for="workspace-font-size">
-
-                        Font Size
-
-                    </label>
-
-
-                    <input type="range"
-                           id="workspace-font-size"
-                           data-layout-control="fontSize"
-                           min="10"
-                           max="18"
-                           value="13"
-                           step="1" />
-
-
-                    <output id="workspace-font-size-value">
-                        13px
-                    </output>
-
-                </div>
-
 
             </div>
 
 
             <!-- 
-                 INFORMATION
+                 ACTIVE PANEL
+                 -->
+
+            <div class="settings-section">
+
+                <div class="settings-section-heading">
+
+                    <strong>
+                        Active Panel
+                    </strong>
+
+                </div>
+
+
+                <div class="active-object-row">
+
+                    <code id="active-panel-id">
+                        none
+                    </code>
+
+                </div>
+
+            </div>
+
+
+            <!-- 
+                 ACTIVE GROUP
                -->
 
-            <div class="settings-section settings-information">
+            <div class="settings-section">
 
-                <strong>
-                    What these controls change
-                </strong>
+                <div class="settings-section-heading">
 
+                    <strong>
+                        Active Group
+                    </strong>
 
-                <p>
-
-                    <b>Gap</b> changes the space between Dockview
-                    groups.
-
-                </p>
+                </div>
 
 
-                <p>
+                <div class="active-object-row">
 
-                    <b>Spacing</b> changes the outer breathing room
-                    inside each panel.
+                    <code id="active-group-id">
+                        none
+                    </code>
 
-                </p>
-
-
-                <p>
-
-                    <b>Padding</b> changes the padding around each
-                    Razor component.
-
-                </p>
+                </div>
 
 
-                <p>
+                <label class="control-select-row">
 
-                    <b>Tab Bar Height</b> changes the Dockview tab
-                    strip height.
+                    <span>
+                        Header
+                    </span>
 
-                </p>
+
+                    <select id="active-group-header">
+
+                        <option value="top">
+                            top
+                        </option>
+
+                        <option value="bottom">
+                            bottom
+                        </option>
+
+                        <option value="left">
+                            left
+                        </option>
+
+                        <option value="right">
+                            right
+                        </option>
+
+                    </select>
+
+                </label>
+
+            </div>
 
 
-                <p>
+            <!--
+                 VIEW
+                 -->
 
-                    <b>Font Size</b> changes the Dockview tab font.
+            <div class="settings-section">
 
-                </p>
+                <div class="settings-section-heading">
+
+                    <strong>
+                        View
+                    </strong>
+
+                </div>
+
+
+                <label class="settings-toggle-row">
+
+                    <span>
+                        Drag &amp; Drop
+                    </span>
+
+                    <input type="checkbox"
+                           data-dock-option="dndEnabled"
+                           checked />
+
+                </label>
+
+
+                <label class="settings-toggle-row">
+
+                    <span>
+                        Floating groups
+                    </span>
+
+                    <input type="checkbox"
+                           data-dock-option="floatingEnabled"
+                           checked />
+
+                </label>
+
+
+                <label class="settings-toggle-row disabled-setting">
+
+                    <span>
+                        DnD compass
+                        <small>
+                            Enterprise
+                        </small>
+                    </span>
+
+                    <input type="checkbox"
+                           disabled />
+
+                </label>
+
+
+                <label class="settings-toggle-row disabled-setting">
+
+                    <span>
+                        Smart guides
+                        <small>
+                            Enterprise
+                        </small>
+                    </span>
+
+                    <input type="checkbox"
+                           disabled />
+
+                </label>
+
 
             </div>
 
