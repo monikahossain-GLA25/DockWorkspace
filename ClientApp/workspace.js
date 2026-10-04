@@ -1179,11 +1179,7 @@ const volSurface =
     });
 
 
-
-
-
-
-/* =========================================================
+/* 
 BOTTOM EDGE TOOL GROUP
 
 FREE Dockview Edge Group.
@@ -1194,8 +1190,7 @@ Expanded:
 Collapsed:
    only the bottom tab strip remains
 
-Auto-hide / peek is NOT used here.
-========================================================= */
+= */
 
 const bottomToolsGroup =
     dockview.addEdgeGroup(
@@ -1241,24 +1236,21 @@ const bottomToolsGroup =
     );
 
 
-/* =========================================================
-   PUT THE TAB BAR AT THE BOTTOM
+/* 
+  
+panel content
 
-   This produces:
-
-   panel content
-   ---------------------------
    Logs | Terminal | Output | Problems
-   ========================================================= */
+ */
 
 bottomToolsGroup.setHeaderPosition(
     "bottom"
 );
 
 
-/* =========================================================
+/* 
    LOGS
-   ========================================================= */
+   */
 
 const logsPanel =
     dockview.addPanel({
@@ -1282,9 +1274,9 @@ const logsPanel =
     });
 
 
-/* =========================================================
+/* 
    TERMINAL
-   ========================================================= */
+ */
 
 dockview.addPanel({
 
@@ -1310,9 +1302,9 @@ dockview.addPanel({
 });
 
 
-/* =========================================================
+/* 
    OUTPUT
-   ========================================================= */
+   */
 
 dockview.addPanel({
 
@@ -1338,9 +1330,9 @@ dockview.addPanel({
 });
 
 
-/* =========================================================
+/* 
    PROBLEMS
-   ========================================================= */
+   */
 
 dockview.addPanel({
 
