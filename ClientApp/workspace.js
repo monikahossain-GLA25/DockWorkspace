@@ -1178,6 +1178,221 @@ const volSurface =
 
     });
 
+
+
+
+
+
+/* =========================================================
+BOTTOM EDGE TOOL GROUP
+
+FREE Dockview Edge Group.
+
+Expanded:
+   normal bottom tool panel
+
+Collapsed:
+   only the bottom tab strip remains
+
+Auto-hide / peek is NOT used here.
+========================================================= */
+
+const bottomToolsGroup =
+    dockview.addEdgeGroup(
+        "bottom",
+        {
+
+            id:
+                "bottom-tools-group",
+
+            /*
+             * Height when expanded.
+             */
+            initialSize:
+                180,
+
+            /*
+             * User cannot shrink expanded panel
+             * below this size.
+             */
+            minimumSize:
+                90,
+
+            /*
+             * Avoid covering too much of the
+             * main workspace.
+             */
+            maximumSize:
+                Math.max(
+                    220,
+                    Math.floor(
+                        workspaceHeight * 0.45
+                    )
+                ),
+
+            /*
+             * Height of the bottom footer strip
+             * while collapsed.
+             */
+            collapsedSize:
+                30
+
+        }
+    );
+
+
+/* =========================================================
+   PUT THE TAB BAR AT THE BOTTOM
+
+   This produces:
+
+   panel content
+   ---------------------------
+   Logs | Terminal | Output | Problems
+   ========================================================= */
+
+bottomToolsGroup.setHeaderPosition(
+    "bottom"
+);
+
+
+/* =========================================================
+   LOGS
+   ========================================================= */
+
+const logsPanel =
+    dockview.addPanel({
+
+        id:
+            "logs",
+
+        component:
+            "logs",
+
+        title:
+            "Logs",
+
+        position: {
+
+            referenceGroup:
+                bottomToolsGroup.id
+
+        }
+
+    });
+
+
+/* =========================================================
+   TERMINAL
+   ========================================================= */
+
+dockview.addPanel({
+
+    id:
+        "terminal",
+
+    component:
+        "terminal",
+
+    title:
+        "Terminal",
+
+    inactive:
+        true,
+
+    position: {
+
+        referenceGroup:
+            bottomToolsGroup.id
+
+    }
+
+});
+
+
+/* =========================================================
+   OUTPUT
+   ========================================================= */
+
+dockview.addPanel({
+
+    id:
+        "output",
+
+    component:
+        "output",
+
+    title:
+        "Output",
+
+    inactive:
+        true,
+
+    position: {
+
+        referenceGroup:
+            bottomToolsGroup.id
+
+    }
+
+});
+
+
+/* =========================================================
+   PROBLEMS
+   ========================================================= */
+
+dockview.addPanel({
+
+    id:
+        "problems",
+
+    component:
+        "problems",
+
+    title:
+        "Problems",
+
+    inactive:
+        true,
+
+    position: {
+
+        referenceGroup:
+            bottomToolsGroup.id
+
+    }
+
+});
+
+
+/* 
+   START COLLAPSED
+    Dockview expands an edge group when new panels
+   are added so collapsing here ensures the page
+   starts in footer-strip mode.
+   */
+
+bottomToolsGroup.collapse();
+
+
+/* 
+   CUSTOM COLLAPSE EVENT
+
+   The small ▾ and × buttons inside our Razor
+   partials send this event.
+ */
+
+window.addEventListener(
+    "dockworkspace:collapse-bottom",
+    () => {
+
+        bottomToolsGroup.collapse();
+
+    }
+);
+
+
 /* 
 CONTROLS & THEME
  */
