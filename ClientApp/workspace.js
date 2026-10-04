@@ -58,6 +58,37 @@ import {
 import {
     setupControlsTheme
 } from "./js/components/controls-theme.js";
+
+
+
+
+
+
+//04.10.2026
+/* 
+   BOTTOM TOOL WORKSPACE
+ */
+
+import {
+    setupLogs
+} from "./js/components/logs.js";
+
+
+import {
+    setupTerminal
+} from "./js/components/terminal.js";
+
+
+import {
+    setupOutput
+} from "./js/components/output.js";
+
+
+import {
+    setupProblems
+} from "./js/components/problems.js";
+
+
 /* 
    GLOBAL VARIABLES
  */
@@ -286,6 +317,53 @@ class TemplatePanel {
                 );
 
                 break;
+
+
+
+            /* 
+            BOTTOM TOOL WORKSPACE
+             */
+
+            case "logs-template":
+
+                setupLogs(
+                    this.contentElement
+                );
+
+                break;
+
+
+            case "terminal-template":
+
+                setupTerminal(
+                    this.contentElement
+                );
+
+                break;
+
+
+            case "output-template":
+
+                setupOutput(
+                    this.contentElement
+                );
+
+                break;
+
+
+            case "problems-template":
+
+                setupProblems(
+                    this.contentElement
+                );
+
+                break;
+
+
+
+
+
+
 
 
             default:
@@ -652,7 +730,6 @@ const dockview =
                                 "volsurface-template"
                             );
 
-
                         /* 
                            RIGHT WORKSPACE
                            */
@@ -670,6 +747,38 @@ const dockview =
                                 "techview-template"
                             );
 
+
+                        /* 10.04.2026 */
+                        /*
+                           BOTTOM TOOL WORKSPACE
+                           */
+
+                        case "logs":
+
+                            return new TemplatePanel(
+                                "logs-template"
+                            );
+
+
+                        case "terminal":
+
+                            return new TemplatePanel(
+                                "terminal-template"
+                            );
+
+
+                        case "output":
+
+                            return new TemplatePanel(
+                                "output-template"
+                            );
+
+
+                        case "problems":
+
+                            return new TemplatePanel(
+                                "problems-template"
+                            );
 
                         /* 
                            DYNAMIC TABS
@@ -699,7 +808,7 @@ const dockview =
 
 
             /* 
-               ☰ BEFORE TABS
+                BEFORE TABS
             */
 
             createPrefixHeaderActionComponent:
