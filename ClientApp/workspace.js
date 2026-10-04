@@ -61,6 +61,23 @@ import {
 
 
 
+/* 
+   TAB CONTEXT MENU
+ */
+
+import {
+    createTabContextMenuItems
+} from "./js/components/tab-context-menu.js";
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -667,6 +684,20 @@ const dockview =
 
             theme:
                 themeLight,
+
+
+            /* 
+            RIGHT-CLICK TAB MENU
+             */
+
+            getTabContextMenuItems:
+                params =>
+                    createTabContextMenuItems(
+                        params
+                    ),
+
+
+
 
 
             /* 
