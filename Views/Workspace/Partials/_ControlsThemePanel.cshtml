@@ -500,6 +500,7 @@
             <!-- 
                  BACKGROUNDS
                   -->
+        
 
             <details class="theme-accordion"
                      open>
@@ -512,56 +513,156 @@
                 <div class="theme-accordion-content">
 
 
-                    <label class="theme-variable-row">
+                    <!-- PANEL BACKGROUND -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Panel background
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-group-view-background-color"
-                               placeholder="#ffffff" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#ffffff"
+                                   data-color-variable="--dv-group-view-background-color"
+                                   title="Choose panel background" />
 
 
-                    <label class="theme-variable-row">
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-group-view-background-color"
+                                   placeholder="#ffffff" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-group-view-background-color"
+                                    title="Reset">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TAB BAR BACKGROUND -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Tab bar background
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-tabs-and-actions-container-background-color"
-                               placeholder="#f3f3f3" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#f3f3f3"
+                                   data-color-variable="--dv-tabs-and-actions-container-background-color"
+                                   title="Choose tab bar background" />
 
 
-                    <label class="theme-variable-row">
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-tabs-and-actions-container-background-color"
+                                   placeholder="#f3f3f3" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-tabs-and-actions-container-background-color"
+                                    title="Reset">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SEPARATOR -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Separator
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-separator-border"
-                               placeholder="#80808059" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#808080"
+                                   data-color-variable="--dv-separator-border"
+                                   title="Choose separator colour" />
 
 
-                    <label class="theme-variable-row">
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-separator-border"
+                                   placeholder="#80808059" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-separator-border"
+                                    title="Reset">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PANE HEADER BORDER -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Pane header border
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-paneview-header-border-color"
-                               placeholder="#333333" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#333333"
+                                   data-color-variable="--dv-paneview-header-border-color"
+                                   title="Choose pane header border" />
+
+
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-paneview-header-border-color"
+                                   placeholder="#333333" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-paneview-header-border-color"
+                                    title="Reset">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
 
 
                 </div>
@@ -569,9 +670,10 @@
             </details>
 
 
+
             <!-- 
-                 ACTIVE GROUP TABS
-                  -->
+     ACTIVE GROUP TABS
+     -->
 
             <details class="theme-accordion"
                      open>
@@ -584,56 +686,148 @@
                 <div class="theme-accordion-content">
 
 
-                    <label class="theme-variable-row">
+                    <!-- VISIBLE BACKGROUND -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Visible tab bg
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-activegroup-visiblepanel-tab-background-color"
-                               placeholder="#ffffff" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#ffffff"
+                                   data-color-variable="--dv-activegroup-visiblepanel-tab-background-color" />
 
 
-                    <label class="theme-variable-row">
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-activegroup-visiblepanel-tab-background-color"
+                                   placeholder="#ffffff" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-activegroup-visiblepanel-tab-background-color">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- HIDDEN BACKGROUND -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Hidden tab bg
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-activegroup-hiddenpanel-tab-background-color"
-                               placeholder="#ececec" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#ececec"
+                                   data-color-variable="--dv-activegroup-hiddenpanel-tab-background-color" />
 
 
-                    <label class="theme-variable-row">
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-activegroup-hiddenpanel-tab-background-color"
+                                   placeholder="#ececec" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-activegroup-hiddenpanel-tab-background-color">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VISIBLE TEXT -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Visible tab text
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-activegroup-visiblepanel-tab-color"
-                               placeholder="#333333" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#333333"
+                                   data-color-variable="--dv-activegroup-visiblepanel-tab-color" />
 
 
-                    <label class="theme-variable-row">
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-activegroup-visiblepanel-tab-color"
+                                   placeholder="#333333" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-activegroup-visiblepanel-tab-color">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- HIDDEN TEXT -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Hidden tab text
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-activegroup-hiddenpanel-tab-color"
-                               placeholder="#333333b3" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#333333"
+                                   data-color-variable="--dv-activegroup-hiddenpanel-tab-color" />
+
+
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-activegroup-hiddenpanel-tab-color"
+                                   placeholder="#333333b3" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-activegroup-hiddenpanel-tab-color">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
 
 
                 </div>
@@ -641,11 +835,13 @@
             </details>
 
 
-            <!-- 
-                 INACTIVE GROUP TABS
-              -->
 
-            <details class="theme-accordion">
+            <!-- 
+     INACTIVE GROUP TABS
+ -->
+
+            <details class="theme-accordion"
+                     open>
 
                 <summary>
                     Inactive Group Tabs
@@ -655,59 +851,153 @@
                 <div class="theme-accordion-content">
 
 
-                    <label class="theme-variable-row">
+                    <!-- VISIBLE BACKGROUND -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Visible tab bg
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-inactivegroup-visiblepanel-tab-background-color"
-                               placeholder="#ffffff" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#ffffff"
+                                   data-color-variable="--dv-inactivegroup-visiblepanel-tab-background-color" />
 
 
-                    <label class="theme-variable-row">
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-inactivegroup-visiblepanel-tab-background-color"
+                                   placeholder="#ffffff" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-inactivegroup-visiblepanel-tab-background-color">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- HIDDEN BACKGROUND -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Hidden tab bg
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-inactivegroup-hiddenpanel-tab-background-color"
-                               placeholder="#ececec" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#ececec"
+                                   data-color-variable="--dv-inactivegroup-hiddenpanel-tab-background-color" />
 
 
-                    <label class="theme-variable-row">
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-inactivegroup-hiddenpanel-tab-background-color"
+                                   placeholder="#ececec" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-inactivegroup-hiddenpanel-tab-background-color">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VISIBLE TEXT -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Visible tab text
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-inactivegroup-visiblepanel-tab-color"
-                               placeholder="#333333" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#333333"
+                                   data-color-variable="--dv-inactivegroup-visiblepanel-tab-color" />
 
 
-                    <label class="theme-variable-row">
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-inactivegroup-visiblepanel-tab-color"
+                                   placeholder="#333333" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-inactivegroup-visiblepanel-tab-color">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- HIDDEN TEXT -->
+
+                    <div class="theme-variable-row">
 
                         <span>
                             Hidden tab text
                         </span>
 
-                        <input type="text"
-                               data-dv-variable="--dv-inactivegroup-hiddenpanel-tab-color"
-                               placeholder="#333333b3" />
 
-                    </label>
+                        <div class="theme-color-control">
+
+                            <input type="color"
+                                   class="theme-color-picker"
+                                   value="#333333"
+                                   data-color-variable="--dv-inactivegroup-hiddenpanel-tab-color" />
+
+
+                            <input type="text"
+                                   class="theme-color-value"
+                                   data-dv-variable="--dv-inactivegroup-hiddenpanel-tab-color"
+                                   placeholder="#333333b3" />
+
+
+                            <button type="button"
+                                    class="theme-color-clear"
+                                    data-clear-variable="--dv-inactivegroup-hiddenpanel-tab-color">
+
+                                ×
+
+                            </button>
+
+                        </div>
+
+                    </div>
 
 
                 </div>
+
+            </details>
 
             </details>
 
