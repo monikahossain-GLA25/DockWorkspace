@@ -1394,7 +1394,20 @@ dockview.addPanel({
    starts in footer-strip mode.
    */
 
-bottomToolsGroup.collapse();
+window.addEventListener(
+    "dockworkspace:collapse-bottom",
+    () => {
+
+        const currentBottomGroup =
+            dockview.getEdgeGroup(
+                "bottom"
+            );
+
+
+        currentBottomGroup?.collapse();
+
+    }
+);
 
 
 /* 

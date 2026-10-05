@@ -17004,6 +17004,158 @@
     }
   });
 
+  // ClientApp/js/components/logs.js
+  function setupLogs(rootElement) {
+    const panel = rootElement.querySelector(
+      "[data-logs-panel]"
+    );
+    if (!panel) {
+      return;
+    }
+    const filters = panel.querySelectorAll(
+      "[data-log-filter]"
+    );
+    const rows = panel.querySelectorAll(
+      "[data-log-level]"
+    );
+    filters.forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            const filter = button.dataset.logFilter;
+            filters.forEach(
+              (item) => {
+                item.classList.remove(
+                  "active"
+                );
+              }
+            );
+            button.classList.add(
+              "active"
+            );
+            rows.forEach(
+              (row) => {
+                const level = row.dataset.logLevel;
+                row.hidden = filter !== "all" && level !== filter;
+              }
+            );
+          }
+        );
+      }
+    );
+    panel.querySelectorAll(
+      "[data-bottom-collapse], [data-bottom-close]"
+    ).forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            window.dispatchEvent(
+              new CustomEvent(
+                "dockworkspace:collapse-bottom"
+              )
+            );
+          }
+        );
+      }
+    );
+  }
+  var init_logs = __esm({
+    "ClientApp/js/components/logs.js"() {
+    }
+  });
+
+  // ClientApp/js/components/terminal.js
+  function setupTerminal(rootElement) {
+    const panel = rootElement.querySelector(
+      "[data-terminal-panel]"
+    );
+    if (!panel) {
+      return;
+    }
+    panel.querySelectorAll(
+      "[data-bottom-collapse], [data-bottom-close]"
+    ).forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            window.dispatchEvent(
+              new CustomEvent(
+                "dockworkspace:collapse-bottom"
+              )
+            );
+          }
+        );
+      }
+    );
+  }
+  var init_terminal = __esm({
+    "ClientApp/js/components/terminal.js"() {
+    }
+  });
+
+  // ClientApp/js/components/output.js
+  function setupOutput(rootElement) {
+    const panel = rootElement.querySelector(
+      "[data-output-panel]"
+    );
+    if (!panel) {
+      return;
+    }
+    panel.querySelectorAll(
+      "[data-bottom-collapse], [data-bottom-close]"
+    ).forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            window.dispatchEvent(
+              new CustomEvent(
+                "dockworkspace:collapse-bottom"
+              )
+            );
+          }
+        );
+      }
+    );
+  }
+  var init_output = __esm({
+    "ClientApp/js/components/output.js"() {
+    }
+  });
+
+  // ClientApp/js/components/problems.js
+  function setupProblems(rootElement) {
+    const panel = rootElement.querySelector(
+      "[data-problems-panel]"
+    );
+    if (!panel) {
+      return;
+    }
+    panel.querySelectorAll(
+      "[data-bottom-collapse], [data-bottom-close]"
+    ).forEach(
+      (button) => {
+        button.addEventListener(
+          "click",
+          () => {
+            window.dispatchEvent(
+              new CustomEvent(
+                "dockworkspace:collapse-bottom"
+              )
+            );
+          }
+        );
+      }
+    );
+  }
+  var init_problems = __esm({
+    "ClientApp/js/components/problems.js"() {
+    }
+  });
+
   // ClientApp/workspace.js
   var require_workspace = __commonJS({
     "ClientApp/workspace.js"() {
@@ -17017,6 +17169,10 @@
       init_news();
       init_tech_view();
       init_controls_theme();
+      init_logs();
+      init_terminal();
+      init_output();
+      init_problems();
       var newTabNumber = 0;
       var BlankPanel = class {
         constructor() {
@@ -17106,6 +17262,29 @@
               break;
             case "techview-template":
               setupTechView(
+                this.contentElement
+              );
+              break;
+            /* 
+            BOTTOM TOOL WORKSPACE
+             */
+            case "logs-template":
+              setupLogs(
+                this.contentElement
+              );
+              break;
+            case "terminal-template":
+              setupTerminal(
+                this.contentElement
+              );
+              break;
+            case "output-template":
+              setupOutput(
+                this.contentElement
+              );
+              break;
+            case "problems-template":
+              setupProblems(
                 this.contentElement
               );
               break;
@@ -17276,6 +17455,26 @@
                 return new TemplatePanel(
                   "techview-template"
                 );
+              /* 10.04.2026 */
+              /*
+                 BOTTOM TOOL WORKSPACE
+                 */
+              case "logs":
+                return new TemplatePanel(
+                  "logs-template"
+                );
+              case "terminal":
+                return new TemplatePanel(
+                  "terminal-template"
+                );
+              case "output":
+                return new TemplatePanel(
+                  "output-template"
+                );
+              case "problems":
+                return new TemplatePanel(
+                  "problems-template"
+                );
               /* 
                   DYNAMIC TABS
               */
@@ -17291,7 +17490,7 @@
             }
           },
           /* 
-             ☰ BEFORE TABS
+              BEFORE TABS
           */
           createPrefixHeaderActionComponent: () => new MenuHeaderAction(),
           /* 
@@ -17403,6 +17602,81 @@
           direction: "below"
         }
       });
+      var bottomToolsGroup = dockview.addEdgeGroup(
+        "bottom",
+        {
+          id: "bottom-tools-group",
+          /*
+           * Height when expanded.
+           */
+          initialSize: 180,
+          /*
+           * User cannot shrink expanded panel
+           * below this size.
+           */
+          minimumSize: 90,
+          /*
+           * Avoid covering too much of the
+           * main workspace.
+           */
+          maximumSize: Math.max(
+            220,
+            Math.floor(
+              workspaceHeight * 0.45
+            )
+          ),
+          /*
+           * Height of the bottom footer strip
+           * while collapsed.
+           */
+          collapsedSize: 30
+        }
+      );
+      bottomToolsGroup.setHeaderPosition(
+        "bottom"
+      );
+      var logsPanel = dockview.addPanel({
+        id: "logs",
+        component: "logs",
+        title: "Logs",
+        position: {
+          referenceGroup: bottomToolsGroup.id
+        }
+      });
+      dockview.addPanel({
+        id: "terminal",
+        component: "terminal",
+        title: "Terminal",
+        inactive: true,
+        position: {
+          referenceGroup: bottomToolsGroup.id
+        }
+      });
+      dockview.addPanel({
+        id: "output",
+        component: "output",
+        title: "Output",
+        inactive: true,
+        position: {
+          referenceGroup: bottomToolsGroup.id
+        }
+      });
+      dockview.addPanel({
+        id: "problems",
+        component: "problems",
+        title: "Problems",
+        inactive: true,
+        position: {
+          referenceGroup: bottomToolsGroup.id
+        }
+      });
+      bottomToolsGroup.collapse();
+      window.addEventListener(
+        "dockworkspace:collapse-bottom",
+        () => {
+          bottomToolsGroup.collapse();
+        }
+      );
       setupControlsTheme(
         dockview,
         container
