@@ -7,95 +7,52 @@
 } from "dockview";
 
 
-/*
-   STORAGE
-    */
-
 const LAYOUT_STORAGE_KEY =
     "dockworkspace-layout-v1";
 
 
-/* 
+/* =========================================================
    THEMES
- */
+   ========================================================= */
 
 const workspaceThemes = {
 
     light: {
-
-        label:
-            "Light",
-
-        theme:
-            themeLight,
-
-        scheme:
-            "light"
-
+        label: "Light",
+        theme: themeLight,
+        scheme: "light"
     },
-
 
     dark: {
-
-        label:
-            "Dark",
-
-        theme:
-            themeDark,
-
-        scheme:
-            "dark"
-
+        label: "Dark",
+        theme: themeDark,
+        scheme: "dark"
     },
-
 
     "visual-studio": {
-
-        label:
-            "Visual Studio",
-
-        theme:
-            themeVisualStudio,
-
-        scheme:
-            "dark"
-
+        label: "Visual Studio",
+        theme: themeVisualStudio,
+        scheme: "dark"
     },
-
 
     nord: {
-
-        label:
-            "Nord",
-
-        theme:
-            themeNord,
-
-        scheme:
-            "dark"
-
+        label: "Nord",
+        theme: themeNord,
+        scheme: "dark"
     },
 
-
     catppuccin: {
-
-        label:
-            "Catppuccin Mocha",
-
-        theme:
-            themeCatppuccinMocha,
-
-        scheme:
-            "dark"
-
+        label: "Catppuccin Mocha",
+        theme: themeCatppuccinMocha,
+        scheme: "dark"
     }
 
 };
 
 
-/*
-   DEFAULT STATE
-  */
+/* =========================================================
+   DEFAULT SETTINGS
+   ========================================================= */
 
 const defaultSettings = {
 
@@ -118,9 +75,9 @@ const defaultSettings = {
         13,
 
 
-    /* 
-       Drag and drop theme behaviour
-       */
+    /* =====================================================
+       DRAG & DROP THEME SETTINGS
+       ===================================================== */
 
     dndOverlayMounting:
         "relative",
@@ -135,9 +92,9 @@ const defaultSettings = {
         "",
 
 
-    /* 
-       Dockview options
-       */
+    /* =====================================================
+       DOCKVIEW OPTIONS
+       ===================================================== */
 
     dndEnabled:
         true,
@@ -148,18 +105,18 @@ const defaultSettings = {
 };
 
 
-/*
+/* =========================================================
    MAIN SETUP
-   */
+   ========================================================= */
 
 export function setupControlsTheme(
     dockview,
     dockviewContainer
 ) {
 
-    /* 
+    /* =====================================================
        DOM
-    */
+       ===================================================== */
 
     const openButton =
         document.getElementById(
@@ -232,19 +189,30 @@ export function setupControlsTheme(
         );
 
         return;
-
     }
 
 
-    /* 
+    /* =====================================================
        STATE
-        */
+       ===================================================== */
 
     const state = {
-
         ...defaultSettings
-
     };
+
+
+    /*
+     * Stores custom values from:
+     *
+     * Backgrounds
+     * Active Group Tabs
+     * Inactive Group Tabs
+     *
+     * This is important because custom colours should remain
+     * after switching Light -> Dark -> Nord etc.
+     */
+    const themeVariableOverrides =
+        new Map();
 
 
     let generatedPanelNumber =
@@ -252,19 +220,21 @@ export function setupControlsTheme(
 
 
     /*
-     * Capture the initial workspace after all normal panels
-     * and the bottom edge group have been created.
+     * setupControlsTheme() is called after the normal
+     * Dockview layout has been created.
+     *
+     * Therefore this is the original/default layout used
+     * by Controls -> Reset.
      */
-
     const initialLayout =
         JSON.stringify(
             dockview.toJSON()
         );
 
 
-    /* 
+    /* =====================================================
        STATUS MESSAGE
-     */
+       ===================================================== */
 
     function setStatus(
         message
@@ -273,7 +243,6 @@ export function setupControlsTheme(
         if (!statusElement) {
 
             return;
-
         }
 
 
@@ -300,9 +269,9 @@ export function setupControlsTheme(
     }
 
 
-    /*
+    /* =====================================================
        DRAWER
-      */
+       ===================================================== */
 
     function openDrawer() {
 
@@ -319,6 +288,21 @@ export function setupControlsTheme(
         drawer.setAttribute(
             "aria-hidden",
             "false"
+        );
+
+
+        /*
+         * Make sure all current Dockview values are shown
+         * when the drawer opens.
+         */
+        requestAnimationFrame(
+            () => {
+
+                syncAllVariableControls();
+
+                refreshActiveInformation();
+
+            }
         );
 
     }
@@ -378,9 +362,9 @@ export function setupControlsTheme(
     );
 
 
-    /* 
-       THEME / CONTROLS TAB SWITCHING
-        */
+    /* =====================================================
+       THEME / CONTROLS MAIN TAB SWITCHING
+       ===================================================== */
 
     const settingsTabs =
         drawer.querySelectorAll(
@@ -444,9 +428,24 @@ export function setupControlsTheme(
     );
 
 
-    /* 
+    /* =====================================================
        DOCKVIEW CSS VARIABLES
-  */
+
+       Handles:
+
+       Drag-over background
+       Backgrounds
+       Active Group Tabs
+       Inactive Group Tabs
+
+       This works with BOTH:
+
+       old version:
+       <input data-dv-variable="..." />
+
+       new version:
+       color square + text + X reset
+       ===================================================== */
 
     const variableInputs =
         drawer.querySelectorAll(
@@ -454,42 +453,457 @@ export function setupControlsTheme(
         );
 
 
-    function applyVariableInput(
-        input
+    const colorPickers =
+        drawer.querySelectorAll(
+            "[data-color-variable]"
+        );
+
+
+    const clearVariableButtons =
+        drawer.querySelectorAll(
+            "[data-clear-variable]"
+        );
+
+
+    /* =====================================================
+       FIND DOCKVIEW THEME TARGETS
+       ===================================================== */
+
+    function getDockviewThemeTargets() {
+
+        const targets =
+            new Set();
+
+
+        /*
+         * Always include main Dockview container.
+         */
+        targets.add(
+            dockviewContainer
+        );
+
+
+        /*
+         * Dockview applies its actual theme class inside
+         * its rendered structure.
+         *
+         * We apply variables there too so the built-in
+         * theme cannot override our custom value.
+         */
+        dockviewContainer
+            .querySelectorAll(
+                '[class*="dockview-theme-"]'
+            )
+            .forEach(
+                element => {
+
+                    targets.add(
+                        element
+                    );
+
+                }
+            );
+
+
+        return [
+            ...targets
+        ];
+
+    }
+
+
+    /* =====================================================
+       SET ONE DOCKVIEW CSS VARIABLE
+       ===================================================== */
+
+    function setDockviewVariable(
+        variableName,
+        value,
+        remember = true
     ) {
 
-        const variableName =
-            input.dataset.dvVariable;
-
-
-        const value =
-            input.value.trim();
+        const cleanValue =
+            String(
+                value ?? ""
+            )
+                .trim();
 
 
         if (
-            value.length === 0
+            remember
         ) {
 
-            dockviewContainer
-                .style
-                .removeProperty(
+            if (
+                cleanValue
+            ) {
+
+                themeVariableOverrides.set(
+                    variableName,
+                    cleanValue
+                );
+
+            }
+            else {
+
+                themeVariableOverrides.delete(
                     variableName
                 );
 
-            return;
+            }
 
         }
 
 
-        dockviewContainer
-            .style
-            .setProperty(
-                variableName,
-                value
+        getDockviewThemeTargets()
+            .forEach(
+                target => {
+
+                    if (
+                        cleanValue
+                    ) {
+
+                        target.style.setProperty(
+                            variableName,
+                            cleanValue
+                        );
+
+                    }
+                    else {
+
+                        target.style.removeProperty(
+                            variableName
+                        );
+
+                    }
+
+                }
             );
 
     }
 
+
+    /* =====================================================
+       READ CURRENT CSS VARIABLE
+       ===================================================== */
+
+    function getCurrentDockviewVariable(
+        variableName
+    ) {
+
+        const targets =
+            getDockviewThemeTargets();
+
+
+        /*
+         * Prefer the real Dockview theme element.
+         *
+         * If none is found use the normal container.
+         */
+        const themeTarget =
+            targets.find(
+                target =>
+
+                    target !==
+                    dockviewContainer &&
+
+                    target.matches?.(
+                        '[class*="dockview-theme-"]'
+                    )
+            ) ??
+            dockviewContainer;
+
+
+        return getComputedStyle(
+            themeTarget
+        )
+            .getPropertyValue(
+                variableName
+            )
+            .trim();
+
+    }
+
+
+    /* =====================================================
+       RGB -> HEX
+       ===================================================== */
+
+    function rgbToHex(
+        red,
+        green,
+        blue
+    ) {
+
+        const toHex =
+            value =>
+
+                Math.max(
+                    0,
+                    Math.min(
+                        255,
+                        Number(
+                            value
+                        )
+                    )
+                )
+                    .toString(16)
+                    .padStart(
+                        2,
+                        "0"
+                    );
+
+
+        return (
+
+            "#" +
+
+            toHex(
+                red
+            ) +
+
+            toHex(
+                green
+            ) +
+
+            toHex(
+                blue
+            )
+
+        );
+
+    }
+
+
+    /* =====================================================
+       NORMALIZE VALUE FOR HTML COLOR PICKER
+       ===================================================== */
+
+    function normalizePickerColor(
+        value
+    ) {
+
+        const cleanValue =
+            String(
+                value ?? ""
+            )
+                .trim();
+
+
+        if (
+            !cleanValue
+        ) {
+
+            return null;
+
+        }
+
+
+        /* #fff */
+
+        if (
+            /^#[0-9a-f]{3}$/i.test(
+                cleanValue
+            )
+        ) {
+
+            return (
+
+                "#" +
+
+                cleanValue[1] +
+                cleanValue[1] +
+
+                cleanValue[2] +
+                cleanValue[2] +
+
+                cleanValue[3] +
+                cleanValue[3]
+
+            );
+
+        }
+
+
+        /* #ffffff */
+
+        if (
+            /^#[0-9a-f]{6}$/i.test(
+                cleanValue
+            )
+        ) {
+
+            return cleanValue;
+
+        }
+
+
+        /*
+         * #ffffff80
+         *
+         * HTML type=color does not represent alpha.
+         * Use only the RGB section in its square.
+         */
+
+        if (
+            /^#[0-9a-f]{8}$/i.test(
+                cleanValue
+            )
+        ) {
+
+            return cleanValue.substring(
+                0,
+                7
+            );
+
+        }
+
+
+        /*
+         * rgb(...)
+         * rgba(...)
+         */
+
+        const rgbMatch =
+            cleanValue.match(
+
+                /^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})/i
+
+            );
+
+
+        if (
+            rgbMatch
+        ) {
+
+            return rgbToHex(
+                rgbMatch[1],
+                rgbMatch[2],
+                rgbMatch[3]
+            );
+
+        }
+
+
+        return null;
+
+    }
+
+
+    /* =====================================================
+       SYNC ONE THEME VARIABLE ROW
+       ===================================================== */
+
+    function syncVariableControl(
+        variableName
+    ) {
+
+        const textInput =
+            drawer.querySelector(
+
+                `[data-dv-variable="${variableName}"]`
+
+            );
+
+
+        const colorPicker =
+            drawer.querySelector(
+
+                `[data-color-variable="${variableName}"]`
+
+            );
+
+
+        const currentValue =
+
+            themeVariableOverrides.get(
+                variableName
+            ) ??
+
+            getCurrentDockviewVariable(
+                variableName
+            );
+
+
+        if (
+            textInput
+        ) {
+
+            textInput.value =
+                currentValue;
+
+        }
+
+
+        if (
+            colorPicker
+        ) {
+
+            const pickerColor =
+                normalizePickerColor(
+                    currentValue
+                );
+
+
+            if (
+                pickerColor
+            ) {
+
+                colorPicker.value =
+                    pickerColor;
+
+            }
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SYNC ALL VARIABLE ROWS
+       ===================================================== */
+
+    function syncAllVariableControls() {
+
+        variableInputs.forEach(
+            input => {
+
+                syncVariableControl(
+                    input.dataset.dvVariable
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       REAPPLY USER COLOUR OVERRIDES
+       ===================================================== */
+
+    function reapplyThemeVariableOverrides() {
+
+        themeVariableOverrides.forEach(
+            (
+                value,
+                variableName
+            ) => {
+
+                setDockviewVariable(
+                    variableName,
+                    value,
+                    false
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       TEXT FIELD CHANGES
+       ===================================================== */
 
     variableInputs.forEach(
         input => {
@@ -498,8 +912,95 @@ export function setupControlsTheme(
                 "input",
                 () => {
 
-                    applyVariableInput(
-                        input
+                    const variableName =
+                        input.dataset.dvVariable;
+
+
+                    const value =
+                        input.value;
+
+
+                    setDockviewVariable(
+                        variableName,
+                        value
+                    );
+
+
+                    /*
+                     * If this row also has a color square,
+                     * keep the square synchronized.
+                     */
+                    const colorPicker =
+                        drawer.querySelector(
+
+                            `[data-color-variable="${variableName}"]`
+
+                        );
+
+
+                    const pickerColor =
+                        normalizePickerColor(
+                            value
+                        );
+
+
+                    if (
+                        colorPicker &&
+                        pickerColor
+                    ) {
+
+                        colorPicker.value =
+                            pickerColor;
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       COLOR PICKER CHANGES
+       ===================================================== */
+
+    colorPickers.forEach(
+        picker => {
+
+            picker.addEventListener(
+                "input",
+                () => {
+
+                    const variableName =
+                        picker.dataset.colorVariable;
+
+
+                    const value =
+                        picker.value;
+
+
+                    const textInput =
+                        drawer.querySelector(
+
+                            `[data-dv-variable="${variableName}"]`
+
+                        );
+
+
+                    if (
+                        textInput
+                    ) {
+
+                        textInput.value =
+                            value;
+
+                    }
+
+
+                    setDockviewVariable(
+                        variableName,
+                        value
                     );
 
                 }
@@ -509,9 +1010,57 @@ export function setupControlsTheme(
     );
 
 
-    /*
-       THEME BORDER
-    */
+    /* =====================================================
+       × RESET ONE VARIABLE
+       ===================================================== */
+
+    clearVariableButtons.forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const variableName =
+                        button.dataset.clearVariable;
+
+
+                    themeVariableOverrides.delete(
+                        variableName
+                    );
+
+
+                    setDockviewVariable(
+                        variableName,
+                        "",
+                        false
+                    );
+
+
+                    /*
+                     * Show the original current theme value
+                     * again after removing the custom value.
+                     */
+                    requestAnimationFrame(
+                        () => {
+
+                            syncVariableControl(
+                                variableName
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       DRAG-OVER BORDER
+       ===================================================== */
 
     const borderInput =
         drawer.querySelector(
@@ -533,16 +1082,18 @@ export function setupControlsTheme(
     );
 
 
-    /* 
-       APPLY THEME
-       */
+    /* =====================================================
+       APPLY DOCKVIEW THEME
+       ===================================================== */
 
     function applyDockviewTheme() {
 
         const definition =
+
             workspaceThemes[
             state.theme
             ] ??
+
             workspaceThemes.light;
 
 
@@ -551,17 +1102,13 @@ export function setupControlsTheme(
             ...definition.theme,
 
 
-            /* 
-               Layout
-              */
+            /* Layout */
 
             gap:
                 state.gap,
 
 
-            /* 
-               DnD controls
-              */
+            /* Drag & Drop */
 
             dndOverlayMounting:
                 state.dndOverlayMounting,
@@ -585,9 +1132,9 @@ export function setupControlsTheme(
         }
 
 
-        /* 
-           Runtime Dockview options
-          */
+        /* =================================================
+           UPDATE DOCKVIEW OPTIONS
+           ================================================= */
 
         dockview.updateOptions({
 
@@ -598,24 +1145,14 @@ export function setupControlsTheme(
                 !state.dndEnabled,
 
             disableFloatingGroups:
-                !state.floatingEnabled,
-
-            /*
-             * Free Dockview overflow behaviour.
-             */
-            overflow: {
-
-                mode:
-                    "dropdown"
-
-            }
+                !state.floatingEnabled
 
         });
 
 
-        /* 
-           Custom Razor theme awareness
-           */
+        /* =================================================
+           OUR CUSTOM RAZOR THEME SUPPORT
+           ================================================= */
 
         document.body.dataset.workspaceScheme =
             definition.scheme;
@@ -625,43 +1162,73 @@ export function setupControlsTheme(
             state.theme;
 
 
-        /* 
-           Tab sizing
-            */
+        /* =================================================
+           TAB BAR
+           ================================================= */
 
         dockviewContainer.style.setProperty(
+
             "--dv-tabs-and-actions-container-height",
+
             `${state.tabBarHeight}px`
+
         );
 
 
         dockviewContainer.style.setProperty(
+
             "--dv-tabs-and-actions-container-font-size",
+
             `${state.fontSize}px`
+
+        );
+
+
+        /* =================================================
+           CUSTOM PANEL WRAPPERS
+           ================================================= */
+
+        document.documentElement.style.setProperty(
+
+            "--workspace-panel-spacing",
+
+            `${state.spacing}px`
+
+        );
+
+
+        document.documentElement.style.setProperty(
+
+            "--workspace-panel-padding",
+
+            `${state.padding}px`
+
         );
 
 
         /*
-           Our own component wrappers
- */
+         * Changing Dockview's built-in theme may replace
+         * theme-level CSS variables.
+         *
+         * Reapply Background / Active / Inactive values.
+         */
 
-        document.documentElement.style.setProperty(
-            "--workspace-panel-spacing",
-            `${state.spacing}px`
-        );
+        requestAnimationFrame(
+            () => {
 
+                reapplyThemeVariableOverrides();
 
-        document.documentElement.style.setProperty(
-            "--workspace-panel-padding",
-            `${state.padding}px`
+                syncAllVariableControls();
+
+            }
         );
 
     }
 
 
-    /* 
-       THEME PRESETS
-       */
+    /* =====================================================
+       THEME PRESET BUTTONS
+       ===================================================== */
 
     const themeButtons =
         drawer.querySelectorAll(
@@ -675,9 +1242,12 @@ export function setupControlsTheme(
             button => {
 
                 button.classList.toggle(
+
                     "active",
+
                     button.dataset.themeKey ===
                     state.theme
+
                 );
 
             }
@@ -753,9 +1323,9 @@ export function setupControlsTheme(
     );
 
 
-    /* 
-       SEGMENTED THEME CHOICES
-       */
+    /* =====================================================
+       DRAG & DROP SEGMENTED OPTIONS
+       ===================================================== */
 
     const choiceButtons =
         drawer.querySelectorAll(
@@ -777,8 +1347,12 @@ export function setupControlsTheme(
 
 
                 button.classList.toggle(
+
                     "active",
-                    state[property] === value
+
+                    state[property] ===
+                    value
+
                 );
 
             }
@@ -802,6 +1376,18 @@ export function setupControlsTheme(
                         button.dataset.themeValue;
 
 
+                    if (
+                        !Object.prototype.hasOwnProperty.call(
+                            state,
+                            property
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
                     state[property] =
                         value;
 
@@ -818,9 +1404,9 @@ export function setupControlsTheme(
     );
 
 
-    /* 
+    /* =====================================================
        RANGE CONTROLS
-        */
+       ===================================================== */
 
     const rangeControls =
         drawer.querySelectorAll(
@@ -854,10 +1440,14 @@ export function setupControlsTheme(
     ) {
 
         const id =
-            outputMap[key];
+            outputMap[
+            key
+            ];
 
 
-        if (!id) {
+        if (
+            !id
+        ) {
 
             return;
 
@@ -930,9 +1520,9 @@ export function setupControlsTheme(
     );
 
 
-    /* 
+    /* =====================================================
        VIEW OPTIONS
-        */
+       ===================================================== */
 
     const dockOptionInputs =
         drawer.querySelectorAll(
@@ -951,6 +1541,18 @@ export function setupControlsTheme(
                         input.dataset.dockOption;
 
 
+                    if (
+                        !Object.prototype.hasOwnProperty.call(
+                            state,
+                            key
+                        )
+                    ) {
+
+                        return;
+
+                    }
+
+
                     state[key] =
                         input.checked;
 
@@ -964,9 +1566,9 @@ export function setupControlsTheme(
     );
 
 
-    /* 
-       ACTIVE PANEL / GROUP
-    */
+    /* =====================================================
+       ACTIVE PANEL / ACTIVE GROUP
+       ===================================================== */
 
     function refreshActiveInformation() {
 
@@ -983,6 +1585,7 @@ export function setupControlsTheme(
         ) {
 
             activePanelElement.textContent =
+
                 activePanel?.id ??
                 "none";
 
@@ -994,6 +1597,7 @@ export function setupControlsTheme(
         ) {
 
             activeGroupElement.textContent =
+
                 activeGroup?.id ??
                 "none";
 
@@ -1006,6 +1610,7 @@ export function setupControlsTheme(
         ) {
 
             activeGroupHeader.value =
+
                 activeGroup
                     .api
                     .getHeaderPosition();
@@ -1041,7 +1646,9 @@ export function setupControlsTheme(
                 dockview.activeGroup;
 
 
-            if (!activeGroup) {
+            if (
+                !activeGroup
+            ) {
 
                 return;
 
@@ -1051,16 +1658,18 @@ export function setupControlsTheme(
             activeGroup
                 .api
                 .setHeaderPosition(
+
                     activeGroupHeader.value
+
                 );
 
         }
     );
 
 
-    /* 
+    /* =====================================================
        ADD EMPTY PANEL
-       */
+       ===================================================== */
 
     function addEmptyPanel() {
 
@@ -1072,10 +1681,12 @@ export function setupControlsTheme(
 
 
         const id =
+
             `dynamic-panel-${Date.now()}-${generatedPanelNumber}`;
 
 
         const title =
+
             `Tab ${generatedPanelNumber}`;
 
 
@@ -1132,9 +1743,9 @@ export function setupControlsTheme(
     }
 
 
-    /* 
-       ADD NEW GROUP
-   */
+    /* =====================================================
+       ADD GROUP
+       ===================================================== */
 
     function addNewGroup() {
 
@@ -1153,12 +1764,14 @@ export function setupControlsTheme(
         dockview.addPanel({
 
             id:
+
                 `group-panel-${Date.now()}-${generatedPanelNumber}`,
 
             component:
                 "empty",
 
             title:
+
                 `Tab ${generatedPanelNumber}`,
 
             position: {
@@ -1178,9 +1791,9 @@ export function setupControlsTheme(
     }
 
 
-    /* 
+    /* =====================================================
        SAVE / LOAD / RESET LAYOUT
-       */
+       ===================================================== */
 
     const layoutButtons =
         drawer.querySelectorAll(
@@ -1199,19 +1812,22 @@ export function setupControlsTheme(
                         button.dataset.layoutAction;
 
 
-                    /* 
+                    /* =================================================
                        SAVE
-                      */
+                       ================================================= */
 
                     if (
                         action === "save"
                     ) {
 
                         localStorage.setItem(
+
                             LAYOUT_STORAGE_KEY,
+
                             JSON.stringify(
                                 dockview.toJSON()
                             )
+
                         );
 
 
@@ -1225,9 +1841,9 @@ export function setupControlsTheme(
                     }
 
 
-                    /* 
+                    /* =================================================
                        LOAD
-                        */
+                       ================================================= */
 
                     if (
                         action === "load"
@@ -1235,15 +1851,20 @@ export function setupControlsTheme(
 
                         const savedLayout =
                             localStorage.getItem(
+
                                 LAYOUT_STORAGE_KEY
+
                             );
 
 
-                        if (!savedLayout) {
+                        if (
+                            !savedLayout
+                        ) {
 
                             setStatus(
                                 "No saved layout"
                             );
+
 
                             return;
 
@@ -1253,9 +1874,22 @@ export function setupControlsTheme(
                         try {
 
                             dockview.fromJSON(
+
                                 JSON.parse(
                                     savedLayout
                                 )
+
+                            );
+
+
+                            requestAnimationFrame(
+                                () => {
+
+                                    reapplyThemeVariableOverrides();
+
+                                    refreshActiveInformation();
+
+                                }
                             );
 
 
@@ -1285,16 +1919,18 @@ export function setupControlsTheme(
                     }
 
 
-                    /*
+                    /* =================================================
                        CLEAR SAVED LAYOUT
-             */
+                       ================================================= */
 
                     if (
                         action === "clear-saved"
                     ) {
 
                         localStorage.removeItem(
+
                             LAYOUT_STORAGE_KEY
+
                         );
 
 
@@ -1308,24 +1944,55 @@ export function setupControlsTheme(
                     }
 
 
-                    /* 
-                       RESET TO INITIAL LAYOUT
-                       */
+                    /* =================================================
+                       RESET LAYOUT
+                       ================================================= */
 
                     if (
                         action === "reset-layout"
                     ) {
 
-                        dockview.fromJSON(
-                            JSON.parse(
-                                initialLayout
-                            )
-                        );
+                        try {
+
+                            dockview.fromJSON(
+
+                                JSON.parse(
+                                    initialLayout
+                                )
+
+                            );
 
 
-                        setStatus(
-                            "Layout reset"
-                        );
+                            requestAnimationFrame(
+                                () => {
+
+                                    reapplyThemeVariableOverrides();
+
+                                    refreshActiveInformation();
+
+                                }
+                            );
+
+
+                            setStatus(
+                                "Layout reset"
+                            );
+
+                        }
+                        catch (
+                        error
+                        ) {
+
+                            console.error(
+                                error
+                            );
+
+
+                            setStatus(
+                                "Layout could not be reset"
+                            );
+
+                        }
 
 
                         return;
@@ -1333,9 +2000,9 @@ export function setupControlsTheme(
                     }
 
 
-                    /*
+                    /* =================================================
                        ADD PANEL
-                      */
+                       ================================================= */
 
                     if (
                         action === "add-panel"
@@ -1343,14 +2010,15 @@ export function setupControlsTheme(
 
                         addEmptyPanel();
 
+
                         return;
 
                     }
 
 
-                    /* 
+                    /* =================================================
                        ADD GROUP
-                      */
+                       ================================================= */
 
                     if (
                         action === "add-group"
@@ -1367,9 +2035,9 @@ export function setupControlsTheme(
     );
 
 
-    /* 
-       RESET THEME / SETTINGS
-   */
+    /* =====================================================
+       RESET THEME SETTINGS
+       ===================================================== */
 
     function resetSettings() {
 
@@ -1379,9 +2047,9 @@ export function setupControlsTheme(
         );
 
 
-        /* 
-           Reset ranges
-  */
+        /* =================================================
+           RESET RANGE CONTROLS
+           ================================================= */
 
         rangeControls.forEach(
             control => {
@@ -1391,21 +2059,31 @@ export function setupControlsTheme(
 
 
                 control.value =
-                    state[key];
+                    state[
+                    key
+                    ];
 
 
                 updateOutput(
+
                     key,
-                    state[key]
+
+                    state[
+                    key
+                    ]
+
                 );
 
             }
         );
 
 
-        /*
-           Reset Dockview variable overrides
-           */
+        /* =================================================
+           RESET BACKGROUND / ACTIVE / INACTIVE VARIABLES
+           ================================================= */
+
+        themeVariableOverrides.clear();
+
 
         variableInputs.forEach(
             input => {
@@ -1414,23 +2092,24 @@ export function setupControlsTheme(
                     input.dataset.dvVariable;
 
 
-                input.value =
-                    "";
+                getDockviewThemeTargets()
+                    .forEach(
+                        target => {
 
+                            target.style.removeProperty(
+                                variableName
+                            );
 
-                dockviewContainer
-                    .style
-                    .removeProperty(
-                        variableName
+                        }
                     );
 
             }
         );
 
 
-        /* 
-           Reset border override
-       - */
+        /* =================================================
+           RESET DRAG BORDER
+           ================================================= */
 
         if (
             borderInput
@@ -1442,9 +2121,9 @@ export function setupControlsTheme(
         }
 
 
-        /* 
-           Reset checkboxes
-          */
+        /* =================================================
+           RESET VIEW CHECKBOXES
+           ================================================= */
 
         dockOptionInputs.forEach(
             input => {
@@ -1455,7 +2134,9 @@ export function setupControlsTheme(
 
                 input.checked =
                     Boolean(
-                        state[key]
+                        state[
+                        key
+                        ]
                     );
 
             }
@@ -1471,6 +2152,15 @@ export function setupControlsTheme(
         applyDockviewTheme();
 
 
+        requestAnimationFrame(
+            () => {
+
+                syncAllVariableControls();
+
+            }
+        );
+
+
         setStatus(
             "Theme settings reset"
         );
@@ -1484,12 +2174,75 @@ export function setupControlsTheme(
     );
 
 
-    /* 
+    /* =====================================================
        INITIALIZE
- */
+       ===================================================== */
 
     activateSettingsTab(
         "theme"
+    );
+
+
+    rangeControls.forEach(
+        control => {
+
+            const key =
+                control.dataset.layoutControl;
+
+
+            if (
+                Object.prototype.hasOwnProperty.call(
+                    state,
+                    key
+                )
+            ) {
+
+                control.value =
+                    state[
+                    key
+                    ];
+
+
+                updateOutput(
+
+                    key,
+
+                    state[
+                    key
+                    ]
+
+                );
+
+            }
+
+        }
+    );
+
+
+    dockOptionInputs.forEach(
+        input => {
+
+            const key =
+                input.dataset.dockOption;
+
+
+            if (
+                Object.prototype.hasOwnProperty.call(
+                    state,
+                    key
+                )
+            ) {
+
+                input.checked =
+                    Boolean(
+                        state[
+                        key
+                        ]
+                    );
+
+            }
+
+        }
     );
 
 
